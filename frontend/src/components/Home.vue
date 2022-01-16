@@ -106,15 +106,13 @@ export default{
   methods:{
     submit(e, value){
       e.preventDefault();
-      const path = 'http://127.0.0.1:8000/item'
+      const path = 'http://127.0.0.1:8000/api/todo/'
       switch(value){
         case 'configure':
           console.log(`${value}: ${this.control_cpu_ip}`);
           axios.post(path, {
-            name: "foo",
-            description: "bar",
-            price: 100,
-            tax: 0,
+            title: "configure",
+            description: "boop",
             // button: value,
             // control_cpu_ip: this.control_cpu_ip,
           })
@@ -128,8 +126,10 @@ export default{
         case 'stream':
           console.log(`${value}: ${this.streaming_cam}`);
           axios.post(path, {
-            button: value,
-            streaming_cam: this.streaming_cam,
+            title: "stream",
+            description: "boop",
+            // button: value,
+            // streaming_cam: this.streaming_cam,
           })
           .then(response => {
             console.log(response);
@@ -141,10 +141,12 @@ export default{
         case 'capture_img':
           console.log(`${value}: ${this.acquisition_cam}, ${this.acquisition_time}, ${this.acquisition_note}`);
           axios.post(path, {
-            button: value,
-            acquisition_cam: this.acquisition_cam,
-            acquisition_time: this.acquisition_time,
-            acquisition_note: this.acquisition_note,
+            title: "capture_img",
+            description: "boop",
+            // button: value,
+            // acquisition_cam: this.acquisition_cam,
+            // acquisition_time: this.acquisition_time,
+            // acquisition_note: this.acquisition_note,
           })
           .then(response => {
             console.log(response);
@@ -156,9 +158,11 @@ export default{
         case 'trigger_gpio':
           console.log(`${value}: ${this.gpio_pin}, ${this.gpio_value}`);
           axios.post(path, {
-            button: value,
-            gpio_pin: this.gpio_pin,
-            gpio_value: this.gpio_value,
+            title: "trigger_gpio",
+            description: "boop",
+            // button: value,
+            // gpio_pin: this.gpio_pin,
+            // gpio_value: this.gpio_value,
           })
           .then(response => {
             console.log(response);

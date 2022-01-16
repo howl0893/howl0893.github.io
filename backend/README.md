@@ -1,5 +1,7 @@
 Backend setup
 ```
+install MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
 download & install conda:
 
     download miniconda from here:   https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
