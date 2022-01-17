@@ -2,4 +2,4 @@ fastapi
 pydantic
 starlette
 uvicorn
-motor
+mongoengine

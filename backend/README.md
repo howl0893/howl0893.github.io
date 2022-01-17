@@ -1,6 +1,8 @@
 Backend setup
 ```
-install MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+install MongoDB: https://docs.mongodb.com/manual/administration/install-community/
+
+start MongoDB (macos): brew services start mongodb-community@5.0
 
 download & install conda:
 
