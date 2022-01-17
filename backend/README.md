@@ -2,7 +2,9 @@ Backend setup
 ```
 install MongoDB: https://docs.mongodb.com/manual/administration/install-community/
 
-start MongoDB (macos): brew services start mongodb-community@5.0
+start MongoDB:
+    (macos) brew services start mongodb-community@5.0
+    (linux) sudo systemctl start mongodb
 
 download & install conda:
 
