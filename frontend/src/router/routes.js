@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../components/Home.vue';
+import Projects from '../components/Projects.vue';
 
 
 Vue.use(VueRouter);
@@ -9,11 +10,15 @@ export default new VueRouter({
     mode:'history',
     routes:[
         {
-            path:'/home',
+            path:'/',
             name:'Home',
             component: Home,
         },
-
+        {
+            path:'/projects',
+            name:'Projects',
+            component: Projects,
+        },
             
     ],
 })
