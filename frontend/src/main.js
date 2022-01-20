@@ -7,6 +7,7 @@ import router from "./router/routes.js";
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+
 Vue.config.productionTip = false
 
 new Vue({
