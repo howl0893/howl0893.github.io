@@ -1,30 +1,15 @@
 <template>
-  <nav class="navbar navbar-expand-sm fixed-top navbar-light">
+  <nav class="navbar navbar-expand-xl fixed-top navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="/">Matthew Howlett</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar1"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar1">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/projects">Projects</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/socials">socials</a>
-          </li>
-        </ul>
+      <div class="nav-item active">
+        <a class="navbar-brand" href="/">Matthew Howlett</a>
       </div>
+      <!-- <div class="nav-item active">
+        <a class="nav-link" href="/about">About</a>
+      </div>
+      <div class="nav-item active">
+        <a class="nav-link" href="/projects">Projects</a>
+      </div> -->
       <div>
         <theme-button />
       </div>
@@ -42,13 +27,14 @@ export default {
 <style lang="css">
 @import "../styles/theme.css";
 
- div a {
+.navbar-light .nav-item.active .nav-link,
+.navbar-light .nav-item.active .navbar-brand {
   color: var(--text-primary-color);
   text-decoration: none;
 }
 
 /* Change the link color to #111 (black) on hover */
-div a:hover {
+.navbar-light .nav-item.active .navbar-brand:hover {
   color: var(--accent-color);
 }
 </style>
