@@ -1,0 +1,46 @@
+/* Define styles for the default root window element */
+:root {
+  --background-color-primary: #cac9c9;
+  --background-color-secondary: #e6e3e3;
+  --accent-color: #313131;
+  --text-primary-color: #222;
+  --element-size: 4rem;
+}
+
+/* Define styles for the root window with dark - mode preference */
+:root.dark-theme {
+  --background-color-primary: #313131;
+  --background-color-secondary: #38383b;
+  --accent-color: #afafaf;
+  --text-primary-color: #ddd;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--background-color-secondary);
+}
+
+p {
+  color: var(--text-primary-color);
+}
+
+/* .container-center {
+  background-color: var(--background-color-primary);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  padding: 2rem 4rem;
+  height: 200px;
+  width: 300px;
+  text-align: center;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  background-color: var(--background-color-secondary);
+} */
