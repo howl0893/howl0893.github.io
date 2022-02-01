@@ -1,18 +1,35 @@
 <template>
-  <div class="wrapper">
-    <div>
-      <a href="/home">Matthew Howlett</a>
+  <nav class="navbar navbar-expand-sm fixed-top navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Matthew Howlett</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar1"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar1">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/projects">Projects</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/socials">socials</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <theme-button />
+      </div>
     </div>
-    <div>
-      <a href="/projects">Projects</a>
-    </div>
-    <div>
-      <a href="/about">About</a>
-    </div>
-    <div>
-      <theme-button />
-    </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -25,16 +42,7 @@ export default {
 <style lang="css">
 @import "../styles/theme.css";
 
-.wrapper {
-  /* list-style-type: none; */
-  display: grid;
-  grid-template-columns: 4fr 0.4fr 0.4fr 0.3fr;
-  padding: 1rem;
-  overflow: hidden;
-  background-color: var(--background-color-primary);
-}
-
-div a { 
+ div a {
   color: var(--text-primary-color);
   text-decoration: none;
 }

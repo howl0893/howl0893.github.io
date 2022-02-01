@@ -80,7 +80,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--background-color-primary);
+  background-color: var(--accent-color);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
