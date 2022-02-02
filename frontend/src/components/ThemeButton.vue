@@ -23,7 +23,7 @@ export default {
       userTheme: "light-theme",
     };
   },
-
+  
   methods: {
     toggleTheme() {
       const activeTheme = localStorage.getItem("user-theme");
@@ -38,6 +38,11 @@ export default {
       localStorage.setItem("user-theme", theme);
       this.userTheme = theme;
       document.documentElement.className = theme;
+      window.dispatchEvent(new CustomEvent('user-theme-localstorage-changed', {
+        detail: {
+          storage: localStorage.getItem('user-theme')
+        }
+      }));
     },
 
     getMediaPreference() {
