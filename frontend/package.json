@@ -15,7 +15,7 @@
     "core-js": "^3.6.5",
     "eslint-loader": "^2.1.2",
     "sass": "^1.49.0",
-    "sass-loader": "^10.0.2",
+    "sass-loader": "^10",
     "vue": "^2.6.11",
     "vue-router": "^3.5.2"
   },
