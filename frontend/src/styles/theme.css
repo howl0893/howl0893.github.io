@@ -18,8 +18,8 @@
 html,
 .main,
 body {
-  padding: 0;
-  margin: 0;
+  /* padding: 0; */
+  /* margin: 0; */
   background-color: var(--background-color-secondary);
 }
 
@@ -28,16 +28,16 @@ p {
   background-color: var(--background-color-secondary);
 }
 
-.container-center {
+/* .container-center {
   background-color: var(--background-color-primary);
   height: 100vh;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.card {
+/* .card {
   padding: 2rem 4rem;
   height: 200px;
   width: 300px;
@@ -45,4 +45,4 @@ p {
   border: 1px solid var(--accent-color);
   border-radius: 4px;
   background-color: var(--background-color-secondary);
-}
+} */

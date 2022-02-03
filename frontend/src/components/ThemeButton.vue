@@ -20,7 +20,7 @@ export default {
 
   data() {
     return {
-      userTheme: "light-theme",
+      userTheme: "dark-theme",
     };
   },
   
