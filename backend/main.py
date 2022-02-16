@@ -12,7 +12,7 @@ from database import (
     remove_todo,
 )
 
-print(f" * cwd: {os.getcwd()}")
+# print(f" * cwd: {os.getcwd()}")
 
 app = FastAPI()
 

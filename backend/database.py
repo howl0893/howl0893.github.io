@@ -1,8 +1,11 @@
+import asyncio
 import motor.motor_asyncio
 from model import Todo
 
 # query os.env for DB_URI
-client = motor.motor_asyncio.AsyncIOMotorClient('mongodb://localhost:27017/')
+conn_str = "mongodb+srv://opt:ReWmJnCv2cEL409F@cluster0.qwahq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" #'mongodb://localhost:27017/'
+client = motor.motor_asyncio.AsyncIOMotorClient(conn_str, serverSelectionTimeoutMS=5000)
+
 database = client.TodoList
 collection = database.todo
 
