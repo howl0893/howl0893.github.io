@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../components/Home.vue';
+import Chart from '../components/Chart.vue';
 // import About from '../views/About.vue';
 // import Halas from '../views/Halas.vue';
 // import Projects from '../views/Projects.vue';
@@ -16,6 +17,11 @@ export default new VueRouter({
             name:'Home',
             component: Home,
         },
+        {
+            path:'/chart',
+            name:'Chart',
+            component: Chart,
+        }
         // {
         //     path:'/about',
         //     name:'About',
