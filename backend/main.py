@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 import os
-from model import Todo
+from model import Todo, File
 
 from database import (
     fetch_one_todo,
@@ -10,6 +10,8 @@ from database import (
     create_todo,
     update_todo,
     remove_todo,
+    create_file,
+    fetch_all_files,
 )
 
 # print(f" * cwd: {os.getcwd()}")
@@ -19,6 +21,7 @@ app = FastAPI()
 # TODO: move this to config file or env variable
 origins = [
     "http://localhost:8080",
+    # "http://localhost:8000",
 ]
 
 app.add_middleware(
@@ -65,3 +68,17 @@ async def delete_todo(title):
     if response:
         return "Successfully deleted todo"
     raise HTTPException(404, f"There is no todo with the title {title}")
+
+
+@app.get("/api/file")
+async def get_files():
+    response = await fetch_all_files()
+    return response
+
+@app.post("/api/file/", response_model=File)
+async def post_file(file: File):
+    print(f"file: {file}")
+    response = await create_file(file.dict())
+    if response:
+        return response
+    raise HTTPException(400, "Something went wrong")

@@ -1,5 +1,5 @@
 import motor.motor_asyncio
-from model import Todo
+from model import Todo, File
 
 try:
     # query os.env for DB_URI conn_str
@@ -24,6 +24,7 @@ async def fetch_all_todos():
 async def create_todo(todo):
     document = todo
     result = await collection.insert_one(document)
+    print(f"result: {result}")
     return document
 
 async def update_todo(title, desc):
@@ -34,3 +35,16 @@ async def update_todo(title, desc):
 async def remove_todo(title):
     await collection.delete_one({"title": title})
     return True
+
+async def create_file(file):
+    document = file
+    result = await collection.insert_one(document)
+    print(f"result: {result}")
+    return document
+
+async def fetch_all_files():
+    files = []
+    cursor = collection.find({})
+    async for document in cursor:
+        files.append(File(**document))
+    return files
