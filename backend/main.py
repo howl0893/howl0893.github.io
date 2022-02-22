@@ -1,8 +1,9 @@
-from fastapi import FastAPI, HTTPException
+import traceback, shutil, os
+from fastapi import FastAPI, HTTPException, UploadFile, File, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
-import os
-from model import Todo, File
+from models import Todo
+from ingestors.csv import IngestCSV
 
 from database import (
     fetch_one_todo,
@@ -14,7 +15,6 @@ from database import (
     fetch_all_files,
 )
 
-# print(f" * cwd: {os.getcwd()}")
 
 app = FastAPI()
 
@@ -75,10 +75,40 @@ async def get_files():
     response = await fetch_all_files()
     return response
 
-@app.post("/api/file/", response_model=File)
-async def post_file(file: File):
-    print(f"file: {file}")
-    response = await create_file(file.dict())
-    if response:
+@app.post("/api/file/", status_code=200) # upload file as multipart/form-data
+async def post_file(response: Response, file: UploadFile = File(...)):
+    try:
+        print(f"file: {file}")
+        print(f"file.file: {file.file}")
+        print(f"filename: {file.filename}")
+        print(f"file.content_type: {file.content_type}")
+        print(f"file._in_memory: {file._in_memory}")
+        print(f"file.spool_max_size: {file.spool_max_size / 1000000} MB")
+        # file_data = file.file.read() # can only be read once!
+        # print(f"file.file.read(): {file_data}")
+        # print(f"file.size {len(file_data) / 1000000} Mb")
+
+        match file.content_type:
+            case "text/csv":
+                ingestor = IngestCSV(file)
+                response = ingestor.save_locally()
+                data_dict, data_description = ingestor.describe_data()
+                # save data and descriptions to database
+                response["data_dict"] = data_dict
+                response["data_description"] = data_description
+                response["mongodb"] = await create_file(file, data_description, data_dict)
+                # print(response)
+            case "image/jpeg":
+                # IngestImage(file)
+                response.status_code = status.HTTP_406_NOT_ACCEPTABLE
+                response = {"info": f"support for '{file.content_type}' file mimetype uploads is coming soon"}
+                print(response)
+            case _:
+                response.status_code = status.HTTP_404_NOT_FOUND
+                response = {"info": f"'{file.content_type}' file mimetype uploads is not yet supported"}
+                print(response)
+
         return response
-    raise HTTPException(400, "Something went wrong")
+    except:
+        print(traceback.format_exc())
+        raise HTTPException(400, traceback.format_exc())

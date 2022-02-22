@@ -1,19 +1,18 @@
 <template>
   <div class="App">
     <D3LineChart :config="chart_config" :datum="chart_data"></D3LineChart>
-    <button @click="addData()">Add</button>
-    <button @click="uploadFiles">Upload files</button>
-    <!-- <input type="file" @change="uploadFiles" multiple> -->
+    <!-- <button @click="addData()">Add</button> -->
+    <!-- <button @click="uploadFiles">Upload files</button> -->
+    <form>
+      <input type="file" @change="fileUpload" ref="file_input" multiple />
+    </form>
   </div>
-  <!-- <div>
-    <highcharts class="hc" :options="chartOptions" ref="chart"></highcharts>
-  </div> -->
 </template>
 
 <script>
 import axios from "axios";
 import { D3LineChart } from "vue-d3-charts";
-import { openFilePicker } from "@/utils.js";
+// import { openFilePicker } from "@/utils.js";
 
 export default {
   components: {
@@ -22,119 +21,75 @@ export default {
   data() {
     return {
       chart_data: [
-        { hours: 238, production: 134, date: 2000 },
-        { hours: 938, production: 478, date: 2001 },
-        { hours: 1832, production: 1392, date: 2002 },
-        { hours: 2092, production: 2343, date: 2003 },
-        { hours: 2847, production: 2346, date: 2004 },
-        { hours: 2576, production: 2233, date: 2005 },
-        { hours: 2524, production: 2325, date: 2006 },
-        { hours: 1648, production: 2456, date: 2007 },
-        { hours: 2479, production: 2329, date: 2008 },
-        { hours: 3200, production: 2438, date: 2009 },
+        { timestamp: '20210803T191252.000', distancecm: 0 },
+        { timestamp: '20210803T191253.500', distancecm: 1 },
+        { timestamp: '20210803T191254.000', distancecm: 2 },
+        { timestamp: '20210803T191255.500', distancecm: 3 },
+        { timestamp: '20210803T191256.000', distancecm: 4 },
+        { timestamp: '20210803T191257.500', distancecm: 5 },
+        { timestamp: '20210803T191258.000', distancecm: 6 },
+        { timestamp: '20210803T191259.500', distancecm: 7 },
+        { timestamp: '20210803T191260.000', distancecm: 8 },
+        { timestamp: '20210803T191261.500', distancecm: 9 },
       ],
       chart_config: {
-        values: ["hours", "production"],
+        values: ["timestamp", "distancecm"],
         date: {
-          key: "date",
-          inputFormat: "%Y",
-          outputFormat: "%Y",
-        },
-        points: {
-          visibleSize: 3,
-          hoverSize: 6,
+          key: "timestamp",
+          inputFormat: "%Y%m%dT%H%M%S.%L",
+          outputFormat: "%M:%S.%L",
         },
         axis: {
-          // add label
-          xTitle: "Year",
-          yTitle: "Hours",
-          // yTicks: 3,
+          xTitle: "timestamp",
+          yTitle: "distancecm",
         },
       },
-      count: 2010,
     };
   },
   methods: {
     addData() {
-      const hours = Math.floor(Math.random() * 1000 * 3);
-      const production = Math.floor(Math.random() * 1000 * 3);
-      const date = this.count++;
-      this.chart_data.push({ hours, production, date });
+      const timestamp = Math.random(0, 1259.999);
+      const distancecm = Math.random(-250, 250);
+      this.chart_data.push({ timestamp, distancecm });
     },
 
-    uploadFiles() {
-      this.uploading = true;
-      const client = openFilePicker();
-      var options = {
-        accept: ["text/*", "image/*", "video/*", "audio/*"],
-        onCancel: () => {
-          this.uploading = false;
-          console.log("cancelled upload");
+    fileUpload(event) {
+      const url = "http://127.0.0.1:8000/api/file/";
+      const formData = new FormData();
+      const file = event.target.files[0];
+
+      console.log("file: ", file);
+      formData.append("file", file);
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
         },
-        onUploadDone: (res) => {
-          console.log("upload complete");
-          console.log(res.filesUploaded);
-          res.filesUploaded.forEach((afile) => {
-            delete afile.originalFile;
-            console.log("file:", afile);
-            axios
-              .post('http://127.0.0.1:8000/api/file/', {
-                file: JSON.stringify(afile),
-              })
-              .then((response) => {  
-                console.log(response);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          });
-        },
-        transformations: { crop: false, circle: false, rotate: false },
       };
-      client.picker(options).open();
+
+      axios
+        .post(url, formData, config)
+        .then((response) => {
+          console.log(response);
+          this.chart_data = response.data.data_dict.slice(0,199);
+          console.log(this.chart_data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-
-    /*
-    filesUploaded(fileInfo) {
-      var filesUploaded = fileInfo.filesUploaded;
-      // Remove the originalFile embedded document business — redundant information.
-      filesUploaded.forEach((file) => {
-        delete file.originalFile;
-      });
-
-      let details = { datasetId: this.datasetId, file: filesUploaded[0] };
-      this.$store.dispatch("datasets/addInitialFile", details);
-    },
-
-    complete() {
-      this.$emit("uploaded");
-    },*/
   },
 };
-
-// import Vue from 'vue'
-// import Highcharts from 'highcharts'
-// import exportingInit from 'highcharts/modules/exporting'
-// import HighchartsVue from "highcharts-vue";
-
-// Vue.use(HighchartsVue);
-
-// exportingInit(Highcharts)
-
-// export default {
-//   data() {
-//     return {
-//       chartOptions: {
-//         series: [
-//           {
-//             data: [10, -2, 3, 30, -54]
-//           }
-//         ]
-//       }
-//     };
-//   }
-// };
 </script>
 
 <style scoped>
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
 </style>>

@@ -1,18 +1,18 @@
 function dummy(args) {}
 
-axios.interceptors.request.use((config) => {
-  const token = window.localStorage.getItem('springmatter-token');
-  if (token) {
-    config.headers.Authorization = `${token}`;
-  }
-  return config;
-});
+// axios.interceptors.request.use((config) => {
+//   const token = window.localStorage.getItem('springmatter-token');
+//   if (token) {
+//     config.headers.Authorization = `${token}`;
+//   }
+//   return config;
+// });
 
-axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  return Promise.reject(error);
-});
+// axios.interceptors.response.use(function (response) {
+//   return response;
+// }, function (error) {
+//   return Promise.reject(error);
+// });
 
 class Samsa {
   // I initialize the swappable proxy.
@@ -40,9 +40,7 @@ class Samsa {
           var url = target.base_url + url_parts + "?args=" + str_arg;
 
           var path = path_parts.pop();
-
-
-
+          
           var method = null;
 
           if (method_types.includes(path)) {
