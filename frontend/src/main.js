@@ -10,7 +10,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 // imported in public/index.html
-// window.$samsa = new Samsa("http://127.0.0.1:8000" + "/");
+window.$samsa = new Samsa("http://127.0.0.1:8000/");
 // Vue.prototype.$samsa = $samsa;
 
 Vue.config.productionTip = false

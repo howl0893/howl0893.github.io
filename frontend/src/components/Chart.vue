@@ -1,10 +1,30 @@
 <template>
   <div class="App">
-    <D3LineChart :config="chart_config" :datum="chart_data"></D3LineChart>
+    <D3LineChart id="chart" :config="chart_config" :datum="chart_data"></D3LineChart>
     <!-- <button @click="addData()">Add</button> -->
     <!-- <button @click="uploadFiles">Upload files</button> -->
     <form>
       <input type="file" @change="fileUpload" ref="file_input" multiple />
+      <select name="x-axis" id="x-axis">
+        <optgroup label="Swedish Cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+        </optgroup>
+        <optgroup label="German Cars">
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </optgroup>
+      </select>
+      <select name="y-axis" id="y-axis">
+        <optgroup label="Swedish Cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+        </optgroup>
+        <optgroup label="German Cars">
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </optgroup>
+      </select>
     </form>
   </div>
 </template>
@@ -21,16 +41,16 @@ export default {
   data() {
     return {
       chart_data: [
-        { timestamp: '20210803T191252.000', distancecm: 0 },
-        { timestamp: '20210803T191253.500', distancecm: 1 },
-        { timestamp: '20210803T191254.000', distancecm: 2 },
-        { timestamp: '20210803T191255.500', distancecm: 3 },
-        { timestamp: '20210803T191256.000', distancecm: 4 },
-        { timestamp: '20210803T191257.500', distancecm: 5 },
-        { timestamp: '20210803T191258.000', distancecm: 6 },
-        { timestamp: '20210803T191259.500', distancecm: 7 },
-        { timestamp: '20210803T191260.000', distancecm: 8 },
-        { timestamp: '20210803T191261.500', distancecm: 9 },
+        { timestamp: "20210803T191252.0", distancecm: 0 },
+        { timestamp: "20210803T191253.5", distancecm: 1 },
+        { timestamp: "20210803T191254.0", distancecm: 2 },
+        { timestamp: "20210803T191255.5", distancecm: 3 },
+        { timestamp: "20210803T191256.0", distancecm: 4 },
+        { timestamp: "20210803T191257.5", distancecm: 5 },
+        { timestamp: "20210803T191258.0", distancecm: 6 },
+        { timestamp: "20210803T191259.5", distancecm: 7 },
+        { timestamp: "20210803T191260.0", distancecm: 8 },
+        { timestamp: "20210803T191261.5", distancecm: 9 },
       ],
       chart_config: {
         values: ["timestamp", "distancecm"],
@@ -71,7 +91,7 @@ export default {
         .post(url, formData, config)
         .then((response) => {
           console.log(response);
-          this.chart_data = response.data.data_dict.slice(0,199);
+          this.chart_data = response.data.data_dict.slice(0, 199);
           console.log(this.chart_data);
         })
         .catch((error) => {
@@ -83,13 +103,8 @@ export default {
 </script>
 
 <style scoped>
-label {
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
-}
-
 input,
 label {
-    margin: .4rem 0;
+  margin: 0.5rem 0.5rem;
 }
 </style>>
