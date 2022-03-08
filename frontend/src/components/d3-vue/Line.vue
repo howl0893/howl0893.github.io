@@ -28,7 +28,7 @@ export default {
         const path = d3.line()
           .x(this.scaledXFn)
           .y(this.scaledYFn)
-
+        
         if (this.curveFn) path.curve(this.curveFn)
         if (this.definedFn) path.defined(this.definedFn)
         return path(this.data)

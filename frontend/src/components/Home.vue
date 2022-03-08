@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import navbar from "./NavBar.vue";
+import navbar from "./sandbox/NavBar.vue";
 // import NFTCard from "./NFTCard.vue";
 
 export default {

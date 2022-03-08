@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import ThemeButton from "@/components/ThemeButton.vue";
+import ThemeButton from "@/components/sandbox/ThemeButton.vue";
 export default {
   components: { ThemeButton },
 };
 </script>
 
 <style lang="css">
-@import "../styles/theme.css";
+@import "../../styles/theme.css";
 
 .navbar-light .nav-item.active .nav-link,
 .navbar-light .nav-item.active .navbar-brand {

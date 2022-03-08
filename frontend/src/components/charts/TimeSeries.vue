@@ -8,24 +8,25 @@
       :height="350"
       :x="x"
       :y="y"
-      zoom="x"
-      @zoom="zoomed"
     >
+    <!-- zoom="x" @zoom="zoomed" -->
       <template #default="props">
         <d3-line
           :data="data"
+          :color="color"
           x="timestamp"
           y="distancecm"
           :curveFn="curveFn"
           v-bind="props"
         />
-        <d3-brush
+        <d3-brush ref="brush" orientation="xy" @end="brushed" v-bind="props"/>
+        <!-- <d3-brush
           ref="brush"
-          orientation="x"
+          orientation="xy"
           @brush="brushed"
           @end="brushed"
           v-bind="props"
-        />
+        /> -->
       </template>
       <template #south="props">
         <d3-axis orientation="Bottom" v-bind="props" />
@@ -34,11 +35,13 @@
         <d3-axis orientation="Left" v-bind="props" />
       </template>
     </d3-cartesian>
-    <d3-cartesian :margin="margin" :width="860" :height="100" :x="x" :y="y">
-      <!-- :x="x2" :y="y"> -->
+    <!-- <file-upload></file-upload> -->
+    <!-- <d3-cartesian :margin="margin" :width="860" :height="100" :x="x" :y="y">
+      // :x="x2" :y="y">
       <template #default="props">
         <d3-line
           :data="data"
+          :color="color"
           x="timestamp"
           y="distancecm"
           :curveFn="curveFn"
@@ -55,16 +58,18 @@
       <template #south="props">
         <d3-axis orientation="Bottom" v-bind="props" />
       </template>
-    </d3-cartesian>
+    </d3-cartesian> -->
   </div>
 </template>
 
 <script>
 import * as d3 from "d3";
-import { Cartesian, Brush, Line, Axis } from "./d3-vue";
+import { Cartesian, Brush, Line, Axis } from "../d3-vue";
+// import FileUpload from "./FileUpload.vue";
 // import navbar from "./NavBar.vue";
 
 const parseDate = d3.timeParse("%Y%m%d%H%M%S.%L"); //"%b %Y");
+// const formatDate = d3.timeFormat("%M:%S.%L");
 
 export default {
   components: {
@@ -72,6 +77,7 @@ export default {
     d3Brush: Brush,
     d3Line: Line,
     d3Axis: Axis,
+    // FileUpload,
     // navbar,
   },
   data() {
@@ -80,6 +86,7 @@ export default {
       x: { type: "Time", domain: [] },
       y: { type: "Linear", domain: [] },
       // x2: { type: "Time", domain: [] },
+      color: "seagreen",
       curveFn: d3.curveMonotoneX,
       data: [],
     };
@@ -97,6 +104,7 @@ export default {
       // d.date = parseDate(d.date);
       // d.price = +d.price;
       d.timestamp = parseDate(d.timestamp);
+      // d.timestamp = formatDate(d.timestamp);
       // console.log("[ d.timetamp, d.distancecm ]: ", [d.timestamp, d.distancecm] );
       return d;
     }).then((data) => {
@@ -112,7 +120,7 @@ export default {
       ]; // [0, d3.max(data, (d) => d.distancecm)];
       this.x.domain = domainX;
       this.y.domain = domainY;
-      console.log("[ domainX, domainY ]: ", [domainX, domainY]);
+      // console.log("[ domainX, domainY ]: ", [domainX, domainY]);
       // this.x2.domain = domainX;
       this.data = data;
       // this.$nextTick(() => {
@@ -124,13 +132,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
-@import "../styles/theme.css";
+@import "../../styles/theme.css";
 
+/*
 .timeseries {
-  display: block;
-  width: 80%;
-  height: 80%;
-  /* margin: 4rem; */
-  /* background-color: var(--background-color-primary); */
-}
+  // display: block;
+  width: 50%;
+  height: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  // margin: 4rem;
+  // background-color: var(--background-color-primary);
+} */
 </style>

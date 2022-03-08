@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped lang="css">
-@import "../styles/theme.css";
+@import "../../styles/theme.css";
 
 /* The switch - the box around the slider */
 .switch {
