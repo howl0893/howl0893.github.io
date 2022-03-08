@@ -1,6 +1,6 @@
 <template>
   <div id="box">
-    <button @click="show_alert">Create error slot</button>
+    <!-- <button @click="show_alert">Create error slot</button>
     <div id="alert-box">
       <AlertBox v-if="show"> Something bad happened. </AlertBox>
     </div>
@@ -14,7 +14,7 @@
         {{ tab }}
       </button>
       <component :is="currentTab" class="tab"></component>
-    </div>
+    </div> -->
     <div>
       <!-- <input type="file" @change="fileUpload" ref="file_input" multiple /> -->
       <component
@@ -24,6 +24,7 @@
       ></component>
       <br />
       <file-upload class="file-upload" @imported-data="receiveData($event)"></file-upload>
+      <label>Chart type:</label>
       <select class="chart-selection" @change="onChangeEvent($event)">
         <option v-for="chart in charts" :key="chart" :value="chart">
           {{ chart }}
@@ -36,36 +37,33 @@
 <script>
 import axios from "axios";
 
+import charts from './charts/'
+import FileUpload from "./FileUpload.vue";
+
 import AlertBox from "./sandbox/AlertBox.vue";
 import Component1 from "./sandbox/Component1.vue";
 import Component2 from "./sandbox/Component2.vue";
 import Component3 from "./sandbox/Component3.vue";
-import TimeSeries from "./charts/TimeSeries.vue";
-import Chart from "./charts/Chart.vue";
-import Scatter from "./charts/Scatter.vue";
-import LineChart from "./charts/LineChart.vue";
-import FileUpload from "./FileUpload.vue";
 
 export default {
   components: {
-    AlertBox,
-    Component1,
-    Component2,
-    Component3,
-    TimeSeries,
-    Chart,
-    Scatter,
-    LineChart,
+    Area: charts.Area, Bar: charts.Bar, Choropleth: charts.Choropleth, 
+    Pie: charts.Pie,
+    TimeSeries: charts.TimeSeries,
+    Linear: charts.Linear,
+    Scatter:charts.Scatter,
+    LineChart: charts.LineChart,
     FileUpload,
+    AlertBox, Component1, Component2, Component3,
   },
-  data() {
+  data() {  
     return {
       chartData: [],
       show: false,
       currentTab: "Component1",
       tabs: ["Component1", "Component2", "Component3"],
-      currentChart: "TimeSeries",
-      charts: ["TimeSeries", "Scatter", "Chart", "LineChart"],
+      currentChart: "Area",
+      charts: ["Area", "Bar", "Choropleth", "Pie", "Linear", "TimeSeries", "Scatter", "LineChart"],
     };
   },
   methods: {
@@ -117,6 +115,9 @@ export default {
 </script>
 
 <style scoped>
+label {
+  padding: 6px;
+}
 #box {
   padding: 20px;
 }
