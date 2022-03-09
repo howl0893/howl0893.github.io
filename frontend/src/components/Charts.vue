@@ -17,17 +17,36 @@
     </div> -->
     <div>
       <!-- <input type="file" @change="fileUpload" ref="file_input" multiple /> -->
+      <h2 id="chart-title">{{ filename }}</h2>
       <component
         :is="currentChart"
-        v-bind:chartData="chartData"
+        :chartData="chartData"
+        :currentXaxe="currentXaxe"
+        :currentYaxe="currentYaxe"
         class="chart"
       ></component>
       <br />
-      <file-upload class="file-upload" @imported-data="receiveData($event)"></file-upload>
+      <file-upload
+        id="file-upload"
+        @imported-data="receiveData($event)"
+        @filename="receiveFilename($event)"
+      ></file-upload>
       <label>Chart type:</label>
-      <select class="chart-selection" @change="onChangeEvent($event)">
+      <select id="chart-select" @change="changeChart($event)">
         <option v-for="chart in charts" :key="chart" :value="chart">
           {{ chart }}
+        </option>
+      </select>
+      <label>x-axis:</label>
+      <select id="axe-select" @change="changeXaxis($event)">
+        <option v-for="data in axes" :key="data" :value="data">
+          {{ data }}
+        </option>
+      </select>
+      <label>y-axis:</label>
+      <select id="axe-select" @change="changeYaxis($event)">
+        <option v-for="data in axes" :key="data" :value="data">
+          {{ data }}
         </option>
       </select>
     </div>
@@ -35,80 +54,101 @@
 </template>
 
 <script>
-import axios from "axios";
-
-import charts from './charts/'
+import charts from "./charts/";
 import FileUpload from "./FileUpload.vue";
 
-import AlertBox from "./sandbox/AlertBox.vue";
-import Component1 from "./sandbox/Component1.vue";
-import Component2 from "./sandbox/Component2.vue";
-import Component3 from "./sandbox/Component3.vue";
+// import AlertBox from "./sandbox/AlertBox.vue";
+// import Component1 from "./sandbox/Component1.vue";
+// import Component2 from "./sandbox/Component2.vue";
+// import Component3 from "./sandbox/Component3.vue";
 
 export default {
   components: {
-    Area: charts.Area, Bar: charts.Bar, Choropleth: charts.Choropleth, 
+    Area: charts.Area,
+    Bar: charts.Bar,
+    BrushingBar: charts.BrushingBar,
+    CandleStick: charts.CandleStick,
+    Choropleth: charts.Choropleth,
+    DensityContour: charts.DensityContour,
+    DualLine: charts.DualLine,
+    GridLines: charts.GridLines,
+    GroupedBar: charts.GroupedBar,
+    Line1: charts.Line1,
+    Line2: charts.Line2,
+    Line3: charts.Line3,
+    MissingData: charts.MissingData,
     Pie: charts.Pie,
-    TimeSeries: charts.TimeSeries,
-    Linear: charts.Linear,
-    Scatter:charts.Scatter,
-    LineChart: charts.LineChart,
+    Scatter: charts.Scatter,
+    Scatter2: charts.Scatter2,
+    StackedBar: charts.StackedBar,
+    Treemap: charts.Treemap,
     FileUpload,
-    AlertBox, Component1, Component2, Component3,
+    // AlertBox,
+    // Component1,
+    // Component2,
+    // Component3,
   },
-  data() {  
+  data() {
     return {
+      filename: null,
       chartData: [],
-      show: false,
-      currentTab: "Component1",
-      tabs: ["Component1", "Component2", "Component3"],
+      axes: [],
+      currentXaxe: "x-axis",
+      currentYaxe: "y-axis",
       currentChart: "Area",
-      charts: ["Area", "Bar", "Choropleth", "Pie", "Linear", "TimeSeries", "Scatter", "LineChart"],
+      charts: [
+        "Area",
+        "Bar",
+        "BrushingBar",
+        "CandleStick",
+        "Choropleth",
+        "DensityContour",
+        "DualLine",
+        "GridLines",
+        "GroupedBar",
+        "Line1",
+        "Line2",
+        "Line3",
+        "MissingData",
+        "Pie",
+        "Scatter",
+        "Scatter2",
+        "StackedBar",
+        "Treemap",
+      ],
+      //example dynamic components
+      // currentTab: "Component1",
+      // tabs: ["Component1", "Component2", "Component3"],
+      // show: false,
     };
   },
   methods: {
-    show_alert: function () {
+    /*show_alert: function () {
       this.show = !this.show;
       console.log("show: ", this.show);
-    },
+    },*/
 
-    onChangeEvent(e) {
+    receiveData($event) {
+      this.chartData = $event;
+      this.axes = Object.keys(this.chartData[0]);
+      console.log("receiveData($event): ", this.chartData);
+      console.log("this.axes: ", this.axes);
+    },
+    receiveFilename($event) {
+      this.filename = $event;
+      console.log("receiveFilename($event): ", this.filename);
+    },
+    changeChart(e) {
       this.currentChart = e.target.value;
       console.log("this.currentChart: ", this.currentChart);
     },
-
-    receiveData($event) {
-      // Do something with the $event data emitted.
-      // $event in this case is equal to "response" from the child component.
-      // this.chart_data = $event.data.data_dict.slice(0, 199);
-      this.chartData = $event;
-      console.log("chart $event: ", this.chartData);
-      console.log("typeof this.chartData: ", typeof this.chartData);
+    changeXaxis(e) {
+      this.currentXaxe = e.target.value;
+      console.log("this.currentXaxe: ", this.currentXaxe);
     },
-    fileUpload(event) {
-      const url = "http://127.0.0.1:8000/api/file/";
-      const formData = new FormData();
-      const file = event.target.files[0];
-
-      console.log("file: ", file);
-      formData.append("file", file);
-
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-
-      axios
-        .post(url, formData, config)
-        .then((response) => {
-          console.log("response: ", response);
-          this.chartData = response.data.data_dict.slice(0, 199);
-          console.log("this.chartData: ", this.chartData);
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-        });
+    changeYaxis(e) {
+      this.currentYaxe = e.target.value;
+      console.log("this.currentYaxe: ", this.currentYaxe);
     },
   },
 };
@@ -117,7 +157,13 @@ export default {
 <style scoped>
 label {
   padding: 6px;
+  margin-left: 2%;
 }
+
+#chart-title {
+  margin-left: 15%;
+}
+
 #box {
   padding: 20px;
 }
@@ -129,7 +175,16 @@ label {
   width: 90%;
 }
 
-.demo {
+#file-upload {
+  display: inline-block;
+  padding: 1%;
+}
+#chart-select,
+#axe-select {
+  display: inline-block;
+}
+
+/* .demo {
   font-family: sans-serif;
   border: 1px solid #eee;
   border-radius: 2px;
@@ -159,10 +214,5 @@ label {
 .tab {
   border: 1px solid #ccc;
   padding: 10px;
-}
-.file-upload,
-.chart-selector {
-  display: inline-block;
-}
-
+} */
 </style>

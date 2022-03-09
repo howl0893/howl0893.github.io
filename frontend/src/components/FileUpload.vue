@@ -8,10 +8,11 @@
 import axios from "axios";
 
 export default {
-  emits: ["import-data"],
+  emits: ["imported-data", "filename"],
   data() {
     return {
-      imported_data: [],
+      filename: null,
+      importedData: [],
     };
   },
   methods: {
@@ -20,6 +21,7 @@ export default {
       const formData = new FormData();
       const file = event.target.files[0];
 
+      this.filename = file.name;
       console.log("file: ", file);
       formData.append("file", file);
 
@@ -34,9 +36,11 @@ export default {
         .then((response) => {
           console.log("response: ", response);
           // TODO: dynamically slice data
-          this.imported_data = response.data.data_dict.slice(0, 199);
-          console.log("this.imported_data: ", this.imported_data);
-          this.$emit("imported-data", this.imported_data);
+          this.importedData = response.data.data_dict.slice(0, 199);
+          console.log("this.importedData: ", this.importedData);
+
+          this.$emit("filename", this.filename);
+          this.$emit("imported-data", this.importedData);
         })
         .catch((error) => {
           console.log("error: ", error);
