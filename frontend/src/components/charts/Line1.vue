@@ -3,7 +3,7 @@
     <D3LineChart
       id="chart"
       :config="chart_config"
-      :datum="chartData"
+      :datum="data"
     ></D3LineChart>
   </div>
 </template>
@@ -16,9 +16,10 @@ export default {
     D3LineChart,
     // FileUpload,
   },
-  props: ["chartData", "currentXaxe", "currentYaxe"],
+  props: ["data", "currentXaxe", "currentYaxe"],
   data() {
     return {
+      componentKey: 0,
       chart_config: {
         values: [this.currentXaxe, this.currentYaxe], // ["timestamp", "distancecm"],
         date: {
@@ -34,19 +35,23 @@ export default {
     };
   },
   watch: {
+    currentXaxe: function(newVal, oldVal) {
+      this.currentXaxe = newVal;
+      console.log("currentXaxe changed from", oldVal, "to", this.currentXaxe);
+    },
     currentYaxe: function(newVal, oldVal) {
       this.currentYaxe = newVal;
-      console.log("currentYaxe changed: ", this.currentYaxe, " | was: ", oldVal);
+      console.log("currentYaxe changed from", oldVal, "to", this.currentYaxe);
     },
   },
   created: function () {
-    console.log("props: ", this.chartData, this.currentXaxe, this.currentYaxe);
+    console.log("props: ", this.data, this.currentXaxe, this.currentYaxe);
   },
   methods: {
     // addData() {
     //   const timestamp = Math.random(0, 1259.999);
     //   const distancecm = Math.random(-250, 250);
-    //   this.chartData.push({ timestamp, distancecm });
+      // this.data.push({ timestamp, distancecm });
     // },
   },
 };

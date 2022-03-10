@@ -20,9 +20,10 @@
       <h2 id="chart-title">{{ filename }}</h2>
       <component
         :is="currentChart"
-        :chartData="chartData"
+        :data="data"
         :currentXaxe="currentXaxe"
         :currentYaxe="currentYaxe"
+        :key="componentUpdate"
         class="chart"
       ></component>
       <br />
@@ -31,7 +32,7 @@
         @imported-data="receiveData($event)"
         @filename="receiveFilename($event)"
       ></file-upload>
-      <label>Chart type:</label>
+      <label>chart type:</label>
       <select id="chart-select" @change="changeChart($event)">
         <option v-for="chart in charts" :key="chart" :value="chart">
           {{ chart }}
@@ -39,13 +40,13 @@
       </select>
       <label>x-axis:</label>
       <select id="axe-select" @change="changeXaxis($event)">
-        <option v-for="data in axes" :key="data" :value="data">
+        <option v-for="data in axes" :key="data">
           {{ data }}
         </option>
       </select>
       <label>y-axis:</label>
       <select id="axe-select" @change="changeYaxis($event)">
-        <option v-for="data in axes" :key="data" :value="data">
+        <option v-for="data in reversedAxes" :key="data">
           {{ data }}
         </option>
       </select>
@@ -90,8 +91,9 @@ export default {
   },
   data() {
     return {
+      componentUpdate: 0,
       filename: null,
-      chartData: [],
+      data: [],
       axes: [],
       currentXaxe: "x-axis",
       currentYaxe: "y-axis",
@@ -129,9 +131,11 @@ export default {
     },*/
 
     receiveData($event) {
-      this.chartData = $event;
-      this.axes = Object.keys(this.chartData[0]);
-      console.log("receiveData($event): ", this.chartData);
+      this.data = $event;
+      this.axes = Object.keys(this.data[0]);
+      this.changeXaxis();
+      this.changeYaxis();
+      console.log("receiveData($event): ", this.data);
       console.log("this.axes: ", this.axes);
     },
     receiveFilename($event) {
@@ -143,14 +147,37 @@ export default {
       console.log("this.currentChart: ", this.currentChart);
     },
     changeXaxis(e) {
-      this.currentXaxe = e.target.value;
-      console.log("this.currentXaxe: ", this.currentXaxe);
+      if (e) {
+        this.currentXaxe = e.target.value;
+        console.log("this.currentXaxe: ", this.currentXaxe);
+      } else {
+        this.currentXaxe = this.axes[0];
+        console.log("this.currentXaxe: ", this.currentXaxe);
+      }
+      this.componentUpdate += 1;
     },
     changeYaxis(e) {
-      this.currentYaxe = e.target.value;
-      console.log("this.currentYaxe: ", this.currentYaxe);
+      if (e) {
+        this.currentYaxe = e.target.value;
+        console.log("this.currentYaxe: ", this.currentYaxe);
+      } else {
+        this.currentYaxe = this.axes[this.axes.length - 1];
+        console.log("this.currentYaxe: ", this.currentYaxe);
+      }
+      this.componentUpdate += 1;
     },
   },
+  computed: {
+    reversedAxes() {
+      let reversedAxes = [...this.axes].reverse();
+      return reversedAxes;
+    },
+  },
+  // updated() {
+  //   this.changeXaxis();
+  //   this.changeYaxis();
+  //   console.log("updated");
+  // },
 };
 </script>
 

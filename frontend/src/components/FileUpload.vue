@@ -36,7 +36,7 @@ export default {
         .then((response) => {
           console.log("response: ", response);
           // TODO: dynamically slice data
-          this.importedData = response.data.data_dict.slice(0, 199);
+          this.importedData = response.data.data_dict.slice(0, 500);
           console.log("this.importedData: ", this.importedData);
 
           this.$emit("filename", this.filename);
