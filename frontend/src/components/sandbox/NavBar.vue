@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-xl fixed-top navbar-light">
     <div class="container">
       <div class="nav-item active">
-        <a class="navbar-brand" href="/">Matthew Howlett</a>
+        <a class="navbar-brand" href="/">Sandbox</a>
       </div>
       <!-- <div class="nav-item active">
         <a class="nav-link" href="/about">About</a>
