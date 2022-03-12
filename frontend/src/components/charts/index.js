@@ -10,6 +10,7 @@ import GroupedBar from './GroupedBar'
 import Line1 from './Line1'
 import Line2 from './Line2'
 import Line3 from './Line3'
+import Line4 from './Line4'
 import MissingData from './MissingData'
 import Pie from './Pie'
 import Scatter from './Scatter'
@@ -20,6 +21,6 @@ import Treemap from './Treemap'
 export default {
   Area, Bar, BrushingBar, CandleStick, Choropleth, 
   DensityContour, DualLine, GridLines, GroupedBar, 
-  Line1, Line2, Line3, MissingData, Pie, Scatter,
+  Line1, Line2, Line3, Line4, MissingData, Pie, Scatter,
   Scatter2, StackedBar, Treemap,
 }
