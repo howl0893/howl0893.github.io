@@ -89,7 +89,7 @@ async def post_file(response: Response, file: UploadFile = File(...)):
         # print(f"file.size {len(file_data) / 1000000} Mb")
 
         match file.content_type:
-            case "text/csv":
+            case "text/csv" | "application/vnd.ms-excel":
                 ingestor = IngestCSV(file)
                 response = ingestor.save_locally()
                 data_dict, data_description = ingestor.describe_data()
