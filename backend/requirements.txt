@@ -3,3 +3,7 @@ pydantic
 starlette
 uvicorn
 mongoengine
+pandas
+motor
+"pymongo[srv]"
+python-multipart

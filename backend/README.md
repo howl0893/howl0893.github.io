@@ -14,9 +14,9 @@ download & install conda:
 
 cd backend
 
-conda create --name my-site python=3.10
+conda create --name my-site (web-dev) python=3.10
 
-conda activate my-site
+conda activate my-site (web-dev)
 
 pip install -r requirements.txt
 
