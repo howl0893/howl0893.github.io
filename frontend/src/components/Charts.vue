@@ -17,6 +17,10 @@
     </div> -->
     <div>
       <!-- <input type="file" @change="fileUpload" ref="file_input" multiple /> -->
+      <connect-device
+        id="connect-device"
+      ></connect-device>
+      <br />
       <h2 id="chart-title">{{ filename }}</h2>
       <component
         :is="currentChart"
@@ -57,6 +61,7 @@
 <script>
 import charts from "./charts/";
 import FileUpload from "./FileUpload.vue";
+import ConnectDevice from "./ConnectDevice.vue";
 
 // import AlertBox from "./sandbox/AlertBox.vue";
 // import Component1 from "./sandbox/Component1.vue";
@@ -85,6 +90,7 @@ export default {
     StackedBar: charts.StackedBar,
     Treemap: charts.Treemap,
     FileUpload,
+    ConnectDevice,
     // AlertBox,
     // Component1,
     // Component2,

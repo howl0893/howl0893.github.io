@@ -4,7 +4,7 @@ import csv, os, shutil
 import pandas as pd
 from dateutil.parser import parse
 
-from models import DataDescriptor
+from models import DataDescription
 
 
 # Helper functions
@@ -102,10 +102,10 @@ class IngestCSV:
         
         return data.to_dict("records"), data_description
 
-    def describe_column(self, column_name: str, data: pd.DataFrame) -> DataDescriptor:
+    def describe_column(self, column_name: str, data: pd.DataFrame) -> DataDescription:
         """
             Extract the metadata from specified column.
-            Return DataDescriptor for that column.
+            Return DataDescription for that column.
         """
         description = {
             "name": column_name,
@@ -133,6 +133,6 @@ class IngestCSV:
         for i in range(5):
             description["examples"] += f"{data[column_name][i]}, "
         description["examples"] += "..."
-        dd = DataDescriptor(**description)
+        dd = DataDescription(**description)
 
         return dd

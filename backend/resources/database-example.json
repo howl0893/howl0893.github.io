@@ -1,0 +1,230 @@
+{
+    "organization (database)": {
+        "name": "MichAero",
+        "projects (collections)": [
+            {
+                "name": "Egret",
+                "datasets": [
+                    {
+                        "name": "devleopment",
+                        "timestamp": "2022-04-14T22:57:24.492731",
+                        "data_source": {
+                            "name": "OpenMV",
+                            "type": "device",
+                            "connected": true,
+                            "api_key": "yEqN8rNEWbnHFrjxq_B8gmBxLEOIuBcT"
+                        },
+                        "images": [
+                            {
+                                "name": "image1.bmp",
+                                "timestamp": "2022-04-14T22:57:24.492731",
+                                "mimetype": "image/bmp",
+                                "data": "image1 or AWS link?"
+                            },
+                            {
+                                "name": "image2.bmp",
+                                "timestamp": "2022-04-14T22:57:24.492731",
+                                "mimetype": "image/bmp",
+                                "data": "image2 or AWS link?"
+                            }
+                        ],
+                        "files": [
+                            {
+                                "name": "lidarlite.csv",
+                                "size": "1.2 MB",
+                                "timestamp": "2022-04-14T22:57:24.492731",
+                                "mimetype": "text/csv",
+                                "url": "",
+                                "data_description": [
+                                    {
+                                        "name": "timestamp",
+                                        "data_type": "datetime",
+                                        "examples": [
+                                            "2022-04-14T22:57:24.492731",
+                                            "2022-04-12T12:34:15.341245"
+                                        ]
+                                    },
+                                    {
+                                        "name": "distance",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    }
+                                ],
+                                "data": [
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "distance": "0.0"
+                                    },
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "distance": "1.0"
+                                    },
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "distance": "2.0"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "gps.csv",
+                                "size": "3.5 MB",
+                                "timestamp": "2022-04-14T22:57:24.492731",
+                                "mimetype": "text/csv",
+                                "url": "",
+                                "data_description": [
+                                    {
+                                        "name": "timestamp",
+                                        "type": "datetime",
+                                        "examples": [
+                                            "2022-04-14T22:57:24.492731",
+                                            "2022-04-12T12:34:15.341245"
+                                        ]
+                                    },
+                                    {
+                                        "name": "latitude",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    },
+                                    {
+                                        "name": "longitude",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    }
+                                ],
+                                "data": [
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "latitude": "0.0",
+                                        "longitude": "0.0"
+                                    },
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "latitude": "1.0",
+                                        "longitude": "1.0"
+                                    },
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "latitude": "2.0",
+                                        "longitude": "2.0"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "imu.csv",
+                                "size": "2.8 MB",
+                                "timestamp": "2022-04-14T22:57:24.492731",
+                                "mimetype": "text/csv",
+                                "url": "",
+                                "data_description": [
+                                    {
+                                        "name": "timestamp",
+                                        "type": "datetime",
+                                        "examples": [
+                                            "2022-04-14T22:57:24.492731",
+                                            "2022-04-12T12:34:15.341245"
+                                        ]
+                                    },
+                                    {
+                                        "name": "acceleration_x",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    },
+                                    {
+                                        "name": "acceleration_y",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    },
+                                    {
+                                        "name": "acceleration_z",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    },
+                                    {
+                                        "name": "angular_velocity_x",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    },
+                                    {
+                                        "name": "angular_velocity_y",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    },
+                                    {
+                                        "name": "angular_velocity_z",
+                                        "type": "float",
+                                        "examples": [
+                                            "0.0",
+                                            "1.0",
+                                            "2.0"
+                                        ]
+                                    }
+                                ],
+                                "data": [
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "acceleration_x": "0.0",
+                                        "acceleration_y": "1.0",
+                                        "acceleration_z": "2.0",
+                                        "angular_velocity_x": "0.0",
+                                        "angular_velocity_y": "1.0",
+                                        "angular_velocity_z": "2.0"
+                                    },
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "acceleration_x": "0.0",
+                                        "acceleration_y": "1.0",
+                                        "acceleration_z": "2.0",
+                                        "angular_velocity_x": "0.0",
+                                        "angular_velocity_y": "1.0",
+                                        "angular_velocity_z": "2.0"
+                                    },
+                                    {
+                                        "timestamp": "2022-04-14T22:57:24.492731",
+                                        "acceleration_x": "0.0",
+                                        "acceleration_y": "1.0",
+                                        "acceleration_z": "2.0",
+                                        "angular_velocity_x": "0.0",
+                                        "angular_velocity_y": "1.0",
+                                        "angular_velocity_z": "2.0"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

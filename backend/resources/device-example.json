@@ -1,0 +1,65 @@
+{
+    "devices": [
+        {
+            "id": "11e5c851fa4a4f33924034911e7efbb6",
+            "name": "Development OpenMV",
+            "platform": "OpenMV",
+            "model": "H7",
+            "last-handshake": "2019-01-24T15:00:00.000Z",
+            "webhook-integration": {
+                "id": "0aa8fd2b4573481e8f0f9dd57ee3a4f8",
+                "status": "Enabled",
+                "api_key": "yEqN8rNEWbnHFrjxq_B8gmBxLEOIuBcT",
+                "connection-type": "WIFI",
+                "request-type": "POST",
+                "request-format": "JSON",
+                "data": {
+                  "gps": {
+                    "latitude": "0.0",
+                    "longitude": "0.0",
+                    "altitude": "0.0",
+                    "speed": "0.0",
+                    "course": "0.0",
+                    "horizontal-accuracy": "0.0",
+                    "vertical-accuracy": "0.0",
+                    "timestamp": "0.0"
+                  },
+                  "rtc": {
+                    "timestamp": "0.0"
+                  },
+                  "imu": {
+                    "accelerometer": {
+                      "x": "0.0",
+                      "y": "0.0",
+                      "z": "0.0"
+                    },
+                    "gyroscope": {
+                      "x": "0.0",
+                      "y": "0.0",
+                      "z": "0.0"
+                    },
+                    "magnetometer": {
+                      "x": "0.0",
+                      "y": "0.0",
+                      "z": "0.0"
+                    },
+                    "temperature": "0.0",
+                    "timestamp": "0.0"
+                  },
+                  "images": [
+                      {
+                          "name": "img1.bmp",
+                          "type": "image/bmp",
+                          "data": "(00, 01, 02) (03, 04, 05) (06, 07, 08) (09, 10, 11) (12, 13, 14) (15, 16, 17)"
+                      }
+                  ]
+                }, 
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "content-Type": "text/json"
+                  }
+            }
+        }
+    ]
+}
