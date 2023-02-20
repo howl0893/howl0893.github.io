@@ -1,5 +1,5 @@
 <template>
-  <body data-new-gr-c-s-check-loaded="14.1044.0" data-gr-ext-installed="">
+  <body>
     <div
       id="doc"
       class="container-fluid markdown-body comment-enabled"
@@ -7,39 +7,27 @@
     >
       <br />
       <h1 style="margin-bottom: 7px">About me</h1>
-      <small style="float: left; color: #888"> 2022 Jan 18 </small>
-      <small style="float: right; color: #888"><a href="/">Back</a></small>
+      <small style="float: left; color: #888"> 2023 Feb 19 </small>
+      <!-- <small style="float: right; color: #888"><a href="/">Back</a></small> -->
       <br />
       <br />
       <br />
-      <title>About me</title>
-
       <p>
-        I was born in 1994 in Russia and moved to Canada in 2000, where I went
-        to school. I happily played World of Warcraft during 2007-2010, but one
-        day Blizzard removed the damage component from my beloved warlock's
-        Siphon Life spell. I cried myself to sleep, and on that day I realized
-        what horrors centralized services can bring. I soon decided to quit. In
-        2011, searching for a new purpose in life, I discovered Bitcoin. At
-        first, I was skeptical, and did not understand how it could possibly
-        have value without physical backing. But slowly I became more and more
-        interested. I started writing for a blog called Bitcoin Weekly initially
-        at a meek wage of $1.5 per hour, and soon with Mihai Alisie cofounded
-        Bitcoin Magazine. In 2012, I entered the University of Waterloo; in 2013
-        I realized that crypto projects were taking up 30h/week of my time, so I
-        dropped out. I went around the world, explored many crypto projects, and
-        finally realized that they were all too concerned about specific
-        applications and not being sufficiently general - hence the birth of
-        Ethereum, which has been taking up my life ever since.
+        I graduated from University in 2019 with a bachelor's in Engineering Physics. I was drawn to this discipline due to the broad bandwidth 
+        of material that would be covered. I had a wide range of interests and feared that choosing a more specialized field would lead to 
+        dissatisfaction or regret. During my studies and through my work experience at Michigan Aerospace, I have gained expertise in various 
+        areas of engineering, but a love for research and software development formulated. Over the years, I have experience designing and building 
+        remote sensors, full-stack web applications, and embedded systems from the initial stages to final product. My goal is to continue my 
+        education and become a digital craftsman, and I am pursuing this through various means, including teaching computers to learn deeply.
       </p>
-      <p>Age: 25 (for now)</p>
-      <p>Residence: Cathay Pacific Airlines</p>
+      <p>Here are some other potentially interesting metrics inspired from Vitalik Buterin:</p>
+      <p>Age: 27 (for now)</p>
+      <p>Residence: Minturn, CO</p>
       <p>Political affiliation: Intellectual hipster meta-contrarian</p>
-      <p>Drinks/smokes/drugs: green tea</p>
+      <p>Drinks/smokes/drugs: Depends what you've got</p>
       <p>Religion: I like DAOism, daoism/taoism, and tauism (as in 6.283185...).</p>
       <p>Occupation: It's complicated</p>
-      <p>Work Egora</p>
-      <p>Education University of Waterloo</p>
+      <p>Seeking a Master's or PhD program, but missed the Fall 2023 deadline</p>
       <p><img src="../assets/about/wild-man-selfie.png" /></p>
     </div>
   </body>
