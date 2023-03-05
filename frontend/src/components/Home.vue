@@ -4,7 +4,7 @@
     <body>
       <div id="image">
         <img id="bg-image" :src="backgroundImage" />
-        <iframe src="https://open.spotify.com/embed/playlist/3PNZmgowCUyoFMhMp1lOt2?si=cc937a4207904739?utm_source=generator&theme=0&autoplay=1"
+        <iframe src="https://open.spotify.com/embed/playlist/3PNZmgowCUyoFMhMp1lOt2?si=cc937a4207904739?utm_source=generator&theme=0&autoplay=1&t=0s"
         width="300vw" height="150vh" frameBorder="0" allowfullscreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
@@ -57,6 +57,7 @@
       <Reconn id="Reconn" v-if="activeComponent == 'Reconn'" />
       <Robotics id="Robotics" v-if="activeComponent == 'Robotics'" />
       <Reading id="Reading" v-if="activeComponent == 'Reading'" />
+      <Void id="Void" v-if="activeComponent == 'Void'" />
     </body>
   </div>
 </template>
@@ -69,6 +70,7 @@ import Halas from './Halas.vue'
 import Reconn from './Reconn.vue'
 import Robotics from './Robotics.vue'
 import Reading from './Reading.vue'
+import Void from './Void.vue'
 
 export default {
   components: {
@@ -78,19 +80,23 @@ export default {
     Halas,
     Reconn,
     Robotics,
-    Reading
+    Reading,
+    Void
   },
 
   data() {
     return {
       activeComponent: null,
       backgroundImages: [
+        require("../assets/background/quandary-peak.jpg"),
         require("../assets/background/holy-cross.jpg"),
         require("../assets/background/summit-lake.jpg"),
         require("../assets/background/bald-mtn.jpg"),
+        require("../assets/background/mineral-bottom.jpg"),
         require("../assets/background/mt-hood.jpg"),
         require("../assets/background/summit-lake2.jpg"),
         require("../assets/background/leadville.jpg"),
+        // require("../assets/background/lake-powell2.jpg"),
         // require("../assets/background/uneva-peak.jpg"),
       ],
       index: 0,
