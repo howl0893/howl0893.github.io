@@ -20,14 +20,6 @@
         remote sensors, full-stack web applications, and embedded systems from the initial stages to final product. My goal is to continue my 
         education and become a digital craftsman, and I am pursuing this through various means, including teaching computers to learn deeply.
       </p>
-      <p>Here are some other potentially interesting metrics inspired from Vitalik Buterin:</p>
-      <p>Age: 27 (for now)</p>
-      <p>Residence: Minturn, CO</p>
-      <p>Political affiliation: Intellectual hipster meta-contrarian</p>
-      <p>Drinks/smokes/drugs: Depends what you've got</p>
-      <p>Religion: I like DAOism, daoism/taoism, and tauism (as in 6.283185...).</p>
-      <p>Occupation: It's complicated</p>
-      <p>Seeking a Master's or PhD program, but missed the Fall 2023 deadline</p>
       <p><img src="../assets/about/wild-man-selfie.png" /></p>
     </div>
   </body>

@@ -4,9 +4,15 @@
     <body>
       <div id="image">
         <img id="bg-image" :src="backgroundImage" />
-        <iframe src="https://open.spotify.com/embed/playlist/3PNZmgowCUyoFMhMp1lOt2?si=cc937a4207904739?utm_source=generator&theme=0&autoplay=1&t=0s"
-        width="300vw" height="150vh" frameBorder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="spotify"
+          src="https://open.spotify.com/embed/playlist/3PNZmgowCUyoFMhMp1lOt2?si=cc937a4207904739?utm_source=generator&theme=0&autoplay=1&t=0s"
+          width="300vw" height="150vh" frameBorder="0" allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="chevron-container">
+          <i class="fa-solid fa-chevron-left" @click="prevBackground"></i>
+          <i class="fa-solid fa-chevron-right" @click="nextBackground"></i>
+        </div>
+
 
         <div class="image-text" id="header-text">
           <header>Matthew Howlett</header>
@@ -16,8 +22,8 @@
             <header class="list-header-text">Research Scientist</header>
             <ul id="list">
               <li @click="scrollToComponent('Halas')">HALAS</li>
-              <li><a href="">Chickadee</a></li>
-              <li><a href="">Autonomous Drone</a></li>
+              <li @click="scrollToComponent('Chickadee')">Chickadee</li>
+              <li @click="scrollToComponent('Drone')">Autonomous Drone</li>
               <li @click="scrollToComponent('Anemometer')">Sonic Anemometer</li>
               <!-- <li><a href="">Computational Physics</a></li> -->
             </ul>
@@ -27,8 +33,8 @@
             <ul id="list">
               <li @click="scrollToComponent('Core')">CORE</li>
               <li @click="scrollToComponent('Reconn')">Reconn.AI</li>
-              <li><a href="">Machine Learning</a></li>
-              <li><a href="">Full stack</a></li>
+              <li @click="scrollToComponent('MachineLearning')">Machine Learning</li>
+              <li @click="scrollToComponent('FullStack')">Full Stack</li>
             </ul>
           </div>
           <div class="image-text" id="personal-text">
@@ -42,18 +48,29 @@
           </div>
         </div>
         <div id="email-text">
-          <a href="https://github.com/howl0893">
-            <img align="left" alt="GitHub" width="30px" style="padding-right:12px;"
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+          <a href="https://github.com/howl0893" target="_blank">
+            <i class="fa-brands fa-github"></i>
+            <!-- <img align="left" alt="GitHub" width="30px" style="padding-right:12px;"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" /> -->
           </a>
-          — matt.r.howlett@gmail.com — <a
-            href="/Users/matthew/dev/my-site/frontend/public/Resume-Matthew-Howlett.pdf">Resume</a>
+          — <a href="mailto:matt.r.howlett@gmail.com" target="_blank">matt.r.howlett@gmail.com</a> — <a
+            href="https://drive.google.com/file/d/1809QDOLC-zyVurXlq3k1EGSBoNDXy9M2/view?usp=sharing"
+            target="_blank">Resume</a>
         </div>
+        <div id="circles">
+          <i v-for="(image, i) in backgroundImages" :key="i" class="circle-icon"
+            :class="{ 'fa-solid fa-circle': i === index, 'fa-regular fa-circle': i !== index }"></i>
+        </div>
+
       </div>
       <About id="About" v-if="activeComponent == 'About'" />
       <Anemometer id="Anemometer" v-if="activeComponent == 'Anemometer'" />
       <Core id="Core" v-if="activeComponent == 'Core'" />
+      <Chickadee id="Chickadee" v-if="activeComponent == 'Chickadee'" />
+      <Drone id="Drone" v-if="activeComponent == 'Drone'" />
+      <FullStack id="FullStack" v-if="activeComponent == 'FullStack'" />
       <Halas id="Halas" v-if="activeComponent == 'Halas'" />
+      <MachineLearning id="MachineLearning" v-if="activeComponent == 'MachineLearning'" />
       <Reconn id="Reconn" v-if="activeComponent == 'Reconn'" />
       <Robotics id="Robotics" v-if="activeComponent == 'Robotics'" />
       <Reading id="Reading" v-if="activeComponent == 'Reading'" />
@@ -66,7 +83,11 @@
 import About from './About.vue'
 import Anemometer from './Anemometer.vue'
 import Core from './Core.vue'
+import Chickadee from './Chickadee.vue'
+import Drone from './Drone.vue'
+import FullStack from './FullStack.vue'
 import Halas from './Halas.vue'
+import MachineLearning from './MachineLearning.vue'
 import Reconn from './Reconn.vue'
 import Robotics from './Robotics.vue'
 import Reading from './Reading.vue'
@@ -77,7 +98,11 @@ export default {
     About,
     Anemometer,
     Core,
+    Chickadee,
+    Drone,
+    FullStack,
     Halas,
+    MachineLearning,
     Reconn,
     Robotics,
     Reading,
@@ -100,27 +125,15 @@ export default {
         // require("../assets/background/uneva-peak.jpg"),
       ],
       index: 0,
-
-      // player: null,
-      // trackName: '',
-      // artistName: '',
-      // trackImageUrl: '',
-      // accessToken: '3933fe89bee343719b0dc66c89d56c35', // insert your access token here
-      // deviceId: '2a6996e4a159416ea0b7ba6ceb7b8879', // insert your device ID here
-      // playlistId: '6kRK16eJxj5uPbA5csodUs?si=e68e77d16b994473', // insert your playlist ID here
-      // trackUris: [], // an array to store the URIs of the first 5 tracks in the playlist
+      intervalId: null,
 
     };
   },
   mounted() {
     // cycle through backgroundImages every 5 seconds
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.index = (this.index + 1) % this.backgroundImages.length;
     }, 5000);
-
-    // Get a reference to the embed iframe element
-    // const spotifyEmbedWindow = document.querySelector('iframe[src*="spotify.com/embed"]').contentWindow;
-    // spotifyEmbedWindow.postMessage({command: 'toggle'}, '*');
 
   },
   computed: {
@@ -137,6 +150,27 @@ export default {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }, 100)
     },
+    prevBackground() {
+      clearInterval(this.intervalId);
+
+      this.index = (this.index - 1 + this.backgroundImages.length) % this.backgroundImages.length;
+
+      this.intervalId = setInterval(() => {
+        this.index = (this.index + 1) % this.backgroundImages.length;
+      }, 5000);
+
+    },
+    nextBackground() {
+      clearInterval(this.intervalId);
+
+      this.index = (this.index + 1) % this.backgroundImages.length;
+
+      this.intervalId = setInterval(() => {
+        this.index = (this.index + 1) % this.backgroundImages.length;
+      }, 5000);
+
+    },
+
   }
 
 };
@@ -144,13 +178,14 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta2/css/all.min.css");
 
-iframe {
+.spotify {
   opacity: 70%;
-  border-radius:12px; 
-  position: 
-  fixed; 
-  top: 2%; 
+  border-radius: 12px;
+  position:
+    fixed;
+  top: 2%;
   left: 1%;
   z-index: 10;
 }
@@ -264,7 +299,7 @@ li:hover {
 
 #email-text {
   position: absolute;
-  bottom: 2%;
+  bottom: 4%;
   text-align: center;
   color: white;
   left: 50%;
@@ -275,69 +310,49 @@ li:hover {
   backdrop-filter: blur(2px);
 }
 
-
-
-.spotify-widget {
-  font-family: sans-serif;
-}
-
-.spotify-widget__player {
+.chevron-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 400px;
-  height: 200px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 1;
 }
 
-.spotify-widget__player__info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.spotify-widget__player__info img {
-  width: 100px;
-  height: 100px;
-  margin-right: 20px;
-}
-
-.spotify-widget__player__info__details h3 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.spotify-widget__player__info__details p {
-  margin: 0;
-  font-size: 16px;
-  color: #666;
-}
-
-.spotify-widget__player__controls button {
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #1db954;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  margin-right: 10px;
+.fa-chevron-left,
+.fa-chevron-right {
+  color: white;
+  opacity: 70%;
+  font-size: 2.5rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  margin: 0 1rem;
+  transition: opacity 0.3s ease-in-out;
+  /* Add transition effect for smooth change */
 }
 
-.spotify-widget__player__controls button:hover {
-  background-color: #0e8f39;
+.fa-chevron-left:hover,
+.fa-chevron-right:hover {
+  opacity: 100%;
+  /* Change the opacity when hovered */
 }
 
+#circles {
+  color: white;
+  position: absolute;
+  opacity: 70%;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.20);
+}
 
-
-
+#circles i {
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
 
 /* Mobile */
 /* @media only screen and (max-width: 600px) {

@@ -14,7 +14,7 @@
         <br />
 
         <p>
-          Comming soon! This will highlight the robotics projects I've worked on & future projects only in my imagination.
+          Highlighting personal, inspiring, and future robotics projects.
         </p>
         <!-- <p><img src="../assets/anemometer/teensy.jpg" width="50%"></p> -->
       </div>
