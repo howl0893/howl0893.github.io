@@ -10,33 +10,28 @@
             <br />
 
             <p>
+                Follow, fork, or create a pull request here: <a href="https://github.com/hopeYouLikeGamminToo/void" target="_blank"><code>void</code></a>
+                <br/> <br/>
                 <code>void</code> is a project I started a few months ago after receiving a GitHub invite to collaborate on
                 a project. A friend
                 was interested in starting a coding project after seeing an up-tick in my GitHub activity. After some short
-                discourse,
-                we settled on creating an web browser multiplayer game. With the idea that one day it would be
+                discourse, we settled on creating a web browser multiplayer game. With the idea that one day it would be
                 connected to a blockchain to feature in-game currency, digital collectibles, and NFT characters.
                 <br /> <br />
                 While the idea of such a game excited us all (there were 3 of us). There was much to learn. None of us had
-                experience with the technologies it would take to complete
-                such a game. We all got to learning, creating individual repositories in a GitHub organization where we
-                would experiement with different
-                technologies. The repository I created got called <code>void</code>. While struggling to come up with a name
-                for the project, and not
-                incredibly confident it would ever amount to anything, I typed <code>mkdir void</code> into my terminal.
-                <code>void</code> because the created directory would be completely empty,
-                but also because in computer programming langauges, such as C++, Java, and others, <code>void</code> is a
-                keyword used to indicate that a function or method
-                does not return any value. Thus, giving me an out in the case that I wanted to abandon it forever.
+                experience with the technologies it would take to complete such a game. We all got to learning, creating individual repositories to act 
+                as a sandbox in a GitHub organization  where we would could experiement, play, and build castles. The repository I created got called 
+                <code>void</code>. While struggling to come up with a name for the project, and not incredibly confident it would ever amount to anything,
+                I typed <code>mkdir void</code> into my terminal. <code>void</code> because the created directory would be completely empty,
+                but also because in computer programming langauges, such as C++, Java, and others, <code>void</code> is a keyword used to 
+                indicate that a function or method does not return any value. Thus, giving me an out in the case that I wanted to abandon it forever.
                 <br /> <br />
                 Over the last several months the collaboration on the the project has dwindled. Despite this, I have
-                continued to tinker away on <code>void</code> in my
-                spare time (which mostly occurs on weekends before or after I hit the slopes). While it isn't anywhere near
-                complete or abandoned, I've made some progress
-                on it. The current state of the game uses <a href="https://pixijs.com/" target="_blank">PixiJS</a> for 2D
-                rendering, <a href="https://brm.io/matter-js/" target="_blank">matter.js</a>
-                for the physics engine, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API"
-                    target="_blank">WebRTC</a> for multiplayer and chat functionality.
+                continued to tinker away on <code>void</code> in my spare time (which mostly occurs on weekends before or after I hit the slopes). 
+                While it isn't anywhere near complete or abandoned, I've made some progress on it. The current state of the game uses 
+                <a href="https://pixijs.com/" target="_blank">PixiJS</a> for 2D rendering, <a href="https://brm.io/matter-js/" target="_blank">matter.js</a>
+                for the physics engine, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API" target="_blank">WebRTC</a> for multiplayer
+                and chat functionality. Here is a gif that depicts most of the functionality to date:
 
             </p>
             <br/>
@@ -44,6 +39,13 @@
                 <img src="../assets/void/demo.gif" width="100%" />
                 <figcaption>
                     demo highlighting current state of <code>void</code>
+                </figcaption>
+            </figure>
+            <br/>
+            <figure>
+                <img src="../assets/void/honest-work.jpg" width="60%"/>
+                <figcaption>
+                    Me
                 </figcaption>
             </figure>
             <br/>
@@ -71,7 +73,7 @@
             <figure class="inline-fig">
                 <img src="../assets/void/glonky-sketch.jpg"/>
                 <figcaption>
-                    artists sketch of kraken
+                    artists sketch of glonky
                 </figcaption>
             </figure>
             <figure class="inline-fig">

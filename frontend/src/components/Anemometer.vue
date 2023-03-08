@@ -14,7 +14,8 @@
         <br />
 
         <p>
-          I designed and built a 3-dimensional sonic anemometer! AKA wind sensor.
+          To complete my thesis requirement while in University, I made a 3D sonic anemometer while working as an intern at Michigan Aerospace.
+          More details to come.
   
   
         </p>

@@ -15,8 +15,7 @@
 
         <p>
           I am one of three software developers contributing to this Machine learning powered website. A tool that helps automate the annotation process of camera trap imagery.
-  
-  
+          
         </p>
         <p><img src="../assets/reconn/collection.png" width="90%"></p>
       </div>

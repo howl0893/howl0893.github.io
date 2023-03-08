@@ -14,12 +14,7 @@
         <br />
         High Altitude LIDARs for Atmospheric Sensing (HALAS) systems.
         <br />
-        Developed software for a high-altitude atmospheric LiDAR system designed to detect clear air turbulence.
-        Tasking included the design, implementation, and unit-testing of safety system algorithms, displaying real-time
-        device and system data to a webpage UI,
-        logging system-wide events, monitoring and complying to predictive avoidance messages sent by a laser governing
-        body,
-        and interfacing with various device APIs or SDKs to write data collection software.
+        More details coming soon.
       </p>
       <figure>
         <img src="../assets/halas/unit0-cape.jpg" width="60%" />
