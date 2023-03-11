@@ -29,5 +29,5 @@
 </script>
 
 <style lang="css" scoped>
-@import "styles.css";
+@import "../styles/global.css";
 </style>

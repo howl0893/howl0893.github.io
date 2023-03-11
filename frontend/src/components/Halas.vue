@@ -17,31 +17,31 @@
         More details coming soon.
       </p>
       <figure>
-        <img src="../assets/halas/unit0-cape.jpg" width="60%" />
+        <img class="blog-img" src="../assets/halas/unit0-cape.jpg" width="60%" />
         <figcaption>
           Ground system 0, stationed at cape canaveral.
         </figcaption>
       </figure>
       <figure>
-        <img src="../assets/halas/unit0-mugu.jpg" width="60%" />
+        <img class="blog-img" src="../assets/halas/unit0-mugu.jpg" width="60%" />
         <figcaption>
           Ground system 0, stationed at Pt. Mugu.
         </figcaption>
       </figure>
       <figure>
-        <img src="../assets/halas/trex.jpg" width="60%" />
+        <img class="blog-img" src="../assets/halas/trex.jpg" width="60%" />
         <figcaption>
           Ground system 1, a TREX is born in Ann Arbor.
         </figcaption>
       </figure>
       <figure>
-        <img src="../assets/halas/night_lazing.jpg" width="60%" />
+        <img class="blog-img" src="../assets/halas/night_lazing.jpg" width="60%" />
         <figcaption>
           Late 3AM night teaching TREX to see for the first time.
         </figcaption>
       </figure>
       <figure>
-        <img src="../assets/halas/inside_airborne.jpg" width="60%" />
+        <img class="blog-img" src="../assets/halas/inside_airborne.jpg" width="60%" />
         <figcaption>
           Inside the Airborne system.
         </figcaption>
@@ -54,14 +54,5 @@
 </script>
 
 <style lang="css" scoped>
-@import "styles.css";
-
-img {
-  border-radius: 2%;
-}
-
-figcaption {
-  font-size: 0.8em;
-  color: #666;
-}
+@import "../styles/global.css";
 </style>
