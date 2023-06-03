@@ -1,10 +1,6 @@
 <template>
   <body>
-    <div
-      id="doc"
-      class="container-fluid markdown-body comment-enabled"
-      data-hard-breaks="true"
-    >
+    <div id="doc" class="container-fluid markdown-body comment-enabled" data-hard-breaks="true">
       <br />
       <h1 style="margin-bottom: 7px">About me</h1>
       <small style="float: left; color: #888"> 2023 Feb 19 </small>
@@ -13,14 +9,92 @@
       <br />
       <br />
       <p>
-        I graduated from University in 2019 with a bachelor's in Engineering Physics. I was drawn to this discipline due to the broad bandwidth 
-        of material that would be covered. I had a wide range of interests and feared that choosing a more specialized field would lead to 
-        dissatisfaction or regret. During my studies and through my work experience at Michigan Aerospace, I have gained expertise in various 
-        areas of engineering, but a love for research and software development formulated. Over the years, I have experience designing and building 
-        remote sensors, full-stack web applications, and embedded systems from the initial stages to final product. My goal is to continue my 
-        education and become a digital craftsman, and I am pursuing this through various means, including teaching computers to learn deeply.
+        I graduated from University in 2019 with a bachelor's in Engineering Physics. I was drawn to this discipline due
+        to the broad bandwidth
+        of material that would be covered. I had a wide range of interests and feared that choosing a more specialized
+        field would lead to
+        dissatisfaction or regret. During my studies and through my work experience at Michigan Aerospace, I have gained
+        expertise in various
+        areas of engineering, but a love for research and software development formulated. I have years of experience
+        designing and building
+        remote sensors, full-stack web applications, and embedded systems from the initial stages to final product. My
+        goal is to continue my
+        education and become a digital craftsman, and I am pursuing this through various means, including teaching
+        computers to learn deeply.
       </p>
-      <p><img src="../assets/about/wild-man-selfie.png" /></p>
+      <p>
+        I've been living in the Colorado Rockies for close to two years. In my spare time I enjoy escaping into the
+        mountains. They offer my
+        mind clarity and moving about them is great way to exercise. I usually bring along my mountain bike or snowboard,
+        but all you really
+        need to bring is yourself. The mountains will do the rest. Aside from this portfolio's cover photos, here are some of 
+        my favorite pictures captured while out adventuring. Much more to come!
+      </p>
+      <br />
+      
+      <h5>Mountain Biking</h5>
+      <div class="grid-1x2">
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/bike/turqoise-lake.jpg" />
+          <figcaption>
+            Turqoise Lake
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/bike/vail.jpg" />
+          <figcaption>
+            Vail gondola one
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/bike/lees-way.jpg" />
+          <figcaption>
+            Lee's way down
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/bike/twin-lakes.jpg" />
+          <figcaption>
+            Twin Lakes
+          </figcaption>
+        </figure>
+      </div>
+
+      <h5>Snowboarding</h5>
+      <div class="grid-1x2">
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/snowboard/bald-mtn.jpg" />
+          <figcaption>
+            Bald Mountain
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/snowboard/uneva-peak.jpg" />
+          <figcaption>
+            Uneva Peak
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/snowboard/mt-hood.jpg" />
+          <figcaption>
+            Mt Hood
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img class="grid-vertical-img" src="../assets/about/snowboard/meadow-mtn-night.jpg" />
+          <figcaption>
+            Meadow Mountain
+          </figcaption>
+        </figure>
+      </div>
+      
+
     </div>
   </body>
 </template>
@@ -30,4 +104,13 @@
 
 <style lang="css" scoped>
 @import "../styles/global.css";
-</style>
+
+.blog-img {
+  width: 40%;
+}
+
+@media only screen and (max-width: 600px) {
+  .blog-img {
+    width: 100%;
+  }
+}</style>

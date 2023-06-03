@@ -16,12 +16,28 @@
         <p>
           Details of my go-to stack.
         </p>
+
+        <figure>
+            <img class="gif-player" src="../assets/physics/random-walk.gif" width="100%"/>
+            <figcaption>
+                random walkers
+            </figcaption>
+        </figure>
+        <br />
+
+        <!-- <RandomWalk/> -->
         <!-- <p><img src="../assets/anemometer/teensy.jpg" width="50%"></p> -->
       </div>
     </body>
   </template>
   
   <script>
+  // import RandomWalk from "./RandomWalk.vue"
+  export default {
+    components: {
+    // RandomWalk,
+    },
+  }
   </script>
   
   <style lang="css" scoped>

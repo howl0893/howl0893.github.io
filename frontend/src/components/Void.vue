@@ -3,7 +3,7 @@
         <div id="doc" class="container-fluid markdown-body comment-enabled" data-hard-breaks="true">
             <br />
             <h1 style="margin-bottom: 7px">VOID</h1>
-            <small style="float: left; color: #888"> 2023 Mar 05 </small>
+            <small style="float: left; color: #888"> 2023 Mar 11 </small>
             <!-- <small style="float: right; color: #888"><a href="/">Back</a></small> -->
             <br />
             <br />
@@ -60,54 +60,57 @@
             </figure>
             <br />
             <figure>
-                <img class="blog-img" src="../assets/void/honest-work.jpg" width="60%" margin-left="40%"/>
+                <img class="blog-img" src="../assets/void/honest-work.jpg" width="60%" margin-left="40%" />
                 <figcaption>
                     Me
                 </figcaption>
             </figure>
             <br />
 
-            <h4>Asset creation </h4>
+            <h4>Characters </h4>
 
-            <figure class="inline-fig">
-                <img class="blog-img" src="../assets/void/kraken-sketch.jpeg" />
-                <figcaption>
-                    artists sketch of kraken
-                </figcaption>
-            </figure>
-            <figure class="inline-fig">
-                <img class="blog-img" src="../assets/void/kraken-headshot-transparent.png" width="50%" />
-                <figcaption>
-                    kraken headshot
-                </figcaption>
-            </figure>
-            <br />
+            <br/>
+
+            <div class="grid-1x2">
+                <figure class="grid-fig">
+                    <img class="grid-vertical-img" src="../assets/void/kraken-headshot-transparent.png" />
+                    <figcaption>
+                        headshot
+                    </figcaption>
+                </figure>
+                <figure class="grid-fig">
+                    <img class="grid-vertical-img" src="../assets/void/kraken-sketch.jpeg" />
+                    <figcaption>
+                        artist's sketch
+                    </figcaption>
+                </figure>
+            </div>
+            <strong>KRAKEN - Suspect M.O.</strong>
             <p>
-                Suspect M.O.
-                <br />
                 Going by the nickname of Kraken, this suspect lurks in the shadows. There are rumors circulating that he has
                 a name,
                 & it's definitely not Kraken. If you happen upon this sea creature take careful watch. He might disappear in
                 the blink of an eye.
 
             </p>
-            <br />
-            <figure class="inline-fig">
-                <img class="blog-img" src="../assets/void/glonky-sketch.jpg" />
-                <figcaption>
-                    artists sketch of glonky
-                </figcaption>
-            </figure>
-            <figure class="inline-fig">
-                <img class="blog-img" src="../assets/void/glonky-headshot-transparent.png" width="47%" />
-                <figcaption>
-                    glonky headshot
-                </figcaption>
-            </figure>
-            <br />
+            <br/>
+            <br/>
+            <div class="grid-1x2">
+                <figure class="grid-fig">
+                    <img class="grid-vertical-img" src="../assets/void/glonky-headshot-transparent.png" />
+                    <figcaption>
+                        headshot
+                    </figcaption>
+                </figure>
+                <figure class="grid-fig">
+                    <img class="grid-vertical-img" src="../assets/void/glonky-sketch.jpg" />
+                    <figcaption>
+                        artist's sketch
+                    </figcaption>
+                </figure>
+            </div>
+            <strong>GLONKY - Suspect M.O.</strong>
             <p>
-                Suspect M.O.
-                <br />
                 Formerly known as Edward, this suspect has since grown out his hair and now goes by the name of Glonky.
                 Not much is known about his habits or whereabouts aside from the fact that he leaves behind a trail of
                 cigarettes and booze.
@@ -134,6 +137,4 @@ code {
     color: var(--color-anchor);
     background-color: inherit;
 }
-
-
 </style>

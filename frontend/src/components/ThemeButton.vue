@@ -3,8 +3,8 @@
     <label class="theme">
       <input type="checkbox" :checked="userTheme === 'dark'" />
       <div class="theme-icon" @click="toggleTheme">
-        <i v-if="userTheme === 'light'" class="fas fa-moon"></i>
-        <i v-else class="fas fa-sun"></i>
+        <i v-if="userTheme === 'light'" class="fas fa-sun"></i>
+        <i v-else class="fas fa-moon"></i>
       </div>
     </label>
   </div>
