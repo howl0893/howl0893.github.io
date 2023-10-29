@@ -1,31 +1,32 @@
 <template>
   <div id="app">
-
     <body>
       <div id="image">
         <img id="bg-image" :src="backgroundImage" />
+    
         <!-- <iframe class="spotify"
           src="https://open.spotify.com/embed/playlist/3PNZmgowCUyoFMhMp1lOt2?si=cc937a4207904739?utm_source=generator&theme=0&autoplay=1&t=0s"
           width="300vw" height="150vh" frameBorder="0" allowfullscreen=""
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
-        <div class="chevron-container">
+        
+          <!-- <div class="chevron-container">
           <i class="fa-solid fa-chevron-left" @click="prevBackground"></i>
           <i class="fa-solid fa-chevron-right" @click="nextBackground"></i>
-        </div>
+        </div> -->
 
 
-        <div class="image-text" id="header-text">
+        <!-- <div class="image-text" id="header-text">
           <header>Matthew Howlett</header>
-        </div>
-        <div id="lower-text">
+        </div> -->
+
+        <!-- <div id="lower-text">
           <div class="image-text" id="ds-text">
             <header class="list-header-text">Research Scientist</header>
             <ul id="list">
               <li @click="scrollToComponent('Halas')">HALAS</li>
-              <li @click="scrollToComponent('Chickadee')">Chickadee</li>
-              <li @click="scrollToComponent('Drone')">Autonomous Drone</li>
-              <li @click="scrollToComponent('Anemometer')">Sonic Anemometer</li>
-              <!-- <li><a href="">Computational Physics</a></li> -->
+              <li @click="scrollToComponent('Chickadee')">SMARTFARM</li>
+              <li @click="scrollToComponent('Drone')">Reconn.AI</li>
+              <li @click="scrollToComponent('Anemometer')">Ultrasonic Anemometer</li>
             </ul>
           </div>
           <div class="image-text" id="swe-text">
@@ -46,14 +47,16 @@
               <li @click="scrollToComponent('Reading')">Reading List</li>
             </ul>
           </div>
-        </div>
-        <div id="email-text">
+        </div> -->
+
+        <!-- <div id="email-text">
           <a href="https://github.com/howl0893" target="_blank">
             <i class="fa-brands fa-github"></i>
           </a>
           <a href="mailto:matt.r.howlett@gmail.com" target="_blank">matt.r.howlett@gmail.com</a>
           <a href="https://drive.google.com/file/d/1809QDOLC-zyVurXlq3k1EGSBoNDXy9M2/view?usp=sharing" target="_blank">Resume</a>
-        </div>
+        </div> -->
+
         <!-- <div id="circles">
           <i v-for="(image, i) in backgroundImages" :key="i" class="circle-icon"
             :class="{ 'fa-solid fa-circle': i === index, 'fa-regular fa-circle': i !== index }"></i>
@@ -62,7 +65,7 @@
       </div>
 
       <ThemeButton class="theme-button" v-if="activeComponent != null" />
-      <About id="About" v-if="activeComponent == 'About'" />
+      <About id="About" v-if="activeComponent == 'About'" @changeActiveComponent="changeActiveComponent"/>
       <Anemometer id="Anemometer" v-if="activeComponent == 'Anemometer'" />
       <Core id="Core" v-if="activeComponent == 'Core'" />
       <Chickadee id="Chickadee" v-if="activeComponent == 'Chickadee'" />
@@ -112,16 +115,17 @@ export default {
 
   data() {
     return {
-      activeComponent: null,
+      activeComponent: "About",
       backgroundImages: [
-        require("../assets/background/quandary-peak.jpg"),
-        require("../assets/background/summit-lake2.jpg"),
-        require("../assets/background/holy-cross.jpg"),
-        require("../assets/background/summit-lake.jpg"),
+        require("../assets/background/crop/quandary-peak.jpg"),
+        // require("../assets/background/crop/maloit-deer.jpg"),
+        require("../assets/background/crop/summit-lake2.jpg"),
+        // require("../assets/background/crop/holy-cross.jpg"),
+        require("../assets/background/crop/summit-lake.jpg"),
         // require("../assets/background/bald-mtn.jpg"),
         // require("../assets/background/mineral-bottom.jpg"),
-        require("../assets/background/leadville.jpg"),
-        require("../assets/background/mt-hood-blue-bird.jpg"),
+        require("../assets/background/crop/leadville.jpg"),
+        // require("../assets/background/crop/mt-hood-blue-bird.jpg"),
         // require("../assets/background/lake-powell2.jpg"),
         // require("../assets/background/uneva-peak.jpg"),
       ],
@@ -143,13 +147,17 @@ export default {
     }
   },
   methods: {
+    changeActiveComponent(newComponent) {
+      this.activeComponent = newComponent;
+      this.scrollToComponent(this.activeComponent);
+    },
     scrollToComponent(id) {
       this.activeComponent = id;
       console.log(this.activeComponent);
       setTimeout(() => {
         const element = document.querySelector(`#${id}`)
         element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 100)
+      }, 250)
     },
     prevBackground() {
       clearInterval(this.intervalId);
@@ -203,7 +211,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 30vh;
 }
 
 #bg-image {
@@ -371,6 +379,12 @@ li:hover {
   margin-right: 0.2rem;
 }
 
+@media only screen and (max-width: 900px) {
+    .theme-button {
+        margin-top: 40px;
+    }
+}
+
 
 /* Mobile */
 @media only screen and (max-width: 600px) {
@@ -420,6 +434,10 @@ li:hover {
   #email-text a {
     display: block;
     color: var(--color-text);
+  }
+
+  .theme-button {
+    margin-top: 15px;
   }
 }
 </style>

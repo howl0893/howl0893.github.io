@@ -4,7 +4,7 @@
             <br />
             <h1 style="margin-bottom: 7px">VOID</h1>
             <small style="float: left; color: #888"> 2023 Mar 11 </small>
-            <!-- <small style="float: right; color: #888"><a href="/">Back</a></small> -->
+            <small style="float: right; color: #888"><a href="/">Back</a></small>
             <br />
             <br />
             <br />
