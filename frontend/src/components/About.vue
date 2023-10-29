@@ -41,16 +41,20 @@
                 </p>
             </section>
 
-            <section class="my-playlist">
+            <section class="my-playlist" v-if="isSpotifyLoaded">
                 <h5>Playlist</h5>
                 <div class="spotify-container">
-                    <iframe class="spotify"
+                    <iframe class="spotify" @error="isSpotifyLoaded = false"
                         src="https://open.spotify.com/embed/playlist/3PNZmgowCUyoFMhMp1lOt2?si=cc937a4207904739?utm_source=generator&theme=0&autoplay=1&t=0s"
                         width="600" height="350" frameBorder="0" allowfullscreen=""
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         loading="lazy"></iframe>
                 </div>
             </section>
+            <div v-else>
+                <br/><br/><br/>
+                <br/><br/><br/><br/>
+            </div>
 
             <section class="skills">
                 <h5>Skills</h5>
@@ -97,13 +101,13 @@
                 <div class="card">
                     <h6>Kettering University</h6>
                     <small>2016 - 2019</small>
-                    <h7>Degree: Bachelor's of Science</h7>
-                    <h7>Major: Engineering Physics</h7>
+                    <span>Degree: Bachelor's of Science</span>
+                    <span>Major: Engineering Physics</span>
                 </div>
                 <div class="card">
                     <h6>Grand Valley State University</h6>
                     <small>2014 - 2016</small>
-                    <h7>Major: Product Manufacturing and Design</h7>
+                    <span>Major: Product Manufacturing and Design</span>
                 </div>
             </section>
 
@@ -111,28 +115,81 @@
                 <h5>Work Experience</h5>
                 <div class="card">
                     <h6>Michigan Aerospace Corporation</h6>
-                    <h6>Research Scientist | Engineer</h6>
+                    <span>Research Scientist | Engineer</span>
                     <small>Nov 2019 - Present (4 years)</small>
                     <ul>
-                        <li>Developed control system software for advanced LiDAR systems like HALAS (High-Altitude Lidar
-                            Atmospheric Sensing) and DroN2O (Drone-based Nitrous Oxide Emission Monitoring), enhancing and
-                            enabling device interoperability, safety algorithms, and real-time data displays.</li>
-                        <li>Researched and applied state-of-the-art deep-learning neural networks for optical flow and
-                            object classification. Architected a comprehensive software pipeline for data preprocessing,
-                            analysis, and sensor information extraction.</li>
+                        <li>
+                            Developed control system software for advanced LiDAR systems like
+                            <a @click="toggleCard('HALAS')" style="cursor:pointer"> HALAS <i
+                                    class="fas fa-caret-down exp-details"></i></a>
+                            and
+                            <a @click="toggleCard('DroN2O')" style="cursor:pointer"> DroN2O <i
+                                    class="fas fa-caret-down exp-details"></i></a>
+                        </li>
+
+                        <br />
+
+                        <div v-if="expandedCards.HALAS">
+                            <!-- <span>High Altitude Lidar Atmospheric sensing</span> -->
+                            <p>
+                                The <a
+                                    href="https://aerospace.honeywell.com/us/en/products-and-services/product/hardware-and-systems/weather-radar/honeywell-halas"
+                                    target="_blank">
+                                    High Altitude Lidar Atmospheric sensing <i
+                                        class="fas fa-external-link-alt exp-details"></i>
+                                </a> (HALAS) System is a ground and air-based, UV LIDAR and
+                                Raman system for real-time, high-altitude measurement of wind velocity, direction, density,
+                                temperature, and composition – O2, N2, and H2O mass fractions.
+                            </p>
+                            <p>
+                                Supporting data collection campaigns for this project took me to many places, including:
+                                Hawaii, California, Virginia, Florida, Maine, and Minnesota.
+                            </p>
+
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in halasSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': halasSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="HALAS Image">
+                                    <a class="prev" @click="changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
+                        <div v-if="expandedCards.DroN2O">
+                            <span>Drone-based Nitrous Oxide Emission Monitoring</span>
+                            <br /><br />
+                        </div>
+
+
+                        <li>Researched and applied deep-learning neural networks for optical flow and object classification.
+                        </li>
+
+                        <br />
+
                         <li>Led the embedded software development and PCB design for a 3D ultrasonic anemometer capable of
                             making high-speed wind and temperature measurements.</li>
+
+                        <br />
+
                         <li>Contributed to the development of Reconn.AI by improving the prediction and classification
                             algorithms, user interface, and integrating a subscription-based payment model using Stripe API.
                         </li>
+
+                        <br />
+
                         <li>Possess 5+ years of industry experience with a strong skill set in ARM Cortex M-series
                             processors, real-time control systems, circuit design, and multidisciplinary team leadership.
                         </li>
+
+                        <br />
+
                     </ul>
                 </div>
                 <div class="card">
                     <h6>Michigan Aerospace Corporation</h6>
-                    <h6>Engineer Co-op</h6>
+                    <span>Engineer Co-op</span>
                     <small>Apr 2018 - Oct 2019 (1 year 7 months)</small>
                     <ul>
                         <li>Designed 1D ultrasonic anemometer PCB shield for ARM based microcontroller.</li>
@@ -143,7 +200,7 @@
                 </div>
                 <div class="card">
                     <h6>New Eagle </h6>
-                    <h6>Engineer Co-op</h6>
+                    <span>Engineer Co-op</span>
                     <small>Sep 2016 - Jul 2017 (11 months)</small>
                     <ul>
                         <li>Contributed to mechanical and electrical design and assembly for multiple hybrid vehicle
@@ -155,12 +212,12 @@
                 </div>
                 <div class="card">
                     <h6>Angelo Iafrate Construction</h6>
-                    <h6>Laborer</h6>
+                    <span>Laborer</span>
                     <small>May 2014 - Jul 2016 (2 yrs 3 months)</small>
                 </div>
                 <div class="card">
                     <h6>College Works Painting</h6>
-                    <h6>Branch Manager</h6>
+                    <span>Branch Manager</span>
                     <small>Feb 2015 - Aug 2015 (7 months)</small>
                     <ul>
                         <li>Generated and managed more than $50k in work over one summer.</li>
@@ -168,7 +225,7 @@
                 </div>
                 <div class="card">
                     <h6>Grass Guyz LLC</h6>
-                    <h6>Co-owner | Manager</h6>
+                    <span>Co-owner | Manager</span>
                     <small>May 2010 - Oct 2013 (3 years 6 months)</small>
                     <ul>
                         <li>Co-founded and managed a lawn care business, overseeing around 30 accounts.</li>
@@ -181,7 +238,43 @@
   
 <script>
 export default {
+    data() {
+        return {
+            expandedCards: {
+                HALAS: false,
+                DroN2O: false
+            },
+            halasSlides: [
+                require('../assets/halas/night_lazing.jpg'),
+                require('../assets/halas/inside_airborne.jpg'),
+                require('../assets/halas/outside_airborne.jpg'),
+                require('../assets/halas/unit0-cape.jpg'),
+                require('../assets/halas/wing.jpg')
+                // ... more slides
+            ],
+            halasSlideIndex: 0,
+            isSpotifyLoaded: true
+        };
+    },
+
+    created() {
+        if (navigator.onLine) {
+            this.isSpotifyLoaded = true;
+        } else {
+            console.log("offline");
+            this.isSpotifyLoaded = false;
+        }
+    },
+
     methods: {
+        toggleCard(project) {
+            this.expandedCards[project] = !this.expandedCards[project];
+        },
+        changeSlide(step) {
+            const numSlides = this.halasSlides.length;
+            this.halasSlideIndex = (this.halasSlideIndex + step + numSlides) % numSlides;
+        },
+
         emitActiveComponent(project) {
             this.$emit('changeActiveComponent', project);
         },
@@ -196,7 +289,7 @@ export default {
                 default:
                     console.log('Unknown project');
             }
-        }
+        },
     }
 }
 </script>
@@ -292,6 +385,10 @@ small {
     margin-top: 0;
 }
 
+.exp-details {
+    font-size: 12px;
+}
+
 .project-icon {
     margin-left: 20px;
 }
@@ -353,10 +450,72 @@ small {
     margin-top: 20px;
 }
 
+.slideshow-container {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 60%;
+}
+
+.slideshow-img {
+    margin-left: 3.5vw;
+    max-width: 100%;
+    border-radius: 5px;
+    height: 80%;
+}
+
+.mySlides {
+    display: none;
+    height: 100%;
+    /* 100% of the container height */
+}
+
+.mySlides img {
+    height: 100%;
+    object-fit: cover;
+    /* Cover the entire area without stretching */
+}
+
+.mySlides.active-slide {
+    display: block;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    margin-top: -22px;
+    padding: 16px;
+    color: var(--color-text);
+    font-weight: bold;
+    transition: 0.6s ease;
+    user-select: none;
+    /* background: rgba(0,0,0,0.5); */
+}
+
+.next {
+    right: 1vw;
+}
+
+.prev {
+    left: 0;
+}
+
 
 @media only screen and (max-width: 1700px) {
     .blog-img {
         max-width: 28%;
+    }
+
+    .slideshow-img {
+        margin-left: 2vw;
+    }
+
+    .next {
+        right: -1vw;
     }
 
     .bio-header {
@@ -370,6 +529,14 @@ small {
         max-width: 35%;
     }
 
+    .slideshow-img {
+        margin-left: 1vw;
+    }
+
+    .next {
+        right: -1vw;
+    }
+
     .bio-header {
         margin-top: 200px;
 
@@ -380,6 +547,11 @@ small {
     .blog-img {
         max-width: 35%;
     }
+
+    .slideshow-img {
+        margin-left: 0;
+    }
+
 
     .bio-header {
         margin-top: 200px;
@@ -399,6 +571,25 @@ small {
 }
 
 @media only screen and (max-width: 900px) {
+
+    .slideshow-container {
+        height: 300px;
+        width: 90%;
+    }
+
+    .slideshow-img {
+        margin-left: 0vw;
+        max-width: 100%;
+    }
+
+    .next {
+        right: -10vw;
+    }
+
+    .prev {
+        left: -10vw;
+    }
+
     .blog-img {
         float: none;
         max-width: 70%;
@@ -419,7 +610,7 @@ small {
     }
 
     .container-fluid {
-    margin-top: -50px;
+        margin-top: -50px;
     }
 }
 
@@ -447,7 +638,8 @@ small {
     }
 
     .container-fluid {
-    margin-top: -100px;
+        margin-top: -100px;
     }
-}</style>
+}
+</style>
 
