@@ -20,7 +20,6 @@
                     <a href="https://www.linkedin.com/in/matthew-howlett-5b9131b2/" target="_blank">LinkedIn</a>
                     <a href="https://github.com/howl0893" target="_blank">GitHub</a>
                 </div>
-                <img class="wall-e-img" src="../assets/wall-e/wall-e.gif"/>
             </section>
 
             <section class="about">
@@ -440,7 +439,7 @@
                 </div>
             </section>
 
-            <section class="education">
+            <section class="certs">
                 <h5>Licenses & Certifications</h5>
                 <div class="edu-cards">
                     <div class="project-card" @click="navigateTo('coursera')">
@@ -461,6 +460,9 @@
                 </div>
             </section>
 
+            <div class="wall-e-img-container">
+                <img class="wall-e-img" src="../assets/wall-e/wall-e.gif"/>
+            </div>
         </div>
     </body>
 </template>
@@ -614,10 +616,10 @@ export default {
     margin-right: 3vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.wall-e-img {
-    float: left;
-    margin-top: -10px;
-    /* margin-left: 10%; */
+.wall-e-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top-section {
@@ -693,6 +695,7 @@ small {
 .about,
 .work-experience,
 .education,
+.certs,
 .projects {
     margin-top: 0;
 }
