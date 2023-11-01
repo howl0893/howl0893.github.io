@@ -20,6 +20,7 @@
                     <a href="https://www.linkedin.com/in/matthew-howlett-5b9131b2/" target="_blank">LinkedIn</a>
                     <a href="https://github.com/howl0893" target="_blank">GitHub</a>
                 </div>
+                <img class="wall-e-img" src="../assets/wall-e/wall-e.gif"/>
             </section>
 
             <section class="about">
@@ -218,12 +219,11 @@
                     <span>Engineer Co-op</span>
                     <small>Apr 2018 - Oct 2019 (1 year 7 months)</small>
                     <ul>
-                        <li>Designed <a @click="toggleCard('Anemometer1D')"
-                                class="dropdown-word"> 1D ultrasonic anemometer
+                        <li>Designed <a @click="toggleCard('Anemometer1D')" class="dropdown-word"> 1D ultrasonic anemometer
                                 <i class="fas fa-caret-down exp-details" v-if="expandedCards.Anemometer1D"></i>
                                 <i class="fas fa-caret-right exp-details" v-else></i>
-                            </a> PCB shield for ARM based microcontroller.</li>
-                        <br/> 
+                            </a> PCB shield for ARM based microcontroller.
+                        </li>
 
                         <div v-if="expandedCards.Anemometer1D">
                             <br />
@@ -237,12 +237,18 @@
                                             class="fa-solid fa-chevron-right"></i></a>
                                 </div>
                             </div>
-                            <br />
                         </div>
+
+                        <br />
 
                         <li>Wrote control system software in Python and LabView for laser-induced melanoma cell detection
                             via photoacoustic effect.</li>
+
+                        <br />
+
                         <li>Utilized SolidWorks for 3D modeling and executed rapid prototyping via 3D printing.</li>
+
+                        <br />
                     </ul>
                 </div>
                 <div class="card">
@@ -252,16 +258,21 @@
                     <ul>
                         <li>Contributed to mechanical and electrical design and assembly for multiple hybrid vehicle
                             projects.</li>
+
+                        <br />
+
                         <li>Participated in a large-scale
-                            <a @click="toggleCard('NewEagle')" class="dropdown-word"> reverse engineering project <i
-                                    class="fas fa-caret-down exp-details"></i></a> for electronic control unit
-                            replacement, focusing on CAN decryption, harness development, and software for I/O validation
-                            and data acquisition.
+                            <a @click="toggleCard('NewEagle')" class="dropdown-word"> reverse engineering project
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.NewEagle"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a> for electronic control unit
+                            replacement, focusing on CAN decryption, harness development, and software for I/O
+                            validation and data acquisition.
                         </li>
+
                         <div v-if="expandedCards.NewEagle">
                             <br />
                             <p>
-                                Shipping container stacker in which we replaced the ECU was replaced.
+                                Shipping container stacker in which we replaced the ECU.
                             </p>
 
                             <div class="slideshow-container">
@@ -274,7 +285,9 @@
                                             class="fa-solid fa-chevron-right"></i></a> -->
                                 </div>
                             </div>
+
                             <br />
+
                         </div>
                     </ul>
 
@@ -284,12 +297,17 @@
                     <span>Laborer</span>
                     <small>May 2014 - Jul 2016 (2 yrs 3 months)</small>
                     <ul>
-                        <!-- <a @click="toggleCard('Iafrate')" style="cursor:pointer"> <i class="fas fa-caret-down exp-details"></i></a> -->
+                        <li>Performed general construction tasks including the operation of heavy machinery.
+                            <a @click="toggleCard('Iafrate')" style="cursor:pointer">
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.Iafrate"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a>
+                        </li>
+
                         <div v-if="expandedCards.Iafrate">
                             <br />
                             <p>
-                                Standing in the pit of what is now Little Cesaers Arena in Detroit where the Red Wings
-                                hockey team plays.
+                                Standing in the pit of what is now Detroit's Little Caesars Arena, the current home of the
+                                Red Wings hockey team.
                             </p>
 
                             <div class="slideshow-container">
@@ -311,9 +329,18 @@
                     <span>Branch Manager</span>
                     <small>Feb 2015 - Aug 2015 (7 months)</small>
                     <ul>
-                        <li>Generated and managed more than $50k in work over one summer.</li>
+                        <li>
+                            Generated and managed more than $50k in work over one summer.
+                            <a @click="toggleCard('CollegeWorks')" style="cursor:pointer">
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.CollegeWorks"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a>
+                        </li>
+                        
                         <div v-if="expandedCards.CollegeWorks">
                             <br />
+                            <p>
+                                Before and after comparison pictures from two job sites.
+                            </p>
                             <div class="slideshow-container">
                                 <div v-for="(slide, index) in cwSlides" :key="index" class="mySlides"
                                     :class="{ 'active-slide': cwSlideIndex === index }">
@@ -333,7 +360,12 @@
                     <span>Co-owner | Manager</span>
                     <small>May 2010 - Oct 2013 (3 years 6 months)</small>
                     <ul>
-                        <li>Co-founded and managed a lawn care business, overseeing around 30 accounts.</li>
+                        <li>
+                            Co-founded and managed a lawn care business, overseeing around 30 accounts.
+                            <a @click="toggleCard('GrassGuyz')" style="cursor:pointer">
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.GrassGuyz"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a>
+                        </li>
                         <div v-if="expandedCards.GrassGuyz">
                             <br />
                             <div class="slideshow-container">
@@ -582,6 +614,11 @@ export default {
     margin-right: 3vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.wall-e-img {
+    float: left;
+    margin-top: -10px;
+    /* margin-left: 10%; */
+}
 
 .top-section {
     display: flex;
@@ -602,7 +639,7 @@ h4,
 }
 
 .bio-header {
-    margin-top: 180px;
+    margin-top: 200px;
     width: 90%;
     margin-left: 5%;
 }
@@ -801,10 +838,10 @@ small {
         right: -1vw;
     }
 
-    .bio-header {
+    /* .bio-header {
         margin-top: 180px;
 
-    }
+    } */
 }
 
 @media only screen and (max-width: 1400px) {
@@ -820,10 +857,10 @@ small {
         right: -1vw;
     }
 
-    .bio-header {
+    /* .bio-header {
         margin-top: 200px;
 
-    }
+    } */
 }
 
 @media only screen and (max-width: 1200px) {
@@ -835,11 +872,9 @@ small {
         margin-left: 0;
     }
 
-
-    .bio-header {
+    /* .bio-header {
         margin-top: 200px;
-
-    }
+    } */
 }
 
 @media only screen and (max-width: 1100px) {
@@ -847,10 +882,9 @@ small {
         max-width: 45%;
     }
 
-    .bio-header {
+    /* .bio-header {
         margin-top: 160px;
-
-    }
+    } */
 }
 
 @media only screen and (max-width: 900px) {
@@ -880,7 +914,7 @@ small {
     }
 
     .bio-header {
-        margin-top: 80px;
+        margin-top: 60px;
 
     }
 
@@ -908,7 +942,7 @@ small {
     }
 
     .bio-header {
-        margin-top: 50px;
+        margin-top: 20px;
 
     }
 
