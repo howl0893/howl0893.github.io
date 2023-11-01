@@ -23,7 +23,8 @@
             </section>
 
             <section class="about">
-                <h5 class="bio-header">Bio</h5>
+                <h1 class="bio-header"></h1>
+                <h5>Bio</h5>
                 <p>
                     As a Research Scientist | Engineer with a bachelor's in engineering physics, I have a solid skill set in
                     sensor design, full-stack web development, and embedded systems, backed by years of impactful work at
@@ -52,63 +53,14 @@
                 </div>
             </section>
             <div v-else>
-                <br/><br/><br/>
-                <br/><br/><br/><br/>
+                <br /><br /><br />
+                <br /><br /><br /><br />
             </div>
 
             <section class="skills">
                 <h5>Skills</h5>
                 <p class="tab-delimited">Python&emsp;Javascript&emsp;C++&emsp;Linux&emsp;ARM Cortex
                     M-series&emsp;VueJS&emsp;PostgreSQL&emsp;Control Systems&emsp;Deep Learning</p>
-            </section>
-
-            <section class="projects">
-                <h5>Personal Projects</h5>
-                <div class="project-cards">
-                    <div class="project-card" @click="emitActiveComponent('Robotics')">
-                        <i class="fa-solid fa-robot project-icon">&nbsp;&nbsp;&nbsp;&nbsp;Robots</i>
-                        <!-- <h6>Robotics</h6> -->
-                        <br />
-                        <br />
-                        <p>More details on the things I've built in my spare time.</p>
-                    </div>
-                    <div class="project-card" @click="navigateTo('wisdom-tree')">
-                        <i class="fa-solid fa-tree project-icon">&nbsp;&nbsp;&nbsp;&nbsp;Widsom Tree</i>
-                        <!-- <h6>Wisdom Tree</h6> -->
-                        <br />
-                        <br />
-                        <p>A browser-based daily word game inspired by Wordle.</p>
-                    </div>
-                    <div class="project-card" @click="emitActiveComponent('Void')">
-                        <i class="fa-solid fa-gamepad project-icon">&nbsp;&nbsp;&nbsp;&nbsp;void</i>
-                        <!-- <h6>void</h6> -->
-                        <br />
-                        <br />
-                        <p>A browser-based multiplayer game inspired by Super Smash Bros.</p>
-                    </div>
-                    <div class="project-card" @click="navigateTo('coming-soon')">
-                        <i class="fa-solid fa-wrench project-icon">&nbsp;&nbsp;&nbsp;&nbsp;Coming Soon</i>
-                        <!-- <h6>Coming Soon</h6> -->
-                        <br />
-                        <br />
-                        <p>Another project is underway; check back here later for more details!</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="education">
-                <h5>Education History</h5>
-                <div class="card">
-                    <h6>Kettering University</h6>
-                    <small>2016 - 2019</small>
-                    <span>Degree: Bachelor's of Science</span>
-                    <span>Major: Engineering Physics</span>
-                </div>
-                <div class="card">
-                    <h6>Grand Valley State University</h6>
-                    <small>2014 - 2016</small>
-                    <span>Major: Product Manufacturing and Design</span>
-                </div>
             </section>
 
             <section class="work-experience">
@@ -150,16 +102,46 @@
                                 <div v-for="(slide, index) in halasSlides" :key="index" class="mySlides"
                                     :class="{ 'active-slide': halasSlideIndex === index }">
                                     <img class="slideshow-img" :src="slide" alt="HALAS Image">
-                                    <a class="prev" @click="changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></a>
+                                    <a class="prev" @click="changeSlide(-1, 'halas')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'halas')"><i
+                                            class="fa-solid fa-chevron-right"></i></a>
                                 </div>
                             </div>
                             <br />
                         </div>
 
                         <div v-if="expandedCards.DroN2O">
-                            <span>Drone-based Nitrous Oxide Emission Monitoring</span>
-                            <br /><br />
+                            <br />
+                            <p>
+                                A <a href="https://arpa-e.energy.gov/technologies/projects/dron2o-drone-based-system-measuring-nitrous-oxide-emissions-agricultural"
+                                    target="_blank">
+                                    Drone-Based System for Measuring Nitrous Oxide Emissions from Agricultural Fields <i
+                                        class="fas fa-external-link-alt exp-details"></i>
+                                </a> (DroN2O) is a system proposed to sense N2O emissions from agricultural fields using
+                                laser-based sensors mounted on drones.
+                                These sensors include an optical absorption cell, a short-range miniature wind LIDAR (LIght
+                                Detection And Ranging),
+                                and a camera for plant health and ground assessment. The measurements from these sensors are
+                                combined and processed
+                                with artificial intelligence-enabled software to accurately measure N2O emissions from a
+                                given farm field during the entire growing season.
+                            </p>
+                            <p>
+
+                            </p>
+
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in droneSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': droneSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="Drone Image">
+                                    <a class="prev" @click="changeSlide(-1, 'drone')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'drone')"><i
+                                            class="fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            <br />
                         </div>
 
 
@@ -199,21 +181,65 @@
                     </ul>
                 </div>
                 <div class="card">
-                    <h6>New Eagle </h6>
+                    <h6>New Eagle</h6>
                     <span>Engineer Co-op</span>
                     <small>Sep 2016 - Jul 2017 (11 months)</small>
                     <ul>
                         <li>Contributed to mechanical and electrical design and assembly for multiple hybrid vehicle
                             projects.</li>
-                        <li>Participated in a large-scale reverse engineering project for electronic control unit
+                        <li>Participated in a large-scale
+                            <a @click="toggleCard('NewEagle')" style="cursor:pointer"> reverse engineering project <i
+                                    class="fas fa-caret-down exp-details"></i></a> for electronic control unit
                             replacement, focusing on CAN decryption, harness development, and software for I/O validation
-                            and data acquisition.</li>
+                            and data acquisition.
+                        </li>
+                        <div v-if="expandedCards.NewEagle">
+                            <br />
+                            <p>
+                                Shipping container stacker in which we replaced the ECU was replaced.
+                            </p>
+
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in newEagleSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': newEagleSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="New Eagle Image">
+                                    <!-- <a class="prev" @click="changeSlide(-1, 'eagle')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'eagle')"><i
+                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                </div>
+                            </div>
+                            <br />
+                        </div>
                     </ul>
+
                 </div>
                 <div class="card">
                     <h6>Angelo Iafrate Construction</h6>
                     <span>Laborer</span>
                     <small>May 2014 - Jul 2016 (2 yrs 3 months)</small>
+                    <ul>
+                        <!-- <a @click="toggleCard('Iafrate')" style="cursor:pointer"> <i class="fas fa-caret-down exp-details"></i></a> -->
+                        <div v-if="expandedCards.Iafrate">
+                            <br />
+                            <p>
+                                Standing in the pit of what is now Little Cesaers Arena in Detroit where the Red Wings
+                                hockey team plays.
+                            </p>
+
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in iafrateSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': iafrateSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="Iafrate Image">
+                                    <!-- <a class="prev" @click="changeSlide(-1, 'iafrate')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'iafrate')"><i
+                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </ul>
                 </div>
                 <div class="card">
                     <h6>College Works Painting</h6>
@@ -221,6 +247,20 @@
                     <small>Feb 2015 - Aug 2015 (7 months)</small>
                     <ul>
                         <li>Generated and managed more than $50k in work over one summer.</li>
+                        <div v-if="expandedCards.CollegeWorks">
+                            <br />
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in cwSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': cwSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="College Works Image">
+                                    <a class="prev" @click="changeSlide(-1, 'cw')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'cw')"><i
+                                            class="fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
                     </ul>
                 </div>
                 <div class="card">
@@ -229,9 +269,101 @@
                     <small>May 2010 - Oct 2013 (3 years 6 months)</small>
                     <ul>
                         <li>Co-founded and managed a lawn care business, overseeing around 30 accounts.</li>
+                        <div v-if="expandedCards.GrassGuyz">
+                            <br />
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in grassSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': grassSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="Grass Guyz Image">
+                                    <!-- <a class="prev" @click="changeSlide(-1, 'grass')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'grass')"><i
+                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
                     </ul>
                 </div>
             </section>
+
+            <section class="education">
+                <h5>Education History</h5>
+                <div class="project-cards">
+                    <div class="project-card">
+                        <h6>Kettering University</h6>
+                        <small>2016 - 2019</small>
+                        <br /> <br />
+                        <span>Degree: Bachelor's of Science</span>
+                        <br/>
+                        <span>Major: Engineering Physics</span>
+                    </div>
+                    <div class="project-card">
+                        <h6>Grand Valley State University</h6>
+                        <small>2014 - 2016</small>
+                        <br /> <br />
+                        <span>Major: Product Manufacturing and Design</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="projects">
+                <h5>Personal Projects</h5>
+                <div class="project-cards">
+                    <div class="project-card" @click="emitActiveComponent('Robotics')">
+                        <i class="fa-solid fa-robot project-icon">&nbsp;&nbsp;&nbsp;&nbsp;Robots</i>
+                        <!-- <h6>Robotics</h6> -->
+                        <br />
+                        <br />
+                        <p>More details on the things I've built in my spare time.</p>
+                    </div>
+                    <div class="project-card" @click="navigateTo('wisdom-tree')">
+                        <i class="fa-solid fa-tree project-icon">&nbsp;&nbsp;&nbsp;&nbsp;Widsom Tree</i>
+                        <!-- <h6>Wisdom Tree</h6> -->
+                        <br />
+                        <br />
+                        <p>A browser-based daily word game inspired by Wordle.</p>
+                    </div>
+                    <div class="project-card" @click="emitActiveComponent('Void')">
+                        <i class="fa-solid fa-gamepad project-icon">&nbsp;&nbsp;&nbsp;&nbsp;void</i>
+                        <!-- <h6>void</h6> -->
+                        <br />
+                        <br />
+                        <p>A browser-based multiplayer game inspired by Super Smash Bros.</p>
+                    </div>
+                    <div class="project-card" @click="navigateTo('coming-soon')">
+                        <i class="fa-solid fa-wrench project-icon">&nbsp;&nbsp;&nbsp;&nbsp;Coming Soon</i>
+                        <!-- <h6>Coming Soon</h6> -->
+                        <br />
+                        <br />
+                        <p>Another project is underway; check back here later for more details!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="education">
+                <h5>Licenses & Certifications</h5>
+                <div class="project-cards">
+                    <div class="project-card" @click="navigateTo('coursera')">
+                        <h6>Neural Networks and Deep Learning</h6>
+                        <small>Issued May 2022</small>
+                        <br /> <br />
+                        <span>DeepLearning.AI</span>
+                        <br/>
+                        <span>Credential ID UU3EMP2YHERR </span>
+                    </div>
+                    <div class="project-card">
+                        <h6>Remote Unmanned Aircraft Pilot</h6>
+                        <small>Issued Jun 2021</small>
+                        <br /> <br />
+                        <span>Federal Aviation Administration</span>
+                    </div>
+
+                </div>
+            </section>
+
         </div>
     </body>
 </template>
@@ -241,8 +373,12 @@ export default {
     data() {
         return {
             expandedCards: {
-                HALAS: false,
-                DroN2O: false
+                HALAS: true,
+                DroN2O: true,
+                NewEagle: true,
+                Iafrate: true,
+                CollegeWorks: true,
+                GrassGuyz: true
             },
             halasSlides: [
                 require('../assets/halas/night_lazing.jpg'),
@@ -250,9 +386,32 @@ export default {
                 require('../assets/halas/outside_airborne.jpg'),
                 require('../assets/halas/unit0-cape.jpg'),
                 require('../assets/halas/wing.jpg')
-                // ... more slides
             ],
+            droneSlides: [
+                require('../assets/smartfarm/ground-payload-2.png'),
+                require('../assets/smartfarm/first-flight.png'),
+                require('../assets/smartfarm/hovering-payload.png'),
+            ],
+            newEagleSlides: [
+                require('../assets/new-eagle/reach.png'),
+            ],
+            iafrateSlides: [
+                require('../assets/iafrate/iafrate.jpg'),
+            ],
+            cwSlides: [
+                require('../assets/college-works/paint1.png'),
+                require('../assets/college-works/paint2.png'),
+            ],
+            grassSlides: [
+                require('../assets/grass-guyz/grass.jpg'),
+            ],
+
             halasSlideIndex: 0,
+            droneSlideIndex: 0,
+            newEagleSlideIndex: 0,
+            iafrateSlideIndex: 0,
+            cwSlideIndex: 0,
+            grassSlideIndex: 0,
             isSpotifyLoaded: true
         };
     },
@@ -270,9 +429,27 @@ export default {
         toggleCard(project) {
             this.expandedCards[project] = !this.expandedCards[project];
         },
-        changeSlide(step) {
-            const numSlides = this.halasSlides.length;
-            this.halasSlideIndex = (this.halasSlideIndex + step + numSlides) % numSlides;
+        changeSlide(step, id) {
+            if (id == 'halas') {
+                const numSlidesHalas = this.halasSlides.length;
+                this.halasSlideIndex = (this.halasSlideIndex + step + numSlidesHalas) % numSlidesHalas;
+            } else if (id == 'drone') {
+                const numSlidesDrone = this.droneSlides.length;
+                this.droneSlideIndex = (this.droneSlideIndex + step + numSlidesDrone) % numSlidesDrone;
+            } else if (id == 'eagle') {
+                const numSlidesEagle = this.newEagleSlides.length;
+                this.newEagleSlides = (this.newEagleSlideIndex + step + numSlidesEagle) % numSlidesEagle;
+            } else if (id == 'iafrate') {
+                const numSlidesIafrate = this.iafrateSlides.length;
+                this.iafrateSlideIndex = (this.iafrateSlideIndex + step + numSlidesIafrate) % numSlidesIafrate;
+            } else if (id == 'cw') {
+                const numSlidesCW = this.cwSlides.length;
+                this.cwSlideIndex = (this.cwSlideIndex + step + numSlidesCW) % numSlidesCW;
+            } else if (id == 'grass') {
+                const numSlidesGrass = this.grassSlides.length;
+                this.grassSlideIndex = (this.grassSlideIndex + step + numSlidesGrass) % numSlidesGrass;
+
+            }
         },
 
         emitActiveComponent(project) {
@@ -282,6 +459,9 @@ export default {
             switch (project) {
                 case 'wisdom-tree':
                     window.open('http://wisdom-tree.netlify.app/', '_blank');
+                    break;
+                case 'coursera':
+                    window.open('https://www.coursera.org/account/accomplishments/verify/UU3EMP2YHERR', '_blank');
                     break;
                 case 'coming-soon':
                     // Do nothing or show a tooltip
@@ -330,6 +510,8 @@ h4,
 
 .bio-header {
     margin-top: 180px;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .contact {
@@ -392,6 +574,7 @@ small {
 .project-icon {
     margin-left: 20px;
 }
+
 
 .project-cards {
     display: grid;
