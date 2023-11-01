@@ -72,11 +72,13 @@
                     <ul>
                         <li>
                             Developed control system software for advanced LiDAR systems like
-                            <a @click="toggleCard('HALAS')" style="cursor:pointer"> HALAS <i
-                                    class="fas fa-caret-down exp-details"></i></a>
+                            <a @click="toggleCard('HALAS')" class="dropdown-word"> HALAS
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.HALAS"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a>
                             and
-                            <a @click="toggleCard('DroN2O')" style="cursor:pointer"> DroN2O <i
-                                    class="fas fa-caret-down exp-details"></i></a>
+                            <a @click="toggleCard('DroN2O')" class="dropdown-word"> DroN2O
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.DroN2O"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a>
                         </li>
 
                         <br />
@@ -150,14 +152,56 @@
 
                         <br />
 
-                        <li>Led the embedded software development and PCB design for a 3D ultrasonic anemometer capable of
-                            making high-speed wind and temperature measurements.</li>
+                        <li>Led the embedded software development and PCB design for a <a @click="toggleCard('Anemometer')"
+                                class="dropdown-word"> 3D ultrasonic anemometer
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.Anemometer"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i>
+                            </a> capable of making high-speed wind and temperature measurements.
+                        </li>
+
+                        <div v-if="expandedCards.Anemometer">
+                            <br />
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in anemometerSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': anemometerSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="Ultrasonic Anemometer Image">
+                                    <!-- <a class="prev" @click="changeSlide(-1, 'cw')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'cw')"><i
+                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
 
                         <br />
 
-                        <li>Contributed to the development of Reconn.AI by improving the prediction and classification
+                        <li>Contributed to the development of <a @click="toggleCard('Reconn')" class="dropdown-word">
+                                Reconn.AI
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.Reconn"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i></a>
+                            by improving the prediction and classification
                             algorithms, user interface, and integrating a subscription-based payment model using Stripe API.
                         </li>
+
+                        <div v-if="expandedCards.Reconn">
+                            <br />
+                            <p><a href="https://reconn.ai" target="_blank">Reconn.AI</a> is an all-in-one platform to manage
+                                and analyze camera trap images by leveraging user trained machine learning
+                                algorithm to help classify any animal species.</p>
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in reconnSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': reconnSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="Ultrasonic Anemometer Image">
+                                    <!-- <a class="prev" @click="changeSlide(-1, 'cw')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'cw')"><i
+                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                </div>
+                            </div>
+                            <br />
+                        </div>
 
                         <br />
 
@@ -174,7 +218,28 @@
                     <span>Engineer Co-op</span>
                     <small>Apr 2018 - Oct 2019 (1 year 7 months)</small>
                     <ul>
-                        <li>Designed 1D ultrasonic anemometer PCB shield for ARM based microcontroller.</li>
+                        <li>Designed <a @click="toggleCard('Anemometer1D')"
+                                class="dropdown-word"> 1D ultrasonic anemometer
+                                <i class="fas fa-caret-down exp-details" v-if="expandedCards.Anemometer1D"></i>
+                                <i class="fas fa-caret-right exp-details" v-else></i>
+                            </a> PCB shield for ARM based microcontroller.</li>
+                        <br/> 
+
+                        <div v-if="expandedCards.Anemometer1D">
+                            <br />
+                            <div class="slideshow-container">
+                                <div v-for="(slide, index) in anemometer1DSlides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': anemometer1DSlideIndex === index }">
+                                    <img class="slideshow-img" :src="slide" alt="Ultrasonic Anemometer Image">
+                                    <a class="prev" @click="changeSlide(-1, 'anemometer1D')"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    <a class="next" @click="changeSlide(1, 'anemometer1D')"><i
+                                            class="fa-solid fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
                         <li>Wrote control system software in Python and LabView for laser-induced melanoma cell detection
                             via photoacoustic effect.</li>
                         <li>Utilized SolidWorks for 3D modeling and executed rapid prototyping via 3D printing.</li>
@@ -188,7 +253,7 @@
                         <li>Contributed to mechanical and electrical design and assembly for multiple hybrid vehicle
                             projects.</li>
                         <li>Participated in a large-scale
-                            <a @click="toggleCard('NewEagle')" style="cursor:pointer"> reverse engineering project <i
+                            <a @click="toggleCard('NewEagle')" class="dropdown-word"> reverse engineering project <i
                                     class="fas fa-caret-down exp-details"></i></a> for electronic control unit
                             replacement, focusing on CAN decryption, harness development, and software for I/O validation
                             and data acquisition.
@@ -290,13 +355,13 @@
 
             <section class="education">
                 <h5>Education History</h5>
-                <div class="project-cards">
+                <div class="edu-cards">
                     <div class="project-card">
                         <h6>Kettering University</h6>
                         <small>2016 - 2019</small>
                         <br /> <br />
                         <span>Degree: Bachelor's of Science</span>
-                        <br/>
+                        <br />
                         <span>Major: Engineering Physics</span>
                     </div>
                     <div class="project-card">
@@ -345,13 +410,13 @@
 
             <section class="education">
                 <h5>Licenses & Certifications</h5>
-                <div class="project-cards">
+                <div class="edu-cards">
                     <div class="project-card" @click="navigateTo('coursera')">
                         <h6>Neural Networks and Deep Learning</h6>
                         <small>Issued May 2022</small>
                         <br /> <br />
                         <span>DeepLearning.AI</span>
-                        <br/>
+                        <br />
                         <span>Credential ID UU3EMP2YHERR </span>
                     </div>
                     <div class="project-card">
@@ -378,8 +443,24 @@ export default {
                 NewEagle: true,
                 Iafrate: true,
                 CollegeWorks: true,
-                GrassGuyz: true
+                GrassGuyz: true,
+                Anemometer: true,
+                Anemometer1D: true,
+                Reconn: true
             },
+            anemometerSlides: [
+                require('../assets/anemometer/teensy.jpg'),
+            ],
+            anemometer1DSlides: [
+                require('../assets/anemometer/eagle.png'),
+                require('../assets/anemometer/oshpark.png'),
+                require('../assets/anemometer/id-shield.png'),
+                require('../assets/anemometer/1d.png'),
+            ],
+
+            reconnSlides: [
+                require('../assets/reconn/reconn.png'),
+            ],
             halasSlides: [
                 require('../assets/halas/night_lazing.jpg'),
                 require('../assets/halas/inside_airborne.jpg'),
@@ -406,6 +487,9 @@ export default {
                 require('../assets/grass-guyz/grass.jpg'),
             ],
 
+            anemometerSlideIndex: 0,
+            anemometer1DSlideIndex: 0,
+            reconnSlideIndex: 0,
             halasSlideIndex: 0,
             droneSlideIndex: 0,
             newEagleSlideIndex: 0,
@@ -448,7 +532,9 @@ export default {
             } else if (id == 'grass') {
                 const numSlidesGrass = this.grassSlides.length;
                 this.grassSlideIndex = (this.grassSlideIndex + step + numSlidesGrass) % numSlidesGrass;
-
+            } else if (id == 'anemometer1D') {
+                const numSlidesanemometer1D = this.anemometer1DSlides.length;
+                this.anemometer1DSlideIndex = (this.anemometer1DSlideIndex + step + numSlidesanemometer1D) % numSlidesanemometer1D;
             }
         },
 
@@ -476,6 +562,13 @@ export default {
   
 <style lang="css" scoped>
 @import "../styles/global.css";
+
+.dropdown-word {
+    cursor: pointer;
+    color: var(--color-blockquote-text);
+    text-decoration: none;
+
+}
 
 .container-fluid {
     margin-top: -10px;
@@ -575,6 +668,13 @@ small {
     margin-left: 20px;
 }
 
+
+.edu-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 4x4 grid */
+    gap: 16px;
+}
 
 .project-cards {
     display: grid;
