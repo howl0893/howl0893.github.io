@@ -449,8 +449,8 @@
                                 </div>
                                 <!-- Navigation dots -->
                                 <div class="navigation-circles">
-                                    <span v-for="(slide, index) in slideshows.grass.slides" :key="`dot-${index}`" class="dot"
-                                        :class="{ 'active': slideshows.grass.index === index }"
+                                    <span v-for="(slide, index) in slideshows.grass.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.grass.index === index }"
                                         @click="goToSlide(index, 'grass')"></span>
                                 </div>
                                 <!-- Swipe controls (needs fixing) -->
@@ -1068,6 +1068,10 @@ small {
     .project-cards {
         grid-template-columns: 1fr;
     }
+    
+    .edu-cards {
+        grid-template-columns: 1fr;
+    }
 
     .spotify {
         width: 350px;
@@ -1094,6 +1098,10 @@ small {
     }
 
     .project-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .edu-cards {
         grid-template-columns: 1fr;
     }
 
