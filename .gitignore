@@ -22,3 +22,4 @@ node_modules
 /dist
 .push-token
 *__pycache__/
+*.aseprite

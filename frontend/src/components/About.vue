@@ -66,9 +66,14 @@
             <section class="work-experience">
                 <h5>Work Experience</h5>
                 <div class="card">
-                    <h6>Michigan Aerospace Corporation</h6>
-                    <span>Research Scientist | Engineer</span>
-                    <small>Nov 2019 - Present (4 years)</small>
+                    <div class="logo-container">
+                        <img src="../assets/logos/michaero.jpeg" alt="Michigan Aerospace Logo" class="company-logo" />
+                        <div class="title-date-container">
+                            <h6 class="company-name">Michigan Aerospace Corporation</h6>
+                            <span class="title">Research Scientist | Engineer</span>
+                            <small class="dates">Nov 2019 - Present (4 years)</small>
+                        </div>
+                    </div>
                     <ul>
                         <li>
                             Developed control system software for advanced LiDAR systems like
@@ -85,7 +90,7 @@
 
                         <div v-if="expandedCards.HALAS">
                             <!-- <span>High Altitude Lidar Atmospheric sensing</span> -->
-                            <p>
+                            <p class="details">
                                 The <a
                                     href="https://aerospace.honeywell.com/us/en/products-and-services/product/hardware-and-systems/weather-radar/honeywell-halas"
                                     target="_blank">
@@ -95,27 +100,33 @@
                                 Raman system for real-time, high-altitude measurement of wind velocity, direction, density,
                                 temperature, and composition – O2, N2, and H2O mass fractions.
                             </p>
-                            <p>
+                            <p class="details">
                                 Supporting data collection campaigns for this project took me to many places, including:
                                 Hawaii, California, Virginia, Florida, Maine, and Minnesota.
                             </p>
 
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in halasSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': halasSlideIndex === index }">
+                                <div v-for="(slide, index) in slideshows.halas.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.halas.index === index }">
                                     <img class="slideshow-img" :src="slide" alt="HALAS Image">
-                                    <a class="prev" @click="changeSlide(-1, 'halas')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'halas')"><i
-                                            class="fa-solid fa-chevron-right"></i></a>
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.halas.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.halas.index === index }"
+                                        @click="goToSlide(index, 'halas')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
+
                             <br />
                         </div>
 
                         <div v-if="expandedCards.DroN2O">
                             <br />
-                            <p>
+                            <p class="details">
                                 A <a href="https://arpa-e.energy.gov/technologies/projects/dron2o-drone-based-system-measuring-nitrous-oxide-emissions-agricultural"
                                     target="_blank">
                                     Drone-Based System for Measuring Nitrous Oxide Emissions from Agricultural Fields <i
@@ -129,19 +140,21 @@
                                 with artificial intelligence-enabled software to accurately measure N2O emissions from a
                                 given farm field during the entire growing season.
                             </p>
-                            <p>
-
-                            </p>
 
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in droneSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': droneSlideIndex === index }">
+                                <div v-for="(slide, index) in slideshows.drone.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.drone.index === index }">
                                     <img class="slideshow-img" :src="slide" alt="Drone Image">
-                                    <a class="prev" @click="changeSlide(-1, 'drone')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'drone')"><i
-                                            class="fa-solid fa-chevron-right"></i></a>
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.drone.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.drone.index === index }"
+                                        @click="goToSlide(index, 'drone')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
                             <br />
                         </div>
@@ -162,14 +175,19 @@
                         <div v-if="expandedCards.Anemometer">
                             <br />
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in anemometerSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': anemometerSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="Ultrasonic Anemometer Image">
-                                    <!-- <a class="prev" @click="changeSlide(-1, 'cw')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'cw')"><i
-                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                <div v-for="(slide, index) in slideshows.anemometer3D.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.anemometer3D.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="anemometer3D Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.anemometer3D.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.anemometer3D.index === index }"
+                                        @click="goToSlide(index, 'anemometer3D')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
                             <br />
                         </div>
@@ -187,18 +205,26 @@
 
                         <div v-if="expandedCards.Reconn">
                             <br />
-                            <p><a href="https://reconn.ai" target="_blank">Reconn.AI</a> is an all-in-one platform to manage
+                            <p class="details">
+                                <a href="https://reconn.ai" target="_blank">Reconn.AI</a> is an all-in-one platform to
+                                manage
                                 and analyze camera trap images by leveraging user trained machine learning
-                                algorithm to help classify any animal species.</p>
+                                algorithm to help classify any animal species.
+                            </p>
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in reconnSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': reconnSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="Ultrasonic Anemometer Image">
-                                    <!-- <a class="prev" @click="changeSlide(-1, 'cw')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'cw')"><i
-                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                <div v-for="(slide, index) in slideshows.reconn.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.reconn.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="reconn Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.reconn.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.reconn.index === index }"
+                                        @click="goToSlide(index, 'reconn')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
                             <br />
                         </div>
@@ -214,9 +240,15 @@
                     </ul>
                 </div>
                 <div class="card">
-                    <h6>Michigan Aerospace Corporation</h6>
-                    <span>Engineer Co-op</span>
-                    <small>Apr 2018 - Oct 2019 (1 year 7 months)</small>
+                    <div class="logo-container">
+                        <img src="../assets/logos/michaero.jpeg" alt="Michigan Aerospace Logo" class="company-logo" />
+                        <div class="title-date-container">
+                            <h6 class="company-name">Michigan Aerospace Corporation</h6>
+                            <span>Engineer Co-op</span>
+                            <small>Apr 2018 - Oct 2019 (1 year 7 months)</small>
+                        </div>
+                    </div>
+
                     <ul>
                         <li>Designed <a @click="toggleCard('Anemometer1D')" class="dropdown-word"> 1D ultrasonic anemometer
                                 <i class="fas fa-caret-down exp-details" v-if="expandedCards.Anemometer1D"></i>
@@ -227,15 +259,21 @@
                         <div v-if="expandedCards.Anemometer1D">
                             <br />
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in anemometer1DSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': anemometer1DSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="Ultrasonic Anemometer Image">
-                                    <a class="prev" @click="changeSlide(-1, 'anemometer1D')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'anemometer1D')"><i
-                                            class="fa-solid fa-chevron-right"></i></a>
+                                <div v-for="(slide, index) in slideshows.anemometer1D.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.anemometer1D.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="anemometer1D Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.anemometer1D.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.anemometer1D.index === index }"
+                                        @click="goToSlide(index, 'anemometer1D')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
+
                         </div>
 
                         <br />
@@ -251,9 +289,14 @@
                     </ul>
                 </div>
                 <div class="card">
-                    <h6>New Eagle</h6>
-                    <span>Engineer Co-op</span>
-                    <small>Sep 2016 - Jul 2017 (11 months)</small>
+                    <div class="logo-container">
+                        <img src="../assets/logos/neweagle.jpeg" alt="Michigan Aerospace Logo" class="company-logo" />
+                        <div class="title-date-container">
+                            <h6 class="company-name">New Eagle</h6>
+                            <span>Engineer Co-op</span>
+                            <small>Sep 2016 - Jul 2017 (11 months)</small>
+                        </div>
+                    </div>
                     <ul>
                         <li>Contributed to mechanical and electrical design and assembly for multiple hybrid vehicle
                             projects.</li>
@@ -270,19 +313,24 @@
 
                         <div v-if="expandedCards.NewEagle">
                             <br />
-                            <p>
+                            <p class="details">
                                 Shipping container stacker in which we replaced the ECU.
                             </p>
 
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in newEagleSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': newEagleSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="New Eagle Image">
-                                    <!-- <a class="prev" @click="changeSlide(-1, 'eagle')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'eagle')"><i
-                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                <div v-for="(slide, index) in slideshows.newEagle.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.newEagle.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="newEagle Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.newEagle.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.newEagle.index === index }"
+                                        @click="goToSlide(index, 'newEagle')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
 
                             <br />
@@ -292,90 +340,122 @@
 
                 </div>
                 <div class="card">
-                    <h6>Angelo Iafrate Construction</h6>
-                    <span>Laborer</span>
-                    <small>May 2014 - Jul 2016 (2 yrs 3 months)</small>
+                    <div class="logo-container">
+                        <img src="../assets/logos/iafrate.jpeg" alt="Iafrate Logo" class="company-logo" />
+                        <div class="title-date-container">
+                            <h6 class="company-name">Angelo Iafrate Construction</h6>
+                            <span>Laborer</span>
+                            <small>May 2014 - Jul 2016 (2 yrs 3 months)</small>
+                        </div>
+                    </div>
                     <ul>
-                        <li>Performed general construction tasks including the operation of heavy machinery.
-                            <a @click="toggleCard('Iafrate')" style="cursor:pointer">
+                        <li>
+                            <a @click="toggleCard('Iafrate')" style="cursor:pointer"> Performed general construction tasks
+                                including the operation of heavy machinery.
                                 <i class="fas fa-caret-down exp-details" v-if="expandedCards.Iafrate"></i>
                                 <i class="fas fa-caret-right exp-details" v-else></i></a>
                         </li>
 
                         <div v-if="expandedCards.Iafrate">
                             <br />
-                            <p>
+                            <p class="details">
                                 Standing in the pit of what is now Detroit's Little Caesars Arena, the current home of the
                                 Red Wings hockey team.
                             </p>
 
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in iafrateSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': iafrateSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="Iafrate Image">
-                                    <!-- <a class="prev" @click="changeSlide(-1, 'iafrate')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'iafrate')"><i
-                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                <div v-for="(slide, index) in slideshows.iafrate.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.iafrate.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="newEagle Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.iafrate.slides" :key="`dot-${index}`"
+                                        class="dot" :class="{ 'active': slideshows.iafrate.index === index }"
+                                        @click="goToSlide(index, 'iafrate')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
                             <br />
                         </div>
                     </ul>
                 </div>
                 <div class="card">
-                    <h6>College Works Painting</h6>
-                    <span>Branch Manager</span>
-                    <small>Feb 2015 - Aug 2015 (7 months)</small>
+                    <div class="logo-container">
+                        <img src="../assets/logos/cwp.jpeg" alt="cwp Logo" class="company-logo" />
+                        <div class="title-date-container">
+                            <h6 class="company-name">College Works Painting</h6>
+                            <span>Branch Manager</span>
+                            <small>Feb 2015 - Aug 2015 (7 months)</small>
+                        </div>
+                    </div>
                     <ul>
                         <li>
-                            Generated and managed more than $50k in work over one summer.
-                            <a @click="toggleCard('CollegeWorks')" style="cursor:pointer">
+                            <a @click="toggleCard('CollegeWorks')" style="cursor:pointer"> Generated and managed more than
+                                $50k in work over one summer.
                                 <i class="fas fa-caret-down exp-details" v-if="expandedCards.CollegeWorks"></i>
                                 <i class="fas fa-caret-right exp-details" v-else></i></a>
                         </li>
-                        
+
                         <div v-if="expandedCards.CollegeWorks">
                             <br />
-                            <p>
+                            <p class="details">
                                 Before and after comparison pictures from two job sites.
                             </p>
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in cwSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': cwSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="College Works Image">
-                                    <a class="prev" @click="changeSlide(-1, 'cw')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'cw')"><i
-                                            class="fa-solid fa-chevron-right"></i></a>
+                                <div v-for="(slide, index) in slideshows.cwp.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.cwp.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="newEagle Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.cwp.slides" :key="`dot-${index}`" class="dot"
+                                        :class="{ 'active': slideshows.cwp.index === index }"
+                                        @click="goToSlide(index, 'cwp')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
                             <br />
                         </div>
                     </ul>
                 </div>
                 <div class="card">
-                    <h6>Grass Guyz LLC</h6>
-                    <span>Co-owner | Manager</span>
-                    <small>May 2010 - Oct 2013 (3 years 6 months)</small>
+                    <div class="logo-container">
+                        <img src="../assets/logos/gg.png" alt="gg Logo" class="company-logo" />
+                        <div class="title-date-container">
+                            <h6 class="company-name">Grass Guyz, LLC</h6>
+                            <span>Co-owner | Manager</span>
+                            <small>May 2010 - Oct 2013 (3 years 6 months)</small>
+
+                        </div>
+                    </div>
                     <ul>
                         <li>
-                            Co-founded and managed a lawn care business, overseeing around 30 accounts.
-                            <a @click="toggleCard('GrassGuyz')" style="cursor:pointer">
+                            <a @click="toggleCard('GrassGuyz')" style="cursor:pointer">Co-founded and managed a lawn care
+                                business, overseeing around 30 accounts.
                                 <i class="fas fa-caret-down exp-details" v-if="expandedCards.GrassGuyz"></i>
                                 <i class="fas fa-caret-right exp-details" v-else></i></a>
                         </li>
                         <div v-if="expandedCards.GrassGuyz">
                             <br />
                             <div class="slideshow-container">
-                                <div v-for="(slide, index) in grassSlides" :key="index" class="mySlides"
-                                    :class="{ 'active-slide': grassSlideIndex === index }">
-                                    <img class="slideshow-img" :src="slide" alt="Grass Guyz Image">
-                                    <!-- <a class="prev" @click="changeSlide(-1, 'grass')"><i
-                                            class="fa-solid fa-chevron-left"></i></a>
-                                    <a class="next" @click="changeSlide(1, 'grass')"><i
-                                            class="fa-solid fa-chevron-right"></i></a> -->
+                                <div v-for="(slide, index) in slideshows.grass.slides" :key="index" class="mySlides"
+                                    :class="{ 'active-slide': slideshows.grass.index === index }">
+                                    <img class="slideshow-img" :src="slide" alt="grass Image">
                                 </div>
+                                <!-- Navigation dots -->
+                                <div class="navigation-circles">
+                                    <span v-for="(slide, index) in slideshows.grass.slides" :key="`dot-${index}`" class="dot"
+                                        :class="{ 'active': slideshows.grass.index === index }"
+                                        @click="goToSlide(index, 'grass')"></span>
+                                </div>
+                                <!-- Swipe controls (needs fixing) -->
+                                <!-- <a class="prev" @click="changeSlide(-1, 'halas')"><i class="fa fa-chevron-left"></i></a>
+                                <a class="next" @click="changeSlide(1, 'halas')"><i class="fa fa-chevron-right"></i></a> -->
                             </div>
                             <br />
                         </div>
@@ -387,18 +467,50 @@
             <section class="education">
                 <h5>Education History</h5>
                 <div class="edu-cards">
+                    <!-- <div class="project-card">
+                        <div class="logo-container">
+                            <img src="../assets/logos/boulder.jpeg" alt="boulder Logo" class="company-logo" />
+                            <div class="title-date-container">
+                                <h6 class="company-name">University of Colorado Boulder</h6>
+                                <small>2023 - enrolled</small>
+                            </div>
+
+                        </div>
+
+                        <br />
+                        <span>Degree: Master's of Science</span>
+                        <br />
+                        <span>Major: Computer Science </span>
+                    </div> -->
+
                     <div class="project-card">
-                        <h6>Kettering University</h6>
-                        <small>2016 - 2019</small>
-                        <br /> <br />
+                        <div class="logo-container">
+                            <img src="../assets/logos/kettering.jpeg" alt="kettering Logo" class="company-logo" />
+                            <div class="title-date-container">
+                                <h6 class="company-name">Kettering University</h6>
+                                <small>2016 - 2019</small>
+                            </div>
+
+                        </div>
+
+                        <br />
                         <span>Degree: Bachelor's of Science</span>
                         <br />
                         <span>Major: Engineering Physics</span>
                     </div>
                     <div class="project-card">
-                        <h6>Grand Valley State University</h6>
-                        <small>2014 - 2016</small>
-                        <br /> <br />
+                        <div class="logo-container">
+                            <img src="../assets/logos/gvsu.jpeg" alt="gvsu Logo" class="company-logo" />
+                            <div class="title-date-container">
+                                <h6 class="company-name">Grand Valley State University</h6>
+                                <small>2014 - 2016</small>
+                            </div>
+
+                        </div>
+
+                        <br />
+                        <span>Degree: N/A</span>
+                        <br />
                         <span>Major: Product Manufacturing and Design</span>
                     </div>
 
@@ -443,17 +555,28 @@
                 <h5>Licenses & Certifications</h5>
                 <div class="edu-cards">
                     <div class="project-card" @click="navigateTo('coursera')">
-                        <h6>Neural Networks and Deep Learning</h6>
-                        <small>Issued May 2022</small>
-                        <br /> <br />
+                        <div class="logo-container">
+                            <img src="../assets/logos/deepnn.jpeg" alt="deepnn Logo" class="company-logo" />
+                            <div class="title-date-container">
+                                <h6 class="company-name">Neural Networks and Deep Learning</h6>
+                                <small>Issued May 2022</small>
+                            </div>
+                        </div>
+
+                        <br />
                         <span>DeepLearning.AI</span>
                         <br />
                         <span>Credential ID UU3EMP2YHERR </span>
                     </div>
                     <div class="project-card">
-                        <h6>Remote Unmanned Aircraft Pilot</h6>
-                        <small>Issued Jun 2021</small>
-                        <br /> <br />
+                        <div class="logo-container">
+                            <img src="../assets/logos/faa.jpeg" alt="faa Logo" class="company-logo" />
+                            <div class="title-date-container">
+                                <h6 class="company-name">Remote Unmanned Aircraft Pilot</h6>
+                                <small>Issued Jun 2021</small>
+                            </div>
+                        </div>
+                        <br />
                         <span>Federal Aviation Administration</span>
                     </div>
 
@@ -461,7 +584,7 @@
             </section>
 
             <div class="wall-e-img-container">
-                <img class="wall-e-img" src="../assets/wall-e/wall-e.gif"/>
+                <img class="wall-e-img" src="../assets/wall-e/wall-e.gif" />
             </div>
         </div>
     </body>
@@ -472,67 +595,87 @@ export default {
     data() {
         return {
             expandedCards: {
-                HALAS: true,
-                DroN2O: true,
-                NewEagle: true,
-                Iafrate: true,
-                CollegeWorks: true,
-                GrassGuyz: true,
-                Anemometer: true,
-                Anemometer1D: true,
-                Reconn: true
+                HALAS: false,
+                DroN2O: false,
+                NewEagle: false,
+                Iafrate: false,
+                CollegeWorks: false,
+                GrassGuyz: false,
+                Anemometer: false,
+                Anemometer1D: false,
+                Reconn: false
             },
-            anemometerSlides: [
-                require('../assets/anemometer/teensy.jpg'),
-            ],
-            anemometer1DSlides: [
-                require('../assets/anemometer/eagle.png'),
-                require('../assets/anemometer/oshpark.png'),
-                require('../assets/anemometer/id-shield.png'),
-                require('../assets/anemometer/1d.png'),
-            ],
+            slideshows: {
+                anemometer1D: {
+                    slides: [
+                        require('../assets/anemometer/eagle.png'),
+                        require('../assets/anemometer/oshpark.png'),
+                        require('../assets/anemometer/id-shield.png'),
+                        require('../assets/anemometer/1d.png'),
+                    ],
+                    index: 0,
+                },
+                anemometer3D: {
+                    slides: [
+                        require('../assets/anemometer/teensy.jpg'),
+                    ],
+                    index: 0,
+                },
+                cwp: {
+                    slides: [
+                        require('../assets/college-works/paint1.png'),
+                        require('../assets/college-works/paint2.png'),
+                    ],
+                    index: 0,
+                },
+                drone: {
+                    slides: [
+                        require('../assets/smartfarm/ground-payload-2.png'),
+                        require('../assets/smartfarm/first-flight.png'),
+                        require('../assets/smartfarm/hovering-payload.png'),
+                    ],
+                    index: 0,
+                },
+                grass: {
+                    slides: [
+                        require('../assets/grass-guyz/grass.jpg'),
+                    ],
+                    index: 0,
+                },
+                halas: {
+                    slides: [
+                        require('../assets/halas/night_lazing.jpg'),
+                        require('../assets/halas/inside_airborne.jpg'),
+                        require('../assets/halas/outside_airborne.jpg'),
+                        require('../assets/halas/unit0-cape.jpg'),
+                        require('../assets/halas/wing.jpg')
+                    ],
+                    index: 0,
+                },
+                iafrate: {
+                    slides: [
+                        require('../assets/iafrate/iafrate.jpg'),
+                    ],
+                    index: 0,
+                },
+                newEagle: {
+                    slides: [
+                        require('../assets/new-eagle/reach.png'),
+                    ],
+                    index: 0,
+                },
+                reconn: {
+                    slides: [
+                        require('../assets/reconn/reconn.png'),
+                    ],
+                    index: 0,
+                },
+            },
 
-            reconnSlides: [
-                require('../assets/reconn/reconn.png'),
-            ],
-            halasSlides: [
-                require('../assets/halas/night_lazing.jpg'),
-                require('../assets/halas/inside_airborne.jpg'),
-                require('../assets/halas/outside_airborne.jpg'),
-                require('../assets/halas/unit0-cape.jpg'),
-                require('../assets/halas/wing.jpg')
-            ],
-            droneSlides: [
-                require('../assets/smartfarm/ground-payload-2.png'),
-                require('../assets/smartfarm/first-flight.png'),
-                require('../assets/smartfarm/hovering-payload.png'),
-            ],
-            newEagleSlides: [
-                require('../assets/new-eagle/reach.png'),
-            ],
-            iafrateSlides: [
-                require('../assets/iafrate/iafrate.jpg'),
-            ],
-            cwSlides: [
-                require('../assets/college-works/paint1.png'),
-                require('../assets/college-works/paint2.png'),
-            ],
-            grassSlides: [
-                require('../assets/grass-guyz/grass.jpg'),
-            ],
-
-            anemometerSlideIndex: 0,
-            anemometer1DSlideIndex: 0,
-            reconnSlideIndex: 0,
-            halasSlideIndex: 0,
-            droneSlideIndex: 0,
-            newEagleSlideIndex: 0,
-            iafrateSlideIndex: 0,
-            cwSlideIndex: 0,
-            grassSlideIndex: 0,
-            isSpotifyLoaded: true
+            isSpotifyLoaded: true,
         };
     },
+
 
     created() {
         if (navigator.onLine) {
@@ -547,31 +690,14 @@ export default {
         toggleCard(project) {
             this.expandedCards[project] = !this.expandedCards[project];
         },
-        changeSlide(step, id) {
-            if (id == 'halas') {
-                const numSlidesHalas = this.halasSlides.length;
-                this.halasSlideIndex = (this.halasSlideIndex + step + numSlidesHalas) % numSlidesHalas;
-            } else if (id == 'drone') {
-                const numSlidesDrone = this.droneSlides.length;
-                this.droneSlideIndex = (this.droneSlideIndex + step + numSlidesDrone) % numSlidesDrone;
-            } else if (id == 'eagle') {
-                const numSlidesEagle = this.newEagleSlides.length;
-                this.newEagleSlides = (this.newEagleSlideIndex + step + numSlidesEagle) % numSlidesEagle;
-            } else if (id == 'iafrate') {
-                const numSlidesIafrate = this.iafrateSlides.length;
-                this.iafrateSlideIndex = (this.iafrateSlideIndex + step + numSlidesIafrate) % numSlidesIafrate;
-            } else if (id == 'cw') {
-                const numSlidesCW = this.cwSlides.length;
-                this.cwSlideIndex = (this.cwSlideIndex + step + numSlidesCW) % numSlidesCW;
-            } else if (id == 'grass') {
-                const numSlidesGrass = this.grassSlides.length;
-                this.grassSlideIndex = (this.grassSlideIndex + step + numSlidesGrass) % numSlidesGrass;
-            } else if (id == 'anemometer1D') {
-                const numSlidesanemometer1D = this.anemometer1DSlides.length;
-                this.anemometer1DSlideIndex = (this.anemometer1DSlideIndex + step + numSlidesanemometer1D) % numSlidesanemometer1D;
-            }
+        changeSlide(step, slideshowId) {
+            let slideshow = this.slideshows[slideshowId];
+            const numSlides = slideshow.slides.length;
+            slideshow.index = (slideshow.index + step + numSlides) % numSlides;
         },
-
+        goToSlide(slideIndex, slideshowId) {
+            this.slideshows[slideshowId].index = slideIndex;
+        },
         emitActiveComponent(project) {
             this.$emit('changeActiveComponent', project);
         },
@@ -597,6 +723,56 @@ export default {
 <style lang="css" scoped>
 @import "../styles/global.css";
 
+.logo-container {
+    display: flex;
+    align-items: flex-start;
+    /* Aligns the logo to the top of the text */
+}
+
+.company-logo {
+    width: 40px;
+    /* Adjust size as needed */
+    height: 40px;
+    /* Adjust size as needed */
+    border-radius: 50%;
+    margin-right: 10px;
+    /* Adjust spacing as needed */
+    object-fit: cover;
+}
+
+.title-date-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.company-name,
+.title,
+.dates {
+    margin: 0;
+    /* Removes default margins */
+    padding-left: 0;
+    /* Aligns text with the start of the company name */
+}
+
+.title {
+    padding-top: 2px;
+    /* Adjusts space between company name and title */
+}
+
+.dates {
+    padding-top: 2px;
+    /* Adjusts space between title and dates */
+}
+
+/* Continue with the rest of your CSS as needed */
+
+
+.company-name {
+    margin-bottom: 4px;
+    /* Adds a little space between the company name and the position title */
+}
+
+
 .dropdown-word {
     cursor: pointer;
     color: var(--color-blockquote-text);
@@ -616,6 +792,7 @@ export default {
     margin-right: 3vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .wall-e-img-container {
     display: flex;
     justify-content: center;
@@ -777,34 +954,48 @@ small {
     position: relative;
     justify-content: center;
     align-items: center;
-    height: 300px;
-    width: 60%;
+    width: 90%;
 }
 
 .slideshow-img {
     margin-left: 3.5vw;
     max-width: 100%;
     border-radius: 5px;
-    height: 80%;
 }
 
 .mySlides {
     display: none;
-    height: 100%;
-    /* 100% of the container height */
 }
 
 .mySlides img {
-    height: 100%;
     object-fit: cover;
-    /* Cover the entire area without stretching */
 }
 
 .mySlides.active-slide {
     display: block;
 }
 
-.prev,
+.navigation-circles {
+    text-align: center;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+/* .prev,
 .next {
     cursor: pointer;
     position: absolute;
@@ -816,7 +1007,6 @@ small {
     font-weight: bold;
     transition: 0.6s ease;
     user-select: none;
-    /* background: rgba(0,0,0,0.5); */
 }
 
 .next {
@@ -825,89 +1015,43 @@ small {
 
 .prev {
     left: 0;
-}
+} */
 
 
 @media only screen and (max-width: 1700px) {
     .blog-img {
         max-width: 28%;
     }
-
-    .slideshow-img {
-        margin-left: 2vw;
-    }
-
-    .next {
-        right: -1vw;
-    }
-
-    /* .bio-header {
-        margin-top: 180px;
-
-    } */
 }
 
 @media only screen and (max-width: 1400px) {
     .blog-img {
         max-width: 35%;
     }
-
-    .slideshow-img {
-        margin-left: 1vw;
-    }
-
-    .next {
-        right: -1vw;
-    }
-
-    /* .bio-header {
-        margin-top: 200px;
-
-    } */
 }
 
 @media only screen and (max-width: 1200px) {
     .blog-img {
         max-width: 35%;
     }
-
-    .slideshow-img {
-        margin-left: 0;
-    }
-
-    /* .bio-header {
-        margin-top: 200px;
-    } */
 }
 
 @media only screen and (max-width: 1100px) {
     .blog-img {
         max-width: 45%;
     }
-
-    /* .bio-header {
-        margin-top: 160px;
-    } */
 }
 
 @media only screen and (max-width: 900px) {
+    .details {
+        width: 115%;
+        margin-left: -15%;
+    }
 
     .slideshow-container {
-        height: 300px;
-        width: 90%;
-    }
-
-    .slideshow-img {
-        margin-left: 0vw;
-        max-width: 100%;
-    }
-
-    .next {
-        right: -10vw;
-    }
-
-    .prev {
-        left: -10vw;
+        height: auto;
+        width: 115%;
+        margin-left: -20%;
     }
 
     .blog-img {
