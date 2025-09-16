@@ -6,9 +6,9 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
-        <img 
-          src="/src/assets/pines.jpeg" 
-          alt="background" 
+        <img
+          src="/pines.jpeg"
+          alt="background"
           className="w-full h-full object-cover"
         />
         {/* Optional overlay for better text readability */}
