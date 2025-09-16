@@ -1,5 +1,6 @@
 import { ArrowRight, Code, Brain, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import pinesBackground from "/pines.jpeg";
 
 const Hero = () => {
   return (
@@ -7,7 +8,7 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="/pines.jpeg"
+          src={pinesBackground}
           alt="background"
           className="w-full h-full object-cover"
         />
