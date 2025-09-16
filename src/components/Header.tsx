@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import appliedMlLogo from "@/assets/applied-ml-logo-new.png";
+import appliedMlLogo from "@/assets/applied-ml-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

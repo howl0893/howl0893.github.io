@@ -1,5 +1,5 @@
 import { Mail, LinkedinIcon, Github } from "lucide-react";
-import appliedMlLogo from "@/assets/applied-ml-logo-new.png";
+import appliedMlLogo from "@/assets/applied-ml-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -46,19 +46,19 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="mailto:hello@applied-ml.dev" 
+                href="mailto:mhowlett@applied-ml.dev" 
                 className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Mail className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/matthew-howlett-5b9131b2/" 
                 className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <LinkedinIcon className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://github.com/howl0893" 
                 className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Github className="h-5 w-5" />

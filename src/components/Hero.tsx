@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 subtle-gradient" />
-      
-      {/* Animated background elements */}
+      {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <img 
+          src="/src/assets/pines.jpeg" 
+          alt="background" 
+          className="w-full h-full object-cover"
+        />
+        {/* Optional overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -23,7 +25,7 @@ const Hero = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-xl mx-auto font-medium">
+          <p className="text-lg md:text-xl text-white mb-12 max-w-xl mx-auto font-medium">
             Expert ML development. Real results. No compromises.
           </p>
 
