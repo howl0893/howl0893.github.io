@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import appliedMlLogo from "@/assets/applied-ml-logo.png";
+import appliedMlLogo from "@/assets/applied-ml-logo-new.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ const Header = () => {
             <img 
               src={appliedMlLogo} 
               alt="Applied ML Logo" 
-              className="h-8 w-auto"
+              className="h-12 w-auto"
             />
           </div>
 
