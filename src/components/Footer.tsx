@@ -1,5 +1,5 @@
 import { Mail, LinkedinIcon, Github } from "lucide-react";
-import appliedMlLogo from "@/assets/applied-ml-logo.png";
+import appliedMlLogo from "@/assets/applied-ml-logo-new.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,10 +12,10 @@ const Footer = () => {
       { name: "Consulting", href: "#services" }
     ],
     Company: [
-      { name: "About", href: "#about" },
-      { name: "Portfolio", href: "#portfolio" },
-      { name: "Contact", href: "#contact" },
-      { name: "Careers", href: "#contact" }
+      { name: "About", href: "/about" },
+      { name: "Portfolio", href: "/portfolio" },
+      { name: "Contact", href: "/contact" },
+      { name: "Careers", href: "/contact" }
     ],
     Technologies: [
       { name: "Python & FastAPI", href: "#" },
@@ -32,11 +32,13 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center mb-4">
-              <img 
-                src={appliedMlLogo} 
-                alt="Applied ML Logo" 
-                className="h-8 w-auto"
-              />
+              <a href="/" className="flex items-center">
+                <img 
+                  src={appliedMlLogo} 
+                  alt="Applied ML Logo" 
+                  className="h-10 w-auto"
+                />
+              </a>
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
               Transform your ideas into powerful machine learning applications. 
