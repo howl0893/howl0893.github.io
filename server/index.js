@@ -1,13 +1,24 @@
 import express from 'express';
 import cors from 'cors';
 import { google } from 'googleapis';
+import { Readable } from 'stream';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors());
-app.use(express.json({ limit: '50mb' })); // Increase limit for file uploads
+// Middleware - CORS with more permissive settings for development and production
+app.use(cors({
+  origin: '*', // Allow all origins (you can restrict this to your frontend URL in production)
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
+app.use(express.json({ limit: '100mb' })); // Increase limit for large file uploads
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 // Detect MIME type from file extension
 const getMimeType = (filename) => {
@@ -28,11 +39,15 @@ const getMimeType = (filename) => {
 // Upload endpoint
 app.post('/api/upload-to-drive', async (req, res) => {
   try {
+    console.log('Upload request received');
     const { file, fileName, folderId } = req.body;
 
     if (!file || !fileName) {
+      console.error('Missing file or fileName:', { hasFile: !!file, fileName });
       return res.status(400).json({ error: 'File and fileName are required' });
     }
+
+    console.log(`Uploading file: ${fileName}, size: ${file.length} bytes`);
 
     // Initialize Google Drive API
     const auth = new google.auth.GoogleAuth({
@@ -48,6 +63,9 @@ app.post('/api/upload-to-drive', async (req, res) => {
     // Convert base64 to buffer
     const fileBuffer = Buffer.from(file, 'base64');
 
+    // Convert buffer to stream (Google Drive API requires a stream)
+    const fileStream = Readable.from(fileBuffer);
+
     // Upload file to Google Drive
     const fileMetadata = {
       name: fileName,
@@ -56,7 +74,7 @@ app.post('/api/upload-to-drive', async (req, res) => {
 
     const media = {
       mimeType: getMimeType(fileName),
-      body: fileBuffer,
+      body: fileStream,
     };
 
     const response = await drive.files.create({
@@ -82,9 +100,11 @@ app.post('/api/upload-to-drive', async (req, res) => {
     });
   } catch (error) {
     console.error('Error uploading to Google Drive:', error);
+    console.error('Error stack:', error.stack);
     res.status(500).json({
       error: 'Failed to upload file',
       message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
   }
 });

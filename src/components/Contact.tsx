@@ -51,33 +51,50 @@ const Contact = () => {
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
     const uploadEndpoint = `${apiUrl}/api/upload-to-drive`;
     
+    console.log('Uploading files to:', uploadEndpoint);
+    console.log('API URL from env:', import.meta.env.VITE_API_URL);
+    
     const uploadPromises = Array.from(files).map(async (file) => {
       try {
+        console.log(`Converting ${file.name} to base64...`);
         const base64File = await fileToBase64(file);
+        console.log(`File converted, size: ${base64File.length} characters`);
         
+        const requestBody = {
+          file: base64File,
+          fileName: file.name,
+          folderId: import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID || undefined,
+        };
+        
+        console.log(`Sending request for ${file.name}...`);
         const response = await fetch(uploadEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            file: base64File,
-            fileName: file.name,
-            folderId: import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID || undefined, // Optional folder ID
-          }),
+          body: JSON.stringify(requestBody),
         });
 
+        console.log(`Response status: ${response.status} ${response.statusText}`);
+
         if (!response.ok) {
-          throw new Error(`Upload failed: ${response.statusText}`);
+          const errorText = await response.text();
+          console.error('Upload error response:', errorText);
+          throw new Error(`Upload failed: ${response.status} ${response.statusText} - ${errorText}`);
         }
 
         const result = await response.json();
+        console.log(`Upload successful for ${file.name}:`, result);
         return {
           name: file.name,
           url: result.downloadUrl || result.viewUrl,
         };
       } catch (error) {
         console.error(`Failed to upload ${file.name}:`, error);
+        if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+          console.error('Network error - check if API URL is correct:', uploadEndpoint);
+          console.error('Make sure VITE_API_URL is set in your frontend environment variables');
+        }
         return null;
       }
     });
