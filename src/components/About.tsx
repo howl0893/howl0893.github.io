@@ -1,6 +1,7 @@
 import { Award, Users, Lightbulb, Target } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import headshot from "@/assets/headshot.png";
 
 const About = () => {
   const stats = [
@@ -61,12 +62,16 @@ const About = () => {
             </div>
           </div>
           
-          {/* Founder Image Placeholder */}
+          {/* Founder Image */}
           <div className="relative">
             <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center">
               <div className="text-center">
-                <div className="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-4xl font-bold text-primary">ML</span>
+                <div className="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                  <img 
+                    src={headshot} 
+                    alt="Matthew Howlett" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Matthew Howlett</h3>
                 <p className="text-muted-foreground">Founder & Lead ML Engineer</p>

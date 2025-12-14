@@ -39,9 +39,11 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
-            <Button variant="hero" size="lg">
-              Get Started
-            </Button>
+            <a href="/contact#quote">
+              <Button variant="default" size="default">
+                Get Started
+              </Button>
+            </a>
           </nav>
 
           {/* Mobile menu button */}
@@ -71,9 +73,11 @@ const Header = () => {
                 </a>
               ))}
               <div className="px-3 pt-2">
-                <Button variant="hero" size="lg" className="w-full">
-                  Get Started
-                </Button>
+                <a href="/contact#quote" className="block w-full">
+                  <Button variant="default" size="default" className="w-full">
+                    Get Started
+                  </Button>
+                </a>
               </div>
             </div>
           </div>

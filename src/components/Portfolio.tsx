@@ -2,16 +2,20 @@ import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import wildtrackDemo from "@/assets/wildtrack-demo.png";
 
 const Portfolio = () => {
+  // Debug: Check if image import is working
+  console.log('WildTrack image URL:', wildtrackDemo);
+  
   const projects = [
     {
-      title: "Healthcare Diagnostic Platform",
-      description: "AI-powered medical image analysis system that assists healthcare professionals in early disease detection with 95% accuracy.",
-      technologies: ["Python", "TensorFlow", "React", "FastAPI", "PostgreSQL"],
-      results: ["95% accuracy improvement", "40% faster diagnosis", "Deployed in 3 hospitals"],
-      image: "/api/placeholder/600/400",
-      category: "Healthcare"
+      title: "WildTrack",
+      description: "WildTrack's mission is to protect endangered species using a unique combination of advanced data analytics, artificial intelligence, and traditional ecological knowledge. Specializing in footprint identification technology, our morphometric and AI models can provide accuracies of >90% in classifying by species, individual, sex and age-class. Data is made available for species protection and the mitigation of human-wildlife conflict.",
+      technologies: ["AWS", "Python", "Flask", "React", "PostgreSQL", "MLOps"],
+      results: ["90% accuracy improvement", "Increased data accuracy", "Reduced human error"],
+      image: wildtrackDemo,
+      category: "Conservation"
     },
     {
       title: "E-commerce Recommendation Engine",
@@ -48,14 +52,29 @@ const Portfolio = () => {
           {projects.map((project, index) => (
             <Card key={index} className="group hover:shadow-custom-xl transition-all duration-300 overflow-hidden">
               <div className="aspect-video bg-muted/50 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <span className="text-2xl font-bold text-primary">{project.category.slice(0, 2)}</span>
+                {project.image && project.image.startsWith('/api/placeholder') ? (
+                  // For placeholder URLs
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                        <span className="text-2xl font-bold text-primary">{project.category.slice(0, 2)}</span>
+                      </div>
+                      <Badge variant="secondary">{project.category}</Badge>
                     </div>
+                  </div>
+                ) : project.image ? (
+                  // For imported images
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  // Fallback if no image
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                     <Badge variant="secondary">{project.category}</Badge>
                   </div>
-                </div>
+                )}
               </div>
               
               <CardHeader>
