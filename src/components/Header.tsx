@@ -7,9 +7,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Services", href: "/services" },
-    { name: "Portfolio", href: "/portfolio" },
     { name: "About", href: "/about" },
+    { name: "Portfolio", href: "/portfolio" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -39,11 +38,6 @@ const Header = () => {
                 {item.name}
               </a>
             ))}
-            <a href="/contact#quote">
-              <Button variant="default" size="default">
-                Get Started
-              </Button>
-            </a>
           </nav>
 
           {/* Mobile menu button */}

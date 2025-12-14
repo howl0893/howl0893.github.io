@@ -1,6 +1,6 @@
 import { ArrowRight, Code, Brain, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import pinesBackground from "@/assets/pines.jpeg";
+import pinesBackground from "/pines.jpeg";
 
 const Hero = () => {
   return (

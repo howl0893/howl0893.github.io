@@ -13,7 +13,7 @@ const Footer = () => {
               <img 
                 src={appliedMlLogo} 
                 alt="Applied ML Logo" 
-                className="h-6 w-auto"
+                className="h-8 w-auto"
               />
             </a>
             <p className="text-xs text-muted-foreground">

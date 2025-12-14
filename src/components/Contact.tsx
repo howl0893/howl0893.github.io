@@ -312,7 +312,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
             Get in Touch
@@ -322,146 +322,166 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Form Type Selector */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
-          <Button 
-            variant={activeForm === "quote" ? "default" : "outline"}
-            onClick={() => setActiveForm("quote")}
-            className="gap-2"
-          >
-            <MessageSquare className="h-4 w-4" />
-            Get Quote
-          </Button>
-          <Button 
-            variant={activeForm === "apply" ? "default" : "outline"}
-            onClick={() => setActiveForm("apply")}
-            className="gap-2"
-          >
-            <Users className="h-4 w-4" />
-            Apply Now
-          </Button>
-          <Button 
-            variant={activeForm === "general" ? "default" : "outline"}
-            onClick={() => setActiveForm("general")}
-            className="gap-2"
-          >
-            <Mail className="h-4 w-4" />
-            General Inquiry
-          </Button>
-        </div>
-
-        {/* Dynamic Form */}
-        <div className="max-w-xl mx-auto">
-          <div className="mb-6 text-center">
-            <h3 className="text-2xl font-semibold mb-2">{getFormTitle()}</h3>
-            <p className="text-sm text-muted-foreground">{getFormDescription()}</p>
+        {/* Unified Card Component */}
+        <div className="bg-card border border-border rounded-2xl shadow-custom-lg overflow-hidden">
+          {/* Integrated Tabs */}
+          <div className="border-b border-border bg-muted/30">
+            <div className="flex">
+              <button
+                onClick={() => setActiveForm("quote")}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-all duration-200 border-b-2 ${
+                  activeForm === "quote"
+                    ? "border-primary text-primary bg-background"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <MessageSquare className="h-4 w-4" />
+                  <span>Get Quote</span>
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveForm("apply")}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-all duration-200 border-b-2 ${
+                  activeForm === "apply"
+                    ? "border-primary text-primary bg-background"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <Users className="h-4 w-4" />
+                  <span>Apply Now</span>
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveForm("general")}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-all duration-200 border-b-2 ${
+                  activeForm === "general"
+                    ? "border-primary text-primary bg-background"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  <span>General Inquiry</span>
+                </div>
+              </button>
+            </div>
           </div>
-          
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name *</Label>
-              <Input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Your name"
-              />
+
+          {/* Form Content */}
+          <div className="p-8 md:p-10">
+            <div className="mb-8">
+              <h3 className="text-2xl md:text-3xl font-semibold mb-2">{getFormTitle()}</h3>
+              <p className="text-muted-foreground">{getFormDescription()}</p>
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder="your@email.com"
-              />
-            </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="name">Name *</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your name"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="your@email.com"
+                />
+              </div>
 
-            {activeForm === "quote" && (
-              <>
+              {activeForm === "quote" && (
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="time">Timeline *</Label>
+                    <Input
+                      id="time"
+                      name="time"
+                      value={formData.time}
+                      onChange={handleChange}
+                      required
+                      placeholder="e.g., 3 months, ASAP"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="attachments">Attachments (Optional)</Label>
+                    <Input
+                      id="attachments"
+                      name="attachments"
+                      type="file"
+                      onChange={handleFileChange}
+                      multiple
+                      className="cursor-pointer"
+                    />
+                    {formData.attachments && formData.attachments.length > 0 && (
+                      <div className="text-sm text-muted-foreground mt-1">
+                        {formData.attachments.length} file(s) selected
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {activeForm === "apply" && (
                 <div className="space-y-2">
-                  <Label htmlFor="time">Timeline *</Label>
+                  <Label htmlFor="resume">Resume *</Label>
                   <Input
-                    id="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                    placeholder="e.g., 3 months, ASAP"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="attachments">Attachments (Optional)</Label>
-                  <Input
-                    id="attachments"
-                    name="attachments"
+                    id="resume"
+                    name="resume"
                     type="file"
+                    accept=".pdf,.doc,.docx"
                     onChange={handleFileChange}
-                    multiple
+                    required
                     className="cursor-pointer"
                   />
-                  {formData.attachments && formData.attachments.length > 0 && (
-                    <div className="text-sm text-muted-foreground mt-1">
-                      {formData.attachments.length} file(s) selected
+                  {formData.resume && (
+                    <div className="text-sm text-muted-foreground flex items-center gap-2 mt-1">
+                      <Upload className="h-4 w-4" />
+                      {formData.resume.name}
                     </div>
                   )}
                 </div>
-              </>
-            )}
+              )}
 
-            {activeForm === "apply" && (
-              <div className="space-y-2">
-                <Label htmlFor="resume">Resume *</Label>
-                <Input
-                  id="resume"
-                  name="resume"
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
-                  required
-                  className="cursor-pointer"
-                />
-                {formData.resume && (
-                  <div className="text-sm text-muted-foreground flex items-center gap-2 mt-1">
-                    <Upload className="h-4 w-4" />
-                    {formData.resume.name}
-                  </div>
-                )}
-              </div>
-            )}
+              {(activeForm === "quote" || activeForm === "general") && (
+                <div className="space-y-2">
+                  <Label htmlFor="message">
+                    {activeForm === "quote" ? "Project Description *" : "Message *"}
+                  </Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    placeholder={
+                      activeForm === "quote" 
+                        ? "Tell us about your project, budget, and requirements..."
+                        : "How can we help?"
+                    }
+                  />
+                </div>
+              )}
 
-            {(activeForm === "quote" || activeForm === "general") && (
-              <div className="space-y-2">
-                <Label htmlFor="message">
-                  {activeForm === "quote" ? "Project Description *" : "Message *"}
-                </Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  placeholder={
-                    activeForm === "quote" 
-                      ? "Tell us about your project, budget, and requirements..."
-                      : "How can we help?"
-                  }
-                />
-              </div>
-            )}
-
-            <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-              <Send className="h-4 w-4 mr-2" />
-              {isSubmitting ? "Sending..." : "Send"}
-            </Button>
-          </form>
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                <Send className="h-4 w-4 mr-2" />
+                {isSubmitting ? "Sending..." : "Send"}
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
