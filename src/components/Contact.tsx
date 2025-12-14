@@ -45,7 +45,7 @@ const Contact = () => {
     });
   };
 
-  const uploadFiles = async (files: FileList | null): Promise<Array<{ name: string; url: string }>> => {
+  const uploadFiles = async (files: FileList | null, contactType: FormType): Promise<Array<{ name: string; url: string }>> => {
     if (!files || files.length === 0) return [];
     
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
@@ -63,7 +63,7 @@ const Contact = () => {
         const requestBody = {
           file: base64File,
           fileName: file.name,
-          folderId: import.meta.env.VITE_GOOGLE_DRIVE_FOLDER_ID || undefined,
+          contactType: contactType, // Pass contact type so server can use the right folder
         };
         
         console.log(`Sending request for ${file.name}...`);
@@ -136,11 +136,24 @@ const Contact = () => {
         timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
       });
 
+      let uploadSuccess = true;
+      let uploadErrors: string[] = [];
+
       if (activeForm === "quote") {
         // Upload attachments
         let uploadedFiles: Array<{ name: string; url: string }> = [];
         if (formData.attachments && formData.attachments.length > 0) {
-          uploadedFiles = await uploadFiles(formData.attachments);
+          try {
+            uploadedFiles = await uploadFiles(formData.attachments, activeForm);
+            const failedCount = formData.attachments.length - uploadedFiles.length;
+            if (failedCount > 0) {
+              uploadSuccess = false;
+              uploadErrors.push(`${failedCount} of ${formData.attachments.length} file(s) failed to upload`);
+            }
+          } catch (error) {
+            uploadSuccess = false;
+            uploadErrors.push("File upload service unavailable");
+          }
         }
 
         let attachmentInfo = "";
@@ -151,8 +164,12 @@ const Contact = () => {
             const fileSize = originalFile ? (originalFile.size / 1024).toFixed(2) : 'unknown';
             attachmentInfo += `${index + 1}. ${uploaded.name} (${fileSize} KB)\n   ${uploaded.url}\n`;
           });
-        } else if (formData.attachments && formData.attachments.length > 0) {
-          attachmentInfo = "\n\nNote: File uploads failed. Please contact the client to request files.";
+        }
+        
+        if (formData.attachments && formData.attachments.length > 0 && uploadedFiles.length === 0) {
+          attachmentInfo = "\n\n⚠️ Note: File uploads failed. Please contact the client to request files directly.";
+        } else if (formData.attachments && formData.attachments.length > uploadedFiles.length) {
+          attachmentInfo += "\n\n⚠️ Note: Some files failed to upload. Please contact the client for the missing files.";
         }
 
         templateParams = {
@@ -163,19 +180,29 @@ const Contact = () => {
           message: `Email: ${formData.email}\n\nTimeline: ${formData.time}\n\nProject Description:\n${formData.message}${attachmentInfo}`,
         };
         templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_GENERAL || "general_template";
-        successMessage = "Quote request sent! We'll get back to you within 24 hours.";
+        successMessage = uploadSuccess 
+          ? "Quote request sent! We'll get back to you within 24 hours."
+          : "Quote request sent, but some files failed to upload. We'll get back to you within 24 hours.";
       } else if (activeForm === "apply") {
         // Upload resume
         let resumeInfo = "No resume attached";
         if (formData.resume) {
-          const resumeFileList = new DataTransfer();
-          resumeFileList.items.add(formData.resume);
-          const uploadedFiles = await uploadFiles(resumeFileList.files);
-          
-          if (uploadedFiles.length > 0 && uploadedFiles[0]) {
-            resumeInfo = `Resume: ${uploadedFiles[0].name} (${(formData.resume.size / 1024).toFixed(2)} KB)\nDownload: ${uploadedFiles[0].url}`;
-          } else {
-            resumeInfo = `Resume: ${formData.resume.name} (${(formData.resume.size / 1024).toFixed(2)} KB) - Upload failed. Please contact the applicant to request the resume.`;
+          try {
+            const resumeFileList = new DataTransfer();
+            resumeFileList.items.add(formData.resume);
+            const uploadedFiles = await uploadFiles(resumeFileList.files, activeForm);
+            
+            if (uploadedFiles.length > 0 && uploadedFiles[0]) {
+              resumeInfo = `Resume: ${uploadedFiles[0].name} (${(formData.resume.size / 1024).toFixed(2)} KB)\nDownload: ${uploadedFiles[0].url}`;
+            } else {
+              uploadSuccess = false;
+              uploadErrors.push("Resume upload failed");
+              resumeInfo = `Resume: ${formData.resume.name} (${(formData.resume.size / 1024).toFixed(2)} KB)\n⚠️ Upload failed. Please contact the applicant to request the resume.`;
+            }
+          } catch (error) {
+            uploadSuccess = false;
+            uploadErrors.push("Resume upload service unavailable");
+            resumeInfo = `Resume: ${formData.resume.name} (${(formData.resume.size / 1024).toFixed(2)} KB)\n⚠️ Upload failed. Please contact the applicant to request the resume.`;
           }
         }
 
@@ -187,7 +214,9 @@ const Contact = () => {
           message: `Email: ${formData.email}\n\n${resumeInfo}`,
         };
         templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_APPLY || "apply_template";
-        successMessage = "Application sent! We'll review your application and get back to you soon.";
+        successMessage = uploadSuccess
+          ? "Application sent! We'll review your application and get back to you soon."
+          : "Application sent, but resume upload failed. We'll review and get back to you soon.";
       } else {
         templateParams = {
           title: "General Inquiry",
@@ -200,13 +229,22 @@ const Contact = () => {
         successMessage = "Message sent! We'll get back to you within 24 hours.";
       }
 
-      const success = await sendEmail(templateParams, templateId);
+      // Always send email, even if uploads failed
+      const emailSuccess = await sendEmail(templateParams, templateId);
       
-      if (success) {
-        toast({
-          title: successMessage.split("!")[0] + "!",
-          description: successMessage.split("!")[1] || "",
-        });
+      if (emailSuccess) {
+        if (uploadSuccess) {
+          toast({
+            title: successMessage.split("!")[0] + "!",
+            description: successMessage.split("!")[1] || "",
+          });
+        } else {
+          toast({
+            title: "Message sent with warnings",
+            description: `${successMessage.split("!")[1] || ""} ${uploadErrors.join(". ")}`,
+            variant: "default",
+          });
+        }
         setFormData({
           name: "",
           email: "",
@@ -221,7 +259,7 @@ const Contact = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to send your message. Please try again.",
+        description: "Failed to send your message. Please try again or contact us directly.",
         variant: "destructive",
       });
     } finally {
