@@ -50,7 +50,7 @@ const Contact = () => {
           email: formData.email,
           reply_to: formData.email,
           to_email: contactEmail,
-          message: `Email: ${formData.email}\n\n${formData.message}`,
+          message: formData.message,
           time: new Date().toLocaleString("en-US", {
             dateStyle: "medium",
             timeStyle: "short",
