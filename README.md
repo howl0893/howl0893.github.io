@@ -22,14 +22,14 @@ npm run preview
 The contact page is static and sends through EmailJS. Configure these environment variables in local `.env` files and as GitHub Actions repository variables:
 
 ```bash
-VITE_CONTACT_EMAIL=mhowlett@applied-ml.dev
+VITE_CONTACT_EMAIL=your-personal-email@example.com
 VITE_EMAILJS_SERVICE_ID=...
 VITE_EMAILJS_TEMPLATE_ID_GENERAL=...
 VITE_EMAILJS_PUBLIC_KEY=...
 VITE_BASE_PATH=/
 ```
 
-If EmailJS is not configured, the UI shows a failure toast and offers the direct `mailto:` fallback.
+If EmailJS is not configured, the UI shows a failure toast. The footer `mailto:` link appears only when `VITE_CONTACT_EMAIL` is configured.
 
 Create one EmailJS template for the contact form. The app sends these template variables:
 
@@ -41,7 +41,7 @@ Create one EmailJS template for the contact form. The app sends these template v
 - `message`
 - `time`
 
-In EmailJS, connect the email service to the current inbox and either set the template recipient to `{{to_email}}` or hard-code `mhowlett@applied-ml.dev` until you move away from Google Workspace.
+In EmailJS, connect the email service to the current inbox and set the template recipient to `{{to_email}}`, or hard-code your personal email in the EmailJS template.
 
 ## GitHub Pages
 
@@ -50,6 +50,7 @@ The site is configured to deploy with GitHub Actions in `.github/workflows/deplo
 - In GitHub repository settings, go to `Settings` -> `Pages`.
 - Set `Build and deployment` -> `Source` to `GitHub Actions`.
 - Add repository variables for the `VITE_*` values above under `Settings` -> `Secrets and variables` -> `Actions` -> `Variables`.
+- Vite exposes `VITE_*` values in the public browser bundle, so repository variables are usually a better fit than secrets for these EmailJS client-side values. The workflow also falls back to repository secrets if you already placed them there.
 - Keep `VITE_BASE_PATH=/` for a user site like `howl0893.github.io` or for a custom domain.
 - Use `VITE_BASE_PATH=/repo-name/` only if publishing this as a project site at `https://howl0893.github.io/repo-name/`.
 

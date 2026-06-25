@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
-const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || "mhowlett@applied-ml.dev";
+const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 
 const Contact = () => {
   const { toast } = useToast();
@@ -37,7 +37,7 @@ const Contact = () => {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     try {
-      if (!serviceId || !templateId || !publicKey) {
+      if (!contactEmail || !serviceId || !templateId || !publicKey) {
         throw new Error("EmailJS is not configured");
       }
 
@@ -73,8 +73,10 @@ const Contact = () => {
     } catch (error) {
       const description =
         error instanceof Error && error.message === "EmailJS is not configured"
-          ? `Email service is not configured yet. Email ${contactEmail} directly instead.`
-          : `The message could not be sent. Email ${contactEmail} directly instead.`;
+          ? "Email service is not configured yet."
+          : contactEmail
+            ? `The message could not be sent. Email ${contactEmail} directly instead.`
+            : "The message could not be sent.";
 
       toast({
         title: "Message not sent",

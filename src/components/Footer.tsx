@@ -2,7 +2,7 @@ import { Mail, LinkedinIcon, Github } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL || "mhowlett@applied-ml.dev";
+  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 
   return (
     <footer className="bg-background border-t border-border">
@@ -18,13 +18,15 @@ const Footer = () => {
           </div>
 
           <div className="flex gap-2">
-            <a 
-              href={`mailto:${contactEmail}`}
-              className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="h-3.5 w-3.5" />
-            </a>
+            {contactEmail && (
+              <a 
+                href={`mailto:${contactEmail}`}
+                className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                aria-label="Email"
+              >
+                <Mail className="h-3.5 w-3.5" />
+              </a>
+            )}
             <a 
               href="https://www.linkedin.com/in/matthew-howlett-5b9131b2/" 
               className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
