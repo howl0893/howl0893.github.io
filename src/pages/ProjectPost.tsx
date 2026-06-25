@@ -11,9 +11,9 @@ const ProjectPost = () => {
   const project = allProjects.find((item) => item.slug === slug);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="pt-16">
+      <main className="pt-16 flex-1">
         <article className="py-16 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
             <Link to="/projects">

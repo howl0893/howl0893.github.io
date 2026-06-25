@@ -14,8 +14,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("user-theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = storedTheme === "dark" || (!storedTheme && prefersDark) ? "dark" : "light";
+    const initialTheme = storedTheme === "dark" ? "dark" : "light";
 
     setTheme(initialTheme);
   }, []);

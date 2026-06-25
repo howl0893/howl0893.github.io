@@ -1,23 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import { Award, GraduationCap } from "lucide-react";
 import headshot from "@/assets/headshot.png";
 import { certifications, education } from "@/data/projects";
 import { Card, CardContent } from "@/components/ui/card";
 
 const About = () => {
-  const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    window.scrollTo(0, 0);
-    navigate(path);
-  };
   return (
     <section id="about" className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        <div className="mb-20">
+        <div className="mb-16">
           <div className="space-y-6 text-muted-foreground leading-relaxed">
-            <div className="flex flex-col md:flex-row justify-center items-center md:items-center gap-8">
+            <div className="flex flex-col sm:flex-row items-start gap-6">
               <div className="flex-shrink-0">
                 <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-border">
                   <img 
@@ -28,12 +20,11 @@ const About = () => {
                 </div>
               </div>
               
-              {/* Team Member Info - Vertically centered with image */}
-              <div className="text-center md:text-left">
+              <div className="text-left pt-1 sm:pt-8">
                 <h4 className="text-2xl font-semibold mb-2 text-foreground">
                   Matthew Howlett
                 </h4>
-                <div className="text-base md:text-lg text-muted-foreground space-y-1">
+                <div className="text-base text-muted-foreground space-y-1">
                   <p>Research Scientist | Engineer</p>
                   <p>Bellingham, WA</p>
                 </div>
@@ -60,16 +51,16 @@ const About = () => {
           </div>
         </div>
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
-            <div className="mb-6 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-3">
               <GraduationCap className="h-5 w-5 text-primary" />
-              <h2 className="text-xl md:text-2xl font-bold">Education</h2>
+              <h2 className="text-lg font-semibold">Education</h2>
             </div>
             <div className="grid grid-cols-1 gap-4">
               {education.map((item) => (
-                <Card key={item.title} className="h-full">
-                  <CardContent className="p-4 flex gap-4 min-h-32">
+                <Card key={item.title} className="h-full hover:shadow-custom-lg transition-shadow">
+                  <CardContent className="p-4 flex gap-3 min-h-24">
                     <img
                       src={item.logo}
                       alt={`${item.issuer} logo`}
@@ -80,7 +71,9 @@ const About = () => {
                         {item.title}
                       </h3>
                       <p className="text-sm text-muted-foreground">{item.issuer}</p>
-                      <p className="text-sm text-muted-foreground">{item.dates}</p>
+                      {item.dates && (
+                        <p className="text-sm text-muted-foreground">{item.dates}</p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -89,15 +82,15 @@ const About = () => {
           </div>
 
           <div>
-            <div className="mb-6 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-3">
               <Award className="h-5 w-5 text-primary" />
-              <h2 className="text-xl md:text-2xl font-bold">Certifications</h2>
+              <h2 className="text-lg font-semibold">Certifications</h2>
             </div>
             <div className="grid grid-cols-1 gap-4">
               {certifications.map((item) => {
                 const content = (
                   <Card className="h-full hover:shadow-custom-lg transition-shadow">
-                    <CardContent className="p-4 flex gap-4 min-h-32">
+                    <CardContent className="p-4 flex gap-3 min-h-24">
                       <img
                         src={item.logo}
                         alt={`${item.issuer} logo`}
@@ -108,7 +101,9 @@ const About = () => {
                           {item.title}
                         </h3>
                         <p className="text-sm text-muted-foreground">{item.issuer}</p>
-                        <p className="text-sm text-muted-foreground">{item.dates}</p>
+                        {item.dates && (
+                          <p className="text-sm text-muted-foreground">{item.dates}</p>
+                        )}
                         {item.detail && (
                           <p className="text-sm text-muted-foreground">{item.detail}</p>
                         )}
@@ -134,25 +129,6 @@ const About = () => {
             </div>
           </div>
         </section>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="w-full sm:w-auto"
-            onClick={() => handleNavigation("/contact")}
-          >
-            Contact Me
-          </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="w-full sm:w-auto"
-            onClick={() => handleNavigation("/projects")}
-          >
-            My Work
-          </Button>
-        </div>
       </div>
     </section>
   );

@@ -19,20 +19,21 @@ npm run preview
 
 ## Contact Form
 
-The contact page is static and sends through EmailJS. Configure these environment variables in local `.env` files and in Render:
+The contact page is static and sends through EmailJS. Configure these environment variables in local `.env` files and as GitHub Actions repository variables:
 
 ```bash
 VITE_CONTACT_EMAIL=mhowlett@applied-ml.dev
 VITE_EMAILJS_SERVICE_ID=...
 VITE_EMAILJS_TEMPLATE_ID_GENERAL=...
 VITE_EMAILJS_PUBLIC_KEY=...
+VITE_BASE_PATH=/
 ```
 
 If EmailJS is not configured, the UI shows a failure toast and offers the direct `mailto:` fallback.
 
 Create one EmailJS template for the contact form. The app sends these template variables:
 
-- `title`
+- `title` (`Website contact`)
 - `name`
 - `email`
 - `reply_to`
@@ -40,27 +41,22 @@ Create one EmailJS template for the contact form. The app sends these template v
 - `message`
 - `time`
 
-In EmailJS, connect the email service to the current Google Workspace inbox and either set the template recipient to `{{to_email}}` or hard-code `mhowlett@applied-ml.dev` until the MRH email cutover is complete.
+In EmailJS, connect the email service to the current inbox and either set the template recipient to `{{to_email}}` or hard-code `mhowlett@applied-ml.dev` until you move away from Google Workspace.
 
-## Render Static Site
+## GitHub Pages
 
-The site is configured as a Render static site.
+The site is configured to deploy with GitHub Actions in `.github/workflows/deploy-pages.yml`.
 
-- Build command: `npm run build`
-- Publish directory: `dist`
-- SPA fallback: rewrite `/*` to `/index.html`
-- Runtime service: static site only; there is no Express upload backend
+- In GitHub repository settings, go to `Settings` -> `Pages`.
+- Set `Build and deployment` -> `Source` to `GitHub Actions`.
+- Add repository variables for the `VITE_*` values above under `Settings` -> `Secrets and variables` -> `Actions` -> `Variables`.
+- Keep `VITE_BASE_PATH=/` for a user site like `howl0893.github.io` or for a custom domain.
+- Use `VITE_BASE_PATH=/repo-name/` only if publishing this as a project site at `https://howl0893.github.io/repo-name/`.
 
-After `mrh.com` is acquired, connect the domain in Render and update DNS at the registrar or DNS provider according to Render's custom-domain instructions. Keep the legacy domain active as a redirect and email alias for at least 6-12 months.
+The workflow builds `dist`, copies `dist/index.html` to `dist/404.html` for React Router fallback behavior, and deploys the artifact to GitHub Pages.
 
-## Google Workspace Cutover
+## Google Workspace Cancellation
 
-Do not change Workspace mail routing until `mrh.com` is owned and DNS is active.
+Before canceling Google Workspace, make sure you have another working email destination for contact form mail. If you keep using EmailJS, connect it to that replacement inbox and update `VITE_CONTACT_EMAIL`.
 
-1. Add `mrh.com` to the existing Google Workspace account.
-2. Verify ownership with the Google-provided TXT record.
-3. Add Google MX records for `mrh.com`.
-4. Configure SPF, DKIM, and DMARC.
-5. Rename the primary user to `{username}@mrh.com`.
-6. Keep the previous address as an alias.
-7. Update EmailJS templates and public site contact settings to the MRH address.
+Cancel Google Workspace from the Admin Console billing/subscription area only after exporting or migrating any mail/data you need.

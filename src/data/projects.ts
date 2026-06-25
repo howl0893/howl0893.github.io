@@ -301,7 +301,7 @@ export const certifications: CredentialItem[] = [
   {
     title: "Neural Networks and Deep Learning",
     issuer: "DeepLearning.AI",
-    dates: "Issued May 2022",
+    dates: "",
     logo: deepLearningLogo,
     detail: "Credential ID UU3EMP2YHERR",
     href: "https://www.coursera.org/account/accomplishments/verify/UU3EMP2YHERR",

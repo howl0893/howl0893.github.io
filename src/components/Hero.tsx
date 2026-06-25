@@ -5,7 +5,7 @@ import quandaryPeak from "@/assets/background/quandary-peak.jpg";
 import rainier from "@/assets/background/rainier.jpeg";
 import snoqual from "@/assets/background/snoqual.jpeg";
 
-const backgroundImages = [rainier, quandaryPeak, snoqual, leadville];
+const backgroundImages = [quandaryPeak, rainier, snoqual, leadville];
 
 const Hero = () => {
   const [activeImage, setActiveImage] = useState(0);

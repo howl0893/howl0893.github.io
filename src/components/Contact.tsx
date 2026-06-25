@@ -16,12 +16,11 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "Project inquiry",
     message: "",
   });
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -46,12 +45,12 @@ const Contact = () => {
         serviceId,
         templateId,
         {
-          title: formData.subject,
+          title: "Website contact",
           name: formData.name,
           email: formData.email,
           reply_to: formData.email,
           to_email: contactEmail,
-          message: `Subject: ${formData.subject}\nEmail: ${formData.email}\n\n${formData.message}`,
+          message: `Email: ${formData.email}\n\n${formData.message}`,
           time: new Date().toLocaleString("en-US", {
             dateStyle: "medium",
             timeStyle: "short",
@@ -69,7 +68,6 @@ const Contact = () => {
       setFormData({
         name: "",
         email: "",
-        subject: "Project inquiry",
         message: "",
       });
     } catch (error) {
@@ -92,7 +90,7 @@ const Contact = () => {
     <section id="contact" className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Contact</h1>
+          <h1 className="text-xl md:text-2xl font-bold mb-3">Contact</h1>
           <p className="text-muted-foreground">
             Send a project inquiry, collaboration note, or general message.
           </p>
@@ -101,7 +99,7 @@ const Contact = () => {
         <div className="bg-card border border-border rounded-lg shadow-custom-lg overflow-hidden">
           <div className="p-8 md:p-10">
             <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-semibold mb-2">Get in Touch</h2>
+              <h2 className="text-xl md:text-xl font-semibold mb-2">Get in Touch</h2>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -130,23 +128,6 @@ const Contact = () => {
                     placeholder="your@email.com"
                   />
                 </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject *</Label>
-                <select
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:text-sm"
-                >
-                  <option>Project inquiry</option>
-                  <option>Consulting availability</option>
-                  <option>Collaboration</option>
-                  <option>General message</option>
-                </select>
               </div>
 
               <div className="space-y-2">

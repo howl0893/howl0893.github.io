@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/card";
 import { allProjects } from "@/data/projects";
 import type { ProjectsItem } from "@/data/projects";
+
+const resumeUrl =
+  "https://drive.google.com/file/d/1gyym9trG3cGGmeVW4vm-yoQcntw38YJB/view?usp=sharing";
 
 const Projects = () => {
   const navigate = useNavigate();
@@ -125,12 +128,17 @@ const Projects = () => {
   return (
     <section id="projects" className="py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Projects</h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            A compact view of client products, research systems, embedded work, and personal
-            experiments.
-          </p>
+        <div className="mb-12 max-w-3xl">
+          <h1 className="text-xl md:text-2xl font-bold mb-4">Projects</h1>
+          <a
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-base font-medium text-primary hover:text-primary/80 underline-offset-4 hover:underline"
+          >
+            View my resume
+            <ExternalLink className="h-4 w-4" />
+          </a>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
