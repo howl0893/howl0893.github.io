@@ -1,6 +1,16 @@
 # MRH
 
-Static React/Vite site for `mrh.com`, adapted from the existing projects site and merged with content from the personal projects.
+Static React/Vite portfolio site for Matthew Howlett, hosted with GitHub Pages.
+
+## Stack
+
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
+- EmailJS contact form
+- Google Analytics 4
 
 ## Development
 
@@ -17,9 +27,9 @@ npm run build
 npm run preview
 ```
 
-## Contact Form
+## Environment
 
-The contact page is static and sends through EmailJS. Configure these environment variables in local `.env` files and as GitHub Actions repository variables:
+Create a local `.env` file from `.env.example`:
 
 ```bash
 VITE_CONTACT_EMAIL=your-personal-email@example.com
@@ -29,11 +39,13 @@ VITE_EMAILJS_PUBLIC_KEY=...
 VITE_BASE_PATH=/
 ```
 
-If EmailJS is not configured, the UI shows a failure toast. The footer `mailto:` link appears only when `VITE_CONTACT_EMAIL` is configured.
+`VITE_BASE_PATH=/` is correct for `https://howl0893.github.io/` and custom domains. Use `/repo-name/` only for a GitHub Pages project site under a repository path.
 
-Create one EmailJS template for the contact form. The app sends these template variables:
+## Contact Form
 
-- `title` (`Website contact`)
+The contact page sends email through EmailJS. The app sends these template variables:
+
+- `title`
 - `name`
 - `email`
 - `reply_to`
@@ -41,23 +53,33 @@ Create one EmailJS template for the contact form. The app sends these template v
 - `message`
 - `time`
 
-In EmailJS, connect the email service to the current inbox and set the template recipient to `{{to_email}}`, or hard-code your personal email in the EmailJS template.
+Recommended EmailJS settings:
 
-## GitHub Pages
+- To Email: `{{to_email}}`
+- Reply To: `{{reply_to}}`
+- Subject: `{{title}}`
 
-The site is configured to deploy with GitHub Actions in `.github/workflows/deploy-pages.yml`.
+The footer email link only appears when `VITE_CONTACT_EMAIL` is configured.
 
-- In GitHub repository settings, go to `Settings` -> `Pages`.
-- Set `Build and deployment` -> `Source` to `GitHub Actions`.
-- Add repository variables for the `VITE_*` values above under `Settings` -> `Secrets and variables` -> `Actions` -> `Variables`.
-- Vite exposes `VITE_*` values in the public browser bundle, so repository variables are usually a better fit than secrets for these EmailJS client-side values. The workflow also falls back to repository secrets if you already placed them there.
-- Keep `VITE_BASE_PATH=/` for a user site like `howl0893.github.io` or for a custom domain.
-- Use `VITE_BASE_PATH=/repo-name/` only if publishing this as a project site at `https://howl0893.github.io/repo-name/`.
+## Analytics
+
+Google Analytics 4 is installed in `index.html` with measurement ID `G-LDT74FLHLZ`.
+
+Custom events are sent for:
+
+- `select_project`
+- `select_resume`
+- `generate_lead`
+
+In GA4, enable enhanced measurement page views for browser history changes so React Router page transitions are tracked.
+
+## Deployment
+
+GitHub Pages deployment is handled by `.github/workflows/deploy-pages.yml`.
+
+Repository setup:
+
+- `Settings` -> `Pages` -> `Build and deployment` -> `Source`: `GitHub Actions`
+- Add the `VITE_*` values above under `Settings` -> `Secrets and variables` -> `Actions` -> `Variables`
 
 The workflow builds `dist`, copies `dist/index.html` to `dist/404.html` for React Router fallback behavior, and deploys the artifact to GitHub Pages.
-
-## Google Workspace Cancellation
-
-Before canceling Google Workspace, make sure you have another working email destination for contact form mail. If you keep using EmailJS, connect it to that replacement inbox and update `VITE_CONTACT_EMAIL`.
-
-Cancel Google Workspace from the Admin Console billing/subscription area only after exporting or migrating any mail/data you need.
