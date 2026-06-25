@@ -1,28 +1,10 @@
 services:
-  # Backend API service for file uploads
   - type: web
-    name: applied-ml-api
-    env: node
-    buildCommand: npm install
-    startCommand: node server/index.js
-    envVars:
-      - key: GOOGLE_SERVICE_ACCOUNT_EMAIL
-        sync: false
-      - key: GOOGLE_PRIVATE_KEY
-        sync: false
-      - key: GOOGLE_DRIVE_FOLDER_ID
-        sync: false
-        optional: true
-
-  # Frontend static site
-  - type: web
-    name: applied-ml-frontend
+    name: mrh
     env: static
     buildCommand: npm run build
     staticPublishPath: dist
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          type: web
-          name: applied-ml-api
-          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
