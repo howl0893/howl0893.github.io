@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import leadville from "@/assets/background/leadville.jpg";
+import pctPines from "@/assets/background/pct-pines.jpeg";
+import pctReflection from "@/assets/background/pct-reflection.jpeg";
 import quandaryPeak from "@/assets/background/quandary-peak.jpg";
 import rainier from "@/assets/background/rainier.jpeg";
 import snoqual from "@/assets/background/snoqual.jpeg";
 
-const backgroundImages = [quandaryPeak, rainier, snoqual, leadville];
+const backgroundImages = [quandaryPeak, pctReflection, rainier, pctPines, snoqual, leadville];
 
 const Hero = () => {
   const [activeImage, setActiveImage] = useState(0);

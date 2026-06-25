@@ -3,6 +3,7 @@ import wildtrack2 from "@/assets/wildtrack-2.png";
 import dfsp1 from "@/assets/dfsp-1.png";
 import dfsp2 from "@/assets/dfsp-2.png";
 import michiganAerospaceLogo from "@/assets/projects/michaero.jpeg";
+import pctMe from "@/assets/pct-me.jpeg";
 import newEagleLogo from "@/assets/projects/neweagle.jpeg";
 import ketteringLogo from "@/assets/projects/kettering.jpeg";
 import gvsuLogo from "@/assets/projects/gvsu.jpeg";
@@ -15,6 +16,8 @@ import anemometerTeensy from "@/assets/projects/anemometer-teensy.jpg";
 import anemometer1d from "@/assets/projects/anemometer-1d.png";
 import reconnImage from "@/assets/projects/reconn.png";
 import newEagleReach from "@/assets/projects/new-eagle-reach.png";
+import openpctGlacierSat from "@/assets/projects/openpct-glacier-sat.jpg";
+import openpctGlacierTopo from "@/assets/projects/openpct-glacier-topo.jpg";
 import roboticsLineFollower from "@/assets/projects/robotics-line-follower.jpg";
 import roboticsSumoBot from "@/assets/projects/robotics-sumo-bot.jpg";
 import roboticsBabySteps from "@/assets/projects/robotics-baby-steps.mp4";
@@ -220,6 +223,29 @@ export const professionalExperience: ExperienceItem[] = [
 
 export const personalProjects: ProjectsItem[] = [
   {
+    slug: "openpct",
+    title: "OpenPCT",
+    category: "Progressive Web App",
+    description:
+      "Installable, offline-capable PWA for exploring open-source Pacific Crest Trail routes, waypoints, maps, and field context.",
+    technologies: ["React", "TypeScript", "PWA", "Offline Data", "Trail Maps"],
+    images: [openpctGlacierTopo, openpctGlacierSat],
+    media: [
+      {
+        type: "image",
+        src: pctMe,
+        caption: "On the Pacific Crest Trail.",
+      },
+    ],
+    externalUrl: "https://openpct.com",
+    externalLabel: "Open OpenPCT",
+    details: [
+      "OpenPCT is a Progressive Web App for exploring Pacific Crest Trail route and waypoint data in a lightweight, installable interface.",
+      "The app uses open-source PCT trail and waypoint data, with offline-capable behavior so trail information can remain available without a live connection.",
+      "It brings together map layers, waypoint context, PWA installation, and field-oriented usability into a free static web app hosted at openpct.com.",
+    ],
+  },
+  {
     slug: "robotics",
     title: "Robotics",
     category: "Personal Projects",
@@ -271,6 +297,7 @@ const unsortedProjects: ProjectsItem[] = [
 const projectBySlug = new Map(unsortedProjects.map((project) => [project.slug, project]));
 
 export const allProjects: ProjectsItem[] = [
+  "openpct",
   "wildtrack",
   "halas",
   "reconn-ai",

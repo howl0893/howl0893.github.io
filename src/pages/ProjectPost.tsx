@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -9,6 +10,10 @@ import { allProjects } from "@/data/projects";
 const ProjectPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = allProjects.find((item) => item.slug === slug);
+  const [enlargedImage, setEnlargedImage] = useState<{
+    src: string;
+    caption: string;
+  } | null>(null);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -105,11 +110,23 @@ const ProjectPost = () => {
                               className="w-full aspect-video object-cover bg-black"
                             />
                           ) : (
-                            <img
-                              src={item.src}
-                              alt={item.caption}
-                              className="w-full aspect-video object-cover"
-                            />
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setEnlargedImage({
+                                  src: item.src,
+                                  caption: item.caption,
+                                })
+                              }
+                              className="block w-full cursor-zoom-in"
+                              aria-label={`Enlarge ${item.caption}`}
+                            >
+                              <img
+                                src={item.src}
+                                alt={item.caption}
+                                className="w-full aspect-video object-cover"
+                              />
+                            </button>
                           )}
                           <figcaption className="px-4 py-3 text-sm text-muted-foreground">
                             {item.caption}
@@ -136,6 +153,26 @@ const ProjectPost = () => {
         </article>
       </main>
       <Footer />
+
+      {enlargedImage && (
+        <button
+          type="button"
+          className="fixed inset-0 z-[60] flex cursor-zoom-out items-center justify-center bg-black/85 p-4"
+          onClick={() => setEnlargedImage(null)}
+          aria-label="Close enlarged project media"
+        >
+          <figure className="max-h-full max-w-5xl">
+            <img
+              src={enlargedImage.src}
+              alt={enlargedImage.caption}
+              className="max-h-[85vh] w-auto max-w-full rounded-lg object-contain"
+            />
+            <figcaption className="mt-3 text-center text-sm text-white/80">
+              {enlargedImage.caption}
+            </figcaption>
+          </figure>
+        </button>
+      )}
     </div>
   );
 };
