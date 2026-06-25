@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { allProjects } from "@/data/projects";
 import type { ProjectsItem } from "@/data/projects";
+import { trackEvent } from "@/lib/analytics";
 
 const resumeUrl =
   "https://drive.google.com/file/d/1gyym9trG3cGGmeVW4vm-yoQcntw38YJB/view?usp=sharing";
@@ -19,9 +20,15 @@ const Projects = () => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState<Record<string, number>>({});
 
-  const openProject = (slug: string) => {
+  const openProject = (project: ProjectsItem) => {
+    trackEvent("select_project", {
+      project_slug: project.slug,
+      project_title: project.title,
+      project_category: project.category,
+    });
+
     window.scrollTo(0, 0);
-    navigate(`/projects/${slug}`);
+    navigate(`/projects/${project.slug}`);
   };
 
   const nextImage = (key: string, totalImages: number, event: React.MouseEvent) => {
@@ -49,11 +56,11 @@ const Projects = () => {
       <Card
         role="link"
         tabIndex={0}
-        onClick={() => openProject(project.slug)}
+        onClick={() => openProject(project)}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            openProject(project.slug);
+            openProject(project);
           }
         }}
         className="group hover:shadow-custom-xl transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -134,6 +141,7 @@ const Projects = () => {
             href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("select_resume", { link_url: resumeUrl })}
             className="inline-flex items-center gap-2 text-base font-medium text-primary hover:text-primary/80 underline-offset-4 hover:underline"
           >
             View my resume
