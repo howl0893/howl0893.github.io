@@ -95,13 +95,6 @@ const Navbar = () => {
                   {item.name}
                 </a>
               ))}
-              <div className="px-3 pt-2">
-                <a href="/contact" className="block w-full">
-                  <Button variant="default" size="default" className="w-full">
-                    Get Started
-                  </Button>
-                </a>
-              </div>
             </div>
           </div>
         )}
