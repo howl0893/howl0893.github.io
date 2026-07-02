@@ -63,15 +63,17 @@ The footer email link only appears when `VITE_CONTACT_EMAIL` is configured.
 
 ## Analytics
 
-Google Analytics 4 is installed in `index.html` with measurement ID `G-LDT74FLHLZ`.
+Google Analytics 4 is installed in `index.html` with public measurement ID
+`G-LDT74FLHLZ`. Automatic snippet page views are disabled; React Router route
+changes send explicit page views with stable route names.
 
-Custom events are sent for:
+Named events are sent for navigation, theme/menu toggles, project selection,
+project media, resume/external/footer links, contact form attempts/outcomes, and
+404 return-home clicks. Existing compatibility events such as `select_project`,
+`select_resume`, and `generate_lead` are still emitted.
 
-- `select_project`
-- `select_resume`
-- `generate_lead`
-
-In GA4, enable enhanced measurement page views for browser history changes so React Router page transitions are tracked.
+Analytics events do not include contact form message content, names, or email
+addresses.
 
 ## Deployment
 

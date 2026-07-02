@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { trackEvent } from "@/lib/analytics";
+import { trackClick, trackEvent } from "@/lib/analytics";
 
 const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
 
@@ -31,6 +31,11 @@ const Contact = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    trackClick("contact_submit_attempt", {
+      element_name: "Send Message",
+      element_type: "button",
+      element_location: "contact_form",
+    });
     setIsSubmitting(true);
 
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -64,6 +69,9 @@ const Contact = () => {
       trackEvent("generate_lead", {
         method: "contact_form",
       });
+      trackEvent("contact_submit_success", {
+        method: "contact_form",
+      });
 
       toast({
         title: "Message sent",
@@ -76,6 +84,13 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
+      trackEvent("contact_submit_failure", {
+        method: "contact_form",
+        reason:
+          error instanceof Error && error.message === "EmailJS is not configured"
+            ? "not_configured"
+            : "send_failed",
+      });
       const description =
         error instanceof Error && error.message === "EmailJS is not configured"
           ? "Email service is not configured yet."

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackClick, trackEvent } from "@/lib/analytics";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +27,31 @@ const Navbar = () => {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    const nextTheme = theme === "light" ? "dark" : "light";
+    trackEvent("theme_toggle", {
+      theme: nextTheme,
+      element_location: "navbar",
+    });
+    setTheme(nextTheme);
+  };
+
+  const toggleMobileMenu = () => {
+    const nextOpen = !isMenuOpen;
+    trackEvent("mobile_menu_toggle", {
+      menu_state: nextOpen ? "open" : "closed",
+      element_location: "navbar_mobile",
+    });
+    setIsMenuOpen(nextOpen);
+  };
+
+  const trackNavClick = (name: string, href: string, location: string) => {
+    trackClick("nav_click", {
+      element_name: name,
+      element_type: "link",
+      element_location: location,
+      destination: href,
+      outbound: false,
+    });
   };
 
   const ThemeToggle = ({ className = "" }: { className?: string }) => (
@@ -47,7 +72,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <a href="/" className="flex items-baseline gap-2">
+            <a
+              href="/"
+              className="flex items-baseline gap-2"
+              onClick={() => trackNavClick("MRH", "/", "navbar_brand")}
+            >
               <span className="text-2xl font-black tracking-tight text-foreground">MRH</span>
             </a>
           </div>
@@ -60,6 +89,7 @@ const Navbar = () => {
                 key={item.name}
                 href={item.href}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+                onClick={() => trackNavClick(item.name, item.href, "navbar_desktop")}
               >
                 {item.name}
               </a>
@@ -71,7 +101,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={toggleMobileMenu}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -90,7 +120,10 @@ const Navbar = () => {
                   key={item.name}
                   href={item.href}
                   className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    trackNavClick(item.name, item.href, "navbar_mobile");
+                    setIsMenuOpen(false);
+                  }}
                 >
                   {item.name}
                 </a>

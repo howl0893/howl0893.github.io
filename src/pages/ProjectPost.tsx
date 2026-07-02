@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { allProjects } from "@/data/projects";
+import { trackClick } from "@/lib/analytics";
 
 const ProjectPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -21,7 +22,20 @@ const ProjectPost = () => {
       <main className="pt-16 flex-1">
         <article className="py-16 md:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <Link to="/projects">
+            <Link
+              to="/projects"
+              onClick={() =>
+                trackClick("back_to_projects_click", {
+                  element_name: "Back to Projects",
+                  element_type: "link",
+                  element_location: "project_detail",
+                  destination: "/projects",
+                  outbound: false,
+                  project_slug: slug,
+                  project_title: project?.title,
+                })
+              }
+            >
               <Button variant="ghost" size="sm" className="mb-8">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Projects
@@ -112,12 +126,20 @@ const ProjectPost = () => {
                           ) : (
                             <button
                               type="button"
-                              onClick={() =>
+                              onClick={() => {
+                                trackClick("project_media_open", {
+                                  element_name: item.caption,
+                                  element_type: "button",
+                                  element_location: "project_media",
+                                  project_slug: project.slug,
+                                  project_title: project.title,
+                                  media_type: item.type,
+                                });
                                 setEnlargedImage({
                                   src: item.src,
                                   caption: item.caption,
-                                })
-                              }
+                                });
+                              }}
                               className="block w-full cursor-zoom-in"
                               aria-label={`Enlarge ${item.caption}`}
                             >
@@ -139,7 +161,22 @@ const ProjectPost = () => {
 
                 {project.externalUrl && (
                   <div className="pt-6">
-                    <a href={project.externalUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() =>
+                        trackClick("project_external_click", {
+                          element_name: project.externalLabel ?? "Open Reference",
+                          element_type: "link",
+                          element_location: "project_detail",
+                          destination: project.externalUrl,
+                          outbound: true,
+                          project_slug: project.slug,
+                          project_title: project.title,
+                        })
+                      }
+                    >
                       <Button>
                         {project.externalLabel ?? "Open Reference"}
                         <ExternalLink className="ml-2 h-4 w-4" />
@@ -158,7 +195,16 @@ const ProjectPost = () => {
         <button
           type="button"
           className="fixed inset-0 z-[60] flex cursor-zoom-out items-center justify-center bg-black/85 p-4"
-          onClick={() => setEnlargedImage(null)}
+          onClick={() => {
+            trackClick("project_media_close", {
+              element_name: enlargedImage.caption,
+              element_type: "button",
+              element_location: "project_media_overlay",
+              project_slug: project?.slug,
+              project_title: project?.title,
+            });
+            setEnlargedImage(null);
+          }}
           aria-label="Close enlarged project media"
         >
           <figure className="max-h-full max-w-5xl">

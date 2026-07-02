@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { allProjects } from "@/data/projects";
 import type { ProjectsItem } from "@/data/projects";
-import { trackEvent } from "@/lib/analytics";
+import { trackClick, trackEvent } from "@/lib/analytics";
 
 const resumeUrl =
   "https://drive.google.com/file/d/1gyym9trG3cGGmeVW4vm-yoQcntw38YJB/view?usp=sharing";
@@ -26,6 +26,16 @@ const Projects = () => {
       project_title: project.title,
       project_category: project.category,
     });
+    trackClick("project_select", {
+      element_name: project.title,
+      element_type: "project_card",
+      element_location: "projects_grid",
+      destination: `/projects/${project.slug}`,
+      outbound: false,
+      project_slug: project.slug,
+      project_title: project.title,
+      project_category: project.category,
+    });
 
     window.scrollTo(0, 0);
     navigate(`/projects/${project.slug}`);
@@ -33,6 +43,14 @@ const Projects = () => {
 
   const nextImage = (key: string, totalImages: number, event: React.MouseEvent) => {
     event.stopPropagation();
+    trackClick("project_image_nav", {
+      element_name: "next_image",
+      element_type: "button",
+      element_location: "project_card",
+      project_title: key,
+      direction: "next",
+      total_images: totalImages,
+    });
     setCurrentImageIndex((prev) => ({
       ...prev,
       [key]: ((prev[key] || 0) + 1) % totalImages,
@@ -41,6 +59,14 @@ const Projects = () => {
 
   const prevImage = (key: string, totalImages: number, event: React.MouseEvent) => {
     event.stopPropagation();
+    trackClick("project_image_nav", {
+      element_name: "previous_image",
+      element_type: "button",
+      element_location: "project_card",
+      project_title: key,
+      direction: "previous",
+      total_images: totalImages,
+    });
     setCurrentImageIndex((prev) => ({
       ...prev,
       [key]: ((prev[key] || 0) - 1 + totalImages) % totalImages,
@@ -141,7 +167,16 @@ const Projects = () => {
             href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent("select_resume", { link_url: resumeUrl })}
+            onClick={() => {
+              trackEvent("select_resume", { link_url: resumeUrl });
+              trackClick("resume_click", {
+                element_name: "View my resume",
+                element_type: "link",
+                element_location: "projects_header",
+                destination: resumeUrl,
+                outbound: true,
+              });
+            }}
             className="inline-flex items-center gap-2 text-base font-medium text-primary hover:text-primary/80 underline-offset-4 hover:underline"
           >
             View my resume

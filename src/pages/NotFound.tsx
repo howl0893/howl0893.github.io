@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { trackClick } from "@/lib/analytics";
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,7 +14,20 @@ const NotFound = () => {
       <div className="text-center">
         <h1 className="mb-4 text-4xl font-bold">404</h1>
         <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
+        <a
+          href="/"
+          className="text-blue-500 underline hover:text-blue-700"
+          onClick={() =>
+            trackClick("not_found_home_click", {
+              element_name: "Return to Home",
+              element_type: "link",
+              element_location: "not_found",
+              destination: "/",
+              outbound: false,
+              missing_path: location.pathname,
+            })
+          }
+        >
           Return to Home
         </a>
       </div>
