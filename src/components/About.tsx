@@ -91,11 +91,15 @@ const About = () => {
                 const content = (
                   <Card className="h-full hover:shadow-custom-lg transition-shadow">
                     <CardContent className="p-4 flex gap-3 min-h-24">
-                      <img
+                      {item.logo ? <img
                         src={item.logo}
                         alt={`${item.issuer} logo`}
                         className="h-10 w-10 rounded-full object-cover border border-border flex-shrink-0"
-                      />
+                      /> : (
+                        <div className="h-10 w-10 rounded-full border border-border flex-shrink-0 flex items-center justify-center text-primary">
+                          <Award className="h-5 w-5" aria-hidden="true" />
+                        </div>
+                      )}
                       <div>
                         <h3 className="font-semibold text-sm text-foreground leading-snug">
                           {item.title}

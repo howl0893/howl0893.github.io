@@ -9,6 +9,7 @@ import ketteringLogo from "@/assets/projects/kettering.jpeg";
 import gvsuLogo from "@/assets/projects/gvsu.jpeg";
 import deepLearningLogo from "@/assets/projects/deepnn.jpeg";
 import faaLogo from "@/assets/projects/faa.jpeg";
+import aiareLogo from "@/assets/projects/snow/AIARE-Logo-cropped.png";
 import halasOutside from "@/assets/projects/halas-outside-airborne.jpg";
 import halasNight from "@/assets/projects/halas-night-lazing.jpg";
 import dron2oFirstFlight from "@/assets/projects/dron2o-first-flight.png";
@@ -63,7 +64,7 @@ export type CredentialItem = {
   title: string;
   issuer: string;
   dates: string;
-  logo: string;
+  logo?: string;
   detail?: string;
   href?: string;
 };
@@ -324,6 +325,14 @@ export const education: CredentialItem[] = [
   },
 ];
 
+export const aiareCertification: CredentialItem = {
+  title: "AIARE 1",
+  issuer: "American Institute for Avalanche Research and Education",
+  dates: "",
+  logo: aiareLogo,
+  href: "https://drive.google.com/file/d/1aHZu6ciyUdWiEyRmjLAbmLelMC2GPV59/view?usp=sharing",
+};
+
 export const certifications: CredentialItem[] = [
   {
     title: "Neural Networks and Deep Learning",
@@ -339,4 +348,5 @@ export const certifications: CredentialItem[] = [
     dates: "Issued June 2021",
     logo: faaLogo,
   },
+  aiareCertification,
 ];

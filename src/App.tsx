@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ProjectPost from "./pages/ProjectPost";
 import NotFound from "./pages/NotFound";
+import Snow from "./pages/Snow";
 import { trackPageView } from "./lib/analytics";
 import { allProjects } from "./data/projects";
 
@@ -20,6 +21,7 @@ const getRouteAnalytics = (pathname: string) => {
   if (pathname === "/about") return { route_name: "about" };
   if (pathname === "/projects") return { route_name: "projects" };
   if (pathname === "/contact") return { route_name: "contact" };
+  if (pathname === "/snow" || pathname === "/snow/") return { route_name: "snow" };
 
   const projectMatch = pathname.match(/^\/projects\/([^/]+)$/);
   if (projectMatch) {
@@ -61,6 +63,7 @@ const App = () => (
           <Route path="/projects/:slug" element={<ProjectPost />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/snow" element={<Snow />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
