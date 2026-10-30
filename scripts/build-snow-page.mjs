@@ -9,6 +9,10 @@ const html = (await readFile(new URL("../dist/index.html", import.meta.url), "ut
   .replace(/(<meta name="description" content=")[^"]*/, `$1${description}`)
   .replace(/(<meta property="og:title" content=")[^"]*/, `$1${title}`)
   .replace(/(<meta property="og:description" content=")[^"]*/, `$1${description}`)
+  .replace(/(<link rel="canonical" href=")[^"]*/, "$1https://howl0893.github.io/snow/")
+  .replace(/(<meta property="og:url" content=")[^"]*/, "$1https://howl0893.github.io/snow/")
+  .replace(/(<meta name="twitter:title" content=")[^"]*/, `$1${title}`)
+  .replace(/(<meta name="twitter:description" content=")[^"]*/, `$1${description}`)
   .replace(/\s*<meta name="keywords"[^>]*>/, "");
 
 const directory = new URL("../dist/snow/", import.meta.url);
